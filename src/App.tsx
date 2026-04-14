@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Banner from './components/Banner';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import OrderPickup from './pages/OrderPickup';
 import ShipNationwide from './pages/ShipNationwide';
@@ -11,7 +12,8 @@ function App() {
   return (
 		<>
 			<Banner/>
-
+			<Navbar/>
+			
 			<Routes>
 				<Route path="/" element={<Home/>} />
 				<Route path="/OrderPickup" element={<OrderPickup/>} />
