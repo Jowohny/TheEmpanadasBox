@@ -1,6 +1,8 @@
 const Banner = () => {
 	return (
-		<div className="uppercase min-w-full bg-[#fec32f] text-center py-3 font-semibold text-md tracking-wide">Free Nationwide Shipping on Orders Over $100</div>
+		<div className="relative z-50 uppercase min-w-full h-9 bg-[#fec32f] text-center flex items-center justify-center font-semibold text-md tracking-wide">
+			Free Nationwide Shipping on Orders Over $100
+		</div>
 	)
 }
 

@@ -11,9 +11,11 @@ import Events from './pages/Events';
 function App() {
   return (
 		<>
-			<Banner/>
-			<Navbar/>
-			
+			<Banner />
+			<div className="sticky top-0 z-40 w-screen">
+				<Navbar />
+			</div>
+
 			<Routes>
 				<Route path="/" element={<Home/>} />
 				<Route path="/OrderPickup" element={<OrderPickup/>} />
