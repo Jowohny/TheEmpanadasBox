@@ -193,6 +193,81 @@ const Home = () => {
 					<button onClick={usePrevious} type="button" className="w-12 h-12 flex items-center justify-center rounded-full border border-[#d9cfc0] bg-white text-[#7a6a55] text-xl shrink-0">→</button>
 				</div>
 			</div>
+
+			<div className="bg-black/10 flex justify-between items-center min-h-screen px-28">
+				<div className="flex flex-col">
+					<h1 className="text-8xl uppercase font-inter font-black mb-8 leading-[0.9] tracking-wide">
+						join the <br />
+						<span className="tracking-tighter font-inter text-red-600">world tour</span>
+					</h1>
+					<div className="flex flex-col gap-6 mb-4">
+						<div className="flex flex-row gap-4">
+							<div className="bg-[#fcc22e] rounded-full h-16 w-16 p-5">
+								<img src="/icons/world.svg" className="w-full h-full"/>
+							</div>
+							<div className="flex flex-col items-left justify-center">
+								<h2 className="font-black tracking-wide text-lg font-mono">Collect Stamps</h2>
+								<p className="font-mono text-sm font-medium">Earn a digital stamp for every new flavor you try!</p>
+							</div>
+						</div>
+						<div className="flex flex-row gap-4">
+							<div className="bg-[#fcc22e] rounded-full h-16 w-16 p-5">
+								<img src="/icons/gift.svg" className="w-full h-full"/>
+							</div>
+							<div className="flex flex-col items-left justify-center">
+								<h2 className="font-black tracking-wide text-lg font-mono">Earn Rewards</h2>
+								<p className="font-mono text-sm font-medium">A full passport earns you a free box of favorites!</p>
+							</div>
+						</div>
+						<button 
+							type="button"
+							onClick={() => navigate('Rewards')} 
+							className="bg-[#fec32f] font-mono inline-block rounded-full px-8 py-4 font-semibold text-black tracking-wide inline-block"
+						>
+							Claim Your Rewards →
+						</button>
+					</div>
+				</div>
+				<div className="relative h-[35vw] w-[35vw] flex items-center justify-center">
+					<div className="absolute border border-gray-600/50 border-3 border-dashed w-full h-full rounded-full"/>
+					<div className="h-[95%] w-[95%] overflow-hidden rounded-full border-4 border-white/80 shadow-xl">
+						<img src="/stamps.jpg" className="h-full w-full object-cover" />
+					</div>
+				</div>
+			</div>
+
+			<div className="relative min-h-screen flex items-center overflow-hidden">
+				<img
+					src="/EmpanadaPics/EzCaterer Menu/Office Empanada Box - 20 Ppl.jpg"
+					className="absolute inset-0 z-0 h-full w-full object-cover"
+				/>
+				<div className="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
+				<div className="relative z-20 m-16 p-10 rounded-3xl border border-white/20 bg-black/30 shadow-2xl backdrop-blur-md max-w-4xl">
+					<p className="font-mono text-xs font-medium tracking-[0.25em] uppercase text-[#fec32f] mb-6">Subscription Plan</p>
+					<h1 className="font-inter font-black uppercase leading-[0.83] tracking-wide text-white text-8xl mb-10">
+						Never have an <br />
+						<span className="text-[#fec32f] italic">empty freezer</span> <br />
+						<span className="text-[17rem] leading-[0.75] tracking-tighter">again</span>
+					</h1>
+					<div className="w-16 h-[2px] bg-[#fec32f] mb-6" />
+					<p className="font-mono text-lg font-medium tracking-wide text-white/80 mb-8">Subscribe and Save 10% on every order.</p>
+					<div className="flex flex-row items-center gap-6">
+						<button 
+							type="button"
+							onClick={() => navigate('ShipNationwide')} 
+							className="bg-[#fec32f] font-mono inline-block rounded-full px-8 py-4 font-semibold text-black tracking-wide"
+						>
+							Build Your Subscription →
+						</button>
+						<div className="flex flex-row items-center gap-3 border-l border-white/20 pl-6">
+							<div className="flex flex-col leading-snug">
+								<h2 className="text-sm text-white font-semibold tracking-wide">Free Shipping</h2>
+								<p className="text-sm text-gray-400 font-mono">on all subscription orders</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 }
