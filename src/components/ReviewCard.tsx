@@ -30,7 +30,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 						))}
 					</div>
 
-					<p className="line-clamp-5 text-md text-[#4a4034]">
+					<p className="line-clamp-5 font-serif text-md text-[#4a4034]">
 						{review.message}
 					</p>
 

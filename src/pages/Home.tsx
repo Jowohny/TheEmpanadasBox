@@ -1,92 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ReviewCard from "../components/ReviewCard";
+import EmpanadaCard from "../components/EmpanadaCard";
+import Empanadas from "../data/Empanadas";
+import Reviews from "../data/Reviews";
 
 const Home = () => {
-	const [currentDisplay, setCurrentDisplay] = useState<number[]>([0,1,2])
+	const [currentEmpanadas, setCurrentEmpanadas] = useState<number[]>([0,1,2])
+	const [currentReviews, setCurrentReviews] = useState<number[]>([0,1,2])
 	const navigate = useNavigate()
 
-	const useNext = () => {
-		setCurrentDisplay(currentDisplay.map(index => (index-1)%empanadaFlavors.length))
+	const useNextEmpanadas = () => {
+		setCurrentEmpanadas(currentEmpanadas.map(index => (index-1+Empanadas.length) % Empanadas.length))
 	}
 
-	const usePrevious = () => {
-		setCurrentDisplay(currentDisplay.map(index => (index+1+empanadaFlavors.length)%empanadaFlavors.length))
+	const usePreviousEmpanadas = () => {
+		setCurrentEmpanadas(currentEmpanadas.map(index => (index+1+Empanadas.length)%Empanadas.length))
 	}
 
-	const empanadaFlavors = [
-		{
-			name: 'Buenos Aires',
-			image: '/EmpanadaPics/Items Photos/BUENOS AIRES.jpg',
-			description: 'Ground beef, onion, bell pepper, green onion',
-			tags: ['beef']
-		},
-		{
-			name: 'Bordeaux',
-			image: '/EmpanadaPics/Items Photos/BORDEAUX.jpg',
-			description: 'Red wine braised short rib, bell pepper, tomato',
-			tags: ['beef']
-		},
-		{
-			name: 'Capri',
-			image: '/EmpanadaPics/Items Photos/CAPRI.jpg',
-			description: 'Tomato, mozzarella, parmesan, fresh basil, oregano',
-			tags: ['vegetarian']
-		},
-		{
-			name: 'Chicago',
-			image: '/EmpanadaPics/Items Photos/CHICAGO.jpg',
-			description: 'Pepperoni, mozzarella, oregano',
-			tags: ['pork']
-		},
-		{
-			name: 'Jamaica',
-			image: '/EmpanadaPics/Items Photos/JAMAICA.jpg',
-			description: 'Jerk chicken, green onion',
-			tags: ['chicken', 'spicy']
-		},
-		{
-			name: 'Louisiana',
-			image: '/EmpanadaPics/Items Photos/LOUISIANA.jpg',
-			description: 'Cajun corn, onion, bell pepper, vegan cheese, green onion',
-			tags: ['vegan', 'spicy']
-		},
-		{
-			name: 'Miami',
-			image: '/EmpanadaPics/Items Photos/MIAMI.jpg',
-			description: 'Marinated pork, swiss cheese, pickles, mustard',
-			tags: ['pork']
-		},
-		{
-			name: 'Mumbai',
-			image: '/EmpanadaPics/Items Photos/MUMBAI.jpg',
-			description: 'Potato & pea samosa',
-			tags: ['vegan', 'spicy']
-		},
-		{
-			name: 'New England',
-			image: '/EmpanadaPics/Items Photos/NEW ENGLAND.jpg',
-			description: 'Chicken breast, onion, carrot, green pea, bechamel',
-			tags: ['chicken']
-		},
-		{
-			name: 'Philly',
-			image: '/EmpanadaPics/Items Photos/PHILLY.jpg',
-			description: 'Steak, onion, bell pepper, provolone',
-			tags: ['beef']
-		},
-		{
-			name: 'Singapore',
-			image: '/EmpanadaPics/Items Photos/SINGAPORE.jpg',
-			description: 'Garlic buttered spinach, mozzarella, parmesan',
-			tags: ['vegetarian']
-		},
-		{
-			name: 'Buffalo',
-			image: '/EmpanadaPics/Items Photos/BUFFALO.jpg',
-			description: 'Buffalo chicken, mozzerella',
-			tags: ['chicken', 'spicy']
-		}
-	]
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentReviews(empanadas => empanadas.map(index => (index+1+Reviews.length)%Reviews.length))
+		}, 3000)
+
+		return () => clearInterval(interval)
+	}, [])
 
 	return (
 		<div className="min-w-screen min-h-screen -mt-[8.25rem]">
@@ -166,31 +104,11 @@ const Home = () => {
 					</button>
 				</div>
 				<div className="flex flex-row justify-center items-center gap-6 px-8 py-14">
-					<button onClick={useNext} type="button" className="w-12 h-12 flex items-center justify-center rounded-full border border-[#d9cfc0] bg-white text-[#7a6a55] text-xl shrink-0">←</button>
-					{currentDisplay.map((index) => (
-						<div key={index} className="flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm border border-[#ede5d8] w-1/4 shrink-0">
-							<div className="bg-[#f5efe6] p-5">
-								<img src={empanadaFlavors[index].image} loading="lazy" className="w-full object-contain aspect-[4/3] rounded-xl" />
-							</div>
-							<div className="py-4 px-5 flex flex-col gap-1 h-40">
-								<p className="text-xs font-medium tracking-widest uppercase text-[#bf8000]">Signature Flavor</p>
-								<h1 className="font-bold tracking-wide font-inter text-xl text-[#1a1209]">{empanadaFlavors[index].name}</h1>
-								{empanadaFlavors[index].description && (
-									<p className="text-sm text-[#6f5e48]">{empanadaFlavors[index].description}</p>
-								)}
-								{empanadaFlavors[index].tags && (
-									<div className="flex flex-wrap gap-2 mt-1">
-										{empanadaFlavors[index].tags.map((tag: string) => (
-											<span key={tag} className="text-[10px] tracking-wide uppercase bg-[#f8f2e9] text-[#8a6f45] border border-[#e9dece] px-2 py-1 rounded-full">
-												{tag}
-											</span>
-										))}
-									</div>
-								)}
-							</div>
-						</div>
+					<button onClick={useNextEmpanadas} type="button" className="w-12 h-12 flex items-center justify-center rounded-full border border-[#d9cfc0] bg-white text-[#7a6a55] text-xl shrink-0">←</button>
+					{currentEmpanadas.map((index) => (
+						<EmpanadaCard key={`empanada-${index}`} empanada={Empanadas[index]} />
 					))}
-					<button onClick={usePrevious} type="button" className="w-12 h-12 flex items-center justify-center rounded-full border border-[#d9cfc0] bg-white text-[#7a6a55] text-xl shrink-0">→</button>
+					<button onClick={usePreviousEmpanadas} type="button" className="w-12 h-12 flex items-center justify-center rounded-full border border-[#d9cfc0] bg-white text-[#7a6a55] text-xl shrink-0">→</button>
 				</div>
 			</div>
 
@@ -265,6 +183,31 @@ const Home = () => {
 								<p className="text-sm text-gray-400 font-mono">on all subscription orders</p>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="flex min-h-screen flex-col items-center justify-center gap-12 bg-[#faf7f2]">
+				<div className="flex flex-row gap-4 justify-center">
+					{Array.from({ length: 5 }).map((_, index) => (
+						<img key={`star-${index}`} src="/star.svg" alt="" className="h-20 w-20" />
+					))}
+				</div>
+
+				<div className="text-center">
+					<h2 className="-mt-4 mb-3 font-inter text-4xl font-black tracking-tight">
+						Over 400+ five-star reviews
+					</h2>
+					<p className="font-mono text-lg text-gray-600/80">
+						On Google and Yelp — see why travelers and locals keep coming back.
+					</p>
+				</div>
+
+				<div className="flex w-full px-48 flex-row items-stretch justify-center gap-6">
+					<div className="grid grid-cols-3 gap-6">
+						{currentReviews.map((index) => (
+							<ReviewCard key={`${Reviews[index].name}-${index}`} review={Reviews[index]} />
+						))}
 					</div>
 				</div>
 			</div>

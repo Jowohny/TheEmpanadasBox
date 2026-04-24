@@ -20,7 +20,7 @@ const Navbar = () => {
 			</div>
 			<div className='flex flex-row gap-12 justify-around'>
 				{tabItems.map((tab) => (
-					<button onClick={() => navigate(tab.webTitle)} 
+					<button key={tab.tabName} onClick={() => navigate(tab.webTitle)} 
 						className='font-extralight tracking-wide text-xl transition-all duration-200 hover:border-b-2 border-[#D09501]'
 					>
 						{tab.tabName}
