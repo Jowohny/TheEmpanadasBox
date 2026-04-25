@@ -64,7 +64,7 @@ const Footer = () => {
 			<div className="border-t border-white/10">
 				<div className="mx-auto flex flex-row gap-3 py-6 font-mono text-sm text-[#faf7f2]/45 items-center justify-around">
 					<p>© {new Date().getFullYear()} The Empanadas Box. All rights reserved.</p>
-					<p className="md:text-right">Free nationwide shipping on orders over $100.</p>
+					<p>Free nationwide shipping on orders over $100.</p>
 				</div>
 			</div>
 		</div>

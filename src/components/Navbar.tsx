@@ -1,38 +1,38 @@
 import { useNavigate } from 'react-router-dom';
+import Links from '../data/Links';
 
 const Navbar = () => {
 	const navigate = useNavigate();
-	const tabItems = [
-		{tabName: 'Home', webTitle: '/'},
-		{tabName: 'Order Pickup', webTitle: '/OrderPickup'}, 
-		{tabName: 'Ship Nationwide', webTitle: '/ShipNationwide'}, 
-		{tabName: 'Catering', webTitle: '/Catering'}, 
-		{tabName: 'Events', webTitle: '/Events'}, 
-		{tabName: 'Rewards', webTitle: '/Rewards'}, 
-		{tabName: 'More', webTitle: '/*'}
-	];
 
 	return (
-		<div className='min-w-full h-24 flex flex-row items-center bg-white/40 backdrop-blur-2xl'>
-			<div  onClick={() => navigate('/')} className='flex flex-1 flex-row items-center gap-3 justify-start mx-4'>
-				<img src='/empanadasboxlogo.png' className='w-20 h-20 aspect-square'/>
-				<h1 className='text-2xl font-bold'>The Empanadas Box</h1>
-			</div>
-			<div className='flex flex-row gap-12 justify-around'>
-				{tabItems.map((tab) => (
-					<button key={tab.tabName} onClick={() => navigate(tab.webTitle)} 
-						className='font-extralight tracking-wide text-xl transition-all duration-200 hover:border-b-2 border-[#D09501]'
+		<>
+			<div className='min-w-full h-[5.5rem] flex flex-row items-center justify-between px-6 bg-white/60 backdrop-blur-2xl'>
+				<div onClick={() => navigate('/')} className='flex flex-row items-center gap-3'>
+					<img src='/empanadasboxlogo.png' className='w-14 h-14 aspect-square rounded-xl' />
+					<h1 className='font-black text-xl tracking-wide text-[#1a1209]'>The Empanadas Box</h1>
+				</div>
+
+				<div className='flex flex-row items-center gap-1'>
+					{Links.map((tab) => (
+						<button key={tab.label} onClick={() => navigate(tab.path)}
+							className='relative font-mono font-medium tracking-wide text-sm text-[#3a3020] px-5 py-2 rounded-full hover:bg-[#bf8000]/10 hover:text-[#bf8000] transition-all duration-200'
+						>
+							{tab.label}
+						</button>
+					))}
+				</div>
+
+				<div className='flex flex-row items-center gap-3'>
+					<button
+						type="button"
+						className='bg-[#bf8000] rounded-full font-mono font-semibold tracking-wider text-sm text-white px-7 py-3 shadow-md border-2 border-black/10 uppercase hover:bg-[#a06b00] transition-all duration-200'
 					>
-						{tab.tabName}
+						Shop Now →
 					</button>
-				))}
+				</div>
 			</div>
-			<div className='flex flex-1 justify-end'>
-				<button type="button" className='bg-[#D09501] rounded-full font-semibold tracking-wide text-center px-6 py-3 text-xl text-white mx-6'>
-					Shop
-				</button>
-			</div>
-		</div>
+			<div className='h-2 bg-linear-to-b from-white/60 to-transparent backdrop-blur-2xl'/>
+		</>
 	)
 }
 
