@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Banner from './components/Banner';
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import OrderPickup from './pages/OrderPickup';
@@ -25,6 +26,8 @@ function App() {
 				<Route path="/Events" element={<Events/>} />
 				<Route path="*" element={<h1>404 <br /> Page Not Found</h1>} />
 			</Routes>
+
+			<Footer />
 		</>		
   )
 }
