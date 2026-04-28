@@ -1,9 +1,6 @@
-export interface Link {
-	label: string
-	path: string
-}
+import type { Link } from "./NavLinks";
 
-const Links = [
+const FooterLinks: Link[] = [
 	{ label: 'Home', path: '/' },
 	{ label: 'Menu', path: '/Menu' },
 	{ label: 'Order Pickup', path: '/OrderPickup' },
@@ -13,6 +10,6 @@ const Links = [
 	{ label: 'Ship Nationwide', path: '/ShipNationwide' },
 	{ label: 'Contact Us', path: '/ContactUs' },
 	{ label: 'About Us', path: '/AboutUs' },
-];
+]
 
-export default Links
+export default FooterLinks

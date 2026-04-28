@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Links from '../data/Links';
+import FooterLinks from '../data/FooterNav';
 import SocialMedia from '../data/Media';
 
 const Footer = () => {
@@ -28,7 +28,7 @@ const Footer = () => {
 						Pages
 					</p>
 					<ul className="grid grid-cols-3 gap-x-8">
-						{Links.map((item) => (
+						{FooterLinks.map((item) => (
 							<li key={item.path} className="mb-2 break-inside-avoid">
 								<button
 									type="button"
@@ -46,7 +46,7 @@ const Footer = () => {
 					<p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2rem] text-[#fec32f]">
 						Social Media
 					</p>
-					<ul>
+					<ul className='grid grid-cols-2 gap-x-8'>
 						{SocialMedia.map((media) => (
 							<li key={media.name} className="mb-2">
 								<button

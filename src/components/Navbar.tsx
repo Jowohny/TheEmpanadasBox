@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Links from '../data/Links';
+import FooterLinks from '../data/NavLinks';
 
 const Navbar = () => {
 	const navigate = useNavigate();
@@ -12,10 +12,10 @@ const Navbar = () => {
 					<h1 className='font-black text-xl tracking-wide text-[#1a1209]'>The Empanadas Box</h1>
 				</div>
 
-				<div className='flex flex-row items-center gap-1'>
-					{Links.map((tab) => (
+				<div className='flex flex-row items-center gap-2'>
+					{FooterLinks.map((tab) => (
 						<button key={tab.label} onClick={() => navigate(tab.path)}
-							className='relative font-mono font-medium tracking-wide text-sm text-[#3a3020] px-5 py-2 rounded-full hover:bg-[#bf8000]/10 hover:text-[#bf8000] transition-all duration-200'
+							className='relative font-mono font-medium tracking-wide text-md text-[#3a3020] px-5 py-2 rounded-full hover:bg-[#bf8000]/10 hover:text-[#bf8000] transition-all duration-200'
 						>
 							{tab.label}
 						</button>
