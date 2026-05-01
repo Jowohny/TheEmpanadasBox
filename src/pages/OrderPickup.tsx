@@ -1,5 +1,7 @@
 import LocationCard from '../components/LocationCard';
+import MarketLocationCard from '../components/MarketLocationCard';
 import Locations from '../data/LocationInfo';
+import MarketLocations from '../data/MarketLocationInfo';
 
 const OrderPickup = () => {
 
@@ -30,8 +32,8 @@ const OrderPickup = () => {
 				</div>
 
 				<div className="relative z-10 flex flex-col items-center gap-3 mt-2">
-					<div className="w-16 h-[2px] bg-[#bf8000]" />
-					<p className="font-mono text-sm font-medium tracking-[0.2em] uppercase text-black">
+					<div className="w-24 h-[2px] bg-[#bf8000] mb-2" />
+					<p className="font-mono text-base font-bold tracking-[0.2em] uppercase text-black">
 						Fresh. Frozen. Ready when you are.
 					</p>
 				</div>
@@ -48,9 +50,24 @@ const OrderPickup = () => {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-2 gap-12">
+					<div className="grid grid-cols-2 gap-12 mb-12">
 						{Locations.map((location) => (
 							<LocationCard location={location}/>
+						))}
+					</div>
+
+					<div className="mb-14 text-center">
+						<h1 className="text-[#765600] block text-center font-semibold tracking-wide text-6xl mb-4">
+							Check out our farmers market locations!
+						</h1>
+						<p className="text-gray-500/80 text-xl font-extralight tracking-wide">
+							Make time to drop by and see us in person. ( At these locations, we only sell frozen empanadas for at home preparation )
+						</p>
+					</div>
+
+					<div className='grid grid-cols-2 gap-12'>
+						{MarketLocations.map((marketLocation) => (
+							<MarketLocationCard marketLocation={marketLocation} />
 						))}
 					</div>
 				</div>
