@@ -3,6 +3,30 @@ import MarketLocationCard from '../components/MarketLocationCard';
 import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
 
+const DoorDashIcon = () => (
+  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.003 0C5.374 0 0 5.372 0 11.997c0 6.628 5.374 12 12.003 12C18.63 24 24 18.625 24 11.997 24 5.372 18.63 0 12.003 0zm5.09 9.356H9.875a2.644 2.644 0 0 0 0 5.288h1.663v2.374H9.875a5.018 5.018 0 1 1 0-10.036h7.217v2.374z"/>
+  </svg>
+)
+
+const UberEatsIcon = () => (
+  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.273 6.545h2.546v5.092a1.273 1.273 0 1 0 2.545 0V6.545h2.546v5.092a3.818 3.818 0 0 1-7.637 0V6.545zm-4.363 0h7.272v2.273H8.727v1.136h2.91v2.273h-2.91v1.136h3.637v2.273H6.364V6.545z"/>
+  </svg>
+)
+
+const PostmatesIcon = () => (
+  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.8 16.4H6.2c-.44 0-.8-.36-.8-.8V8.4c0-.44.36-.8.8-.8h11.6c.44 0 .8.36.8.8v7.2c0 .44-.36.8-.8.8zm-5.8-6.8a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8z"/>
+  </svg>
+)
+
+const deliveryServices = [
+  { key: 'doordashLink',    label: 'DoorDash',  Icon: DoorDashIcon  },
+  { key: 'uberEatsLinks',   label: 'Uber Eats', Icon: UberEatsIcon  },
+  { key: 'postmatesLink',   label: 'Postmates', Icon: PostmatesIcon },
+]
+
 const OrderPickup = () => {
 
 	return (
@@ -71,6 +95,36 @@ const OrderPickup = () => {
 						))}
 					</div>
 				</div>
+			</div>
+			<div className="flex items-center justify-center gap-3 bg-[#0d0c0b] px-20 py-5 border-y border-white/8">
+				<p className="font-mono text-xs font-black uppercase tracking-[0.25em] text-white/90">
+					Order for Delivery
+				</p>
+
+				<span className="text-[#fec32f]/30 scale-x-[3]">-</span>
+
+				{Locations.flatMap((location, li) =>
+					deliveryServices.map(({ key, label }, si) => {
+						const href = location[key as keyof typeof location] as string
+						const isLast = li === Locations.length - 1 && si === deliveryServices.length - 1
+						return (
+							<div key={`${li}-${si}`} className="flex items-center gap-3">
+								<a
+									href={href}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="cursor-pointer font-mono text-xs font-black uppercase tracking-[0.2em] text-white/70 transition-colors duration-200 hover:text-[#fec32f]"
+								>
+									{label}
+									<span className="ml-1 font-normal normal-case tracking-normal text-white/40">
+										({location.name.split('\n')[1]})
+									</span>
+								</a>
+								{!isLast && <span className="text-[#fec32f]/20">&bull;</span>}
+							</div>
+						)
+					})
+				)}
 			</div>
 		</div>
 	)

@@ -37,7 +37,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 					{review.images.length > 0 && (
 						<div className="mt-3 flex gap-2">
 							{review.images.map((src) => (
-								<img key={src} src={src} className="w-[31.5%] shrink-0 rounded-lg border border-[#ede5d8] object-cover" referrerPolicy="no-referrer"/>
+								<img key={src} src={src} className="w-[31.5%] shrink-0 rounded-lg border border-[#ede5d8] object-cover" loading="lazy" referrerPolicy="no-referrer"/>
 							))}
 						</div>
 					)}
