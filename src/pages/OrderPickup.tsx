@@ -3,28 +3,10 @@ import MarketLocationCard from '../components/MarketLocationCard';
 import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
 
-const DoorDashIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12.003 0C5.374 0 0 5.372 0 11.997c0 6.628 5.374 12 12.003 12C18.63 24 24 18.625 24 11.997 24 5.372 18.63 0 12.003 0zm5.09 9.356H9.875a2.644 2.644 0 0 0 0 5.288h1.663v2.374H9.875a5.018 5.018 0 1 1 0-10.036h7.217v2.374z"/>
-  </svg>
-)
-
-const UberEatsIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.273 6.545h2.546v5.092a1.273 1.273 0 1 0 2.545 0V6.545h2.546v5.092a3.818 3.818 0 0 1-7.637 0V6.545zm-4.363 0h7.272v2.273H8.727v1.136h2.91v2.273h-2.91v1.136h3.637v2.273H6.364V6.545z"/>
-  </svg>
-)
-
-const PostmatesIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.8 16.4H6.2c-.44 0-.8-.36-.8-.8V8.4c0-.44.36-.8.8-.8h11.6c.44 0 .8.36.8.8v7.2c0 .44-.36.8-.8.8zm-5.8-6.8a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8z"/>
-  </svg>
-)
-
 const deliveryServices = [
-  { key: 'doordashLink',    label: 'DoorDash',  Icon: DoorDashIcon  },
-  { key: 'uberEatsLinks',   label: 'Uber Eats', Icon: UberEatsIcon  },
-  { key: 'postmatesLink',   label: 'Postmates', Icon: PostmatesIcon },
+  { key: 'doordashLink',    label: 'DoorDash' },
+  { key: 'uberEatsLinks',   label: 'Uber Eats' },
+  { key: 'postmatesLink',   label: 'Postmates' },
 ]
 
 const OrderPickup = () => {
@@ -125,6 +107,57 @@ const OrderPickup = () => {
 						)
 					})
 				)}
+			</div>
+
+			<div className="relative flex min-h-[38rem] items-center justify-between overflow-hidden border-b border-[#e2d8ca] bg-[#faf7f2] px-20 py-16">
+				<div className="absolute left-0 top-0 h-full w-3 bg-[#fec32f]" />
+				<div className="absolute inset-0 bg-[url('/stamps.jpg')] bg-repeat bg-center opacity-[0.06]" />
+
+				<div className="relative z-10 ml-6">
+					<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+						Passport Rewards
+					</p>
+					<h2 className="mb-5 font-inter text-7xl font-black leading-[0.88] tracking-tight text-[#242424]">
+						Don't Leave<br />Without Your<br />Stamps!
+					</h2>
+					<p className="mb-8 max-w-md text-lg font-light leading-relaxed text-[#64605b]">
+						Sign in at checkout to earn Passport Stamps on every order.
+					</p>
+
+					<div className="mb-9 flex gap-4">
+						{[
+							{ stamps: '50', reward: '1 Free Empanada' },
+							{ stamps: '70', reward: 'Free Combo'      },
+						].map(({ stamps, reward }) => (
+							<div key={stamps} className="rounded-xl border border-[#e2d8ca] bg-white/60 px-5 py-4">
+								<p className="font-inter text-3xl font-black leading-none text-[#242424]">{stamps}</p>
+								<p className="mt-1 font-mono text-[10px] font-black uppercase tracking-[0.18em] text-[#fec32f]">Stamps</p>
+								<p className="mt-2 font-inter text-sm font-medium text-[#5f5a54]">{reward}</p>
+							</div>
+						))}
+					</div>
+
+					<div className="flex gap-4">
+						<button
+							className="rounded-full bg-[#fec32f] px-8 py-4 font-mono text-xs font-black uppercase tracking-[0.16em] text-[#765600] shadow-md"
+						>
+							Check Stamp Balance
+						</button>
+						<button
+							className="rounded-full border border-[#d4c9b8] bg-transparent px-8 py-4 font-mono text-xs font-black uppercase tracking-[0.16em] text-[#5f5a54]"
+						>
+							Learn More
+						</button>
+					</div>
+				</div>
+
+				<div className="relative z-10 mr-10 h-[33rem] w-[33rem] overflow-hidden rounded-full border-8 border-[#faf7f2] shadow-[0_28px_60px_rgba(26,18,9,0.18)]">
+					<img
+						src="/EmpanadaPics/Singapore Case.png"
+						alt="Fresh empanadas"
+						className="h-full w-full object-cover object-center"
+					/>
+				</div>
 			</div>
 		</div>
 	)
