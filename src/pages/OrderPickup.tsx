@@ -159,6 +159,60 @@ const OrderPickup = () => {
 					/>
 				</div>
 			</div>
+
+			<div className="relative overflow-hidden border-b border-[#e2d8ca] bg-[#0d0c0b] px-20 py-16">
+				<div className="absolute left-0 top-0 h-full w-3 bg-[#fec32f]" />
+
+				<div className="ml-6">
+					<p className="mb-3 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+						Reheating Guide
+					</p>
+					<h2 className="mb-10 font-inter text-5xl font-black tracking-tight text-[#faf7f2]">
+						How to Heat Your Empanadas
+					</h2>
+
+					<div className="flex gap-5">
+						<div className="flex flex-1 flex-col justify-between rounded-2xl border border-white/8 bg-white/4 p-7">
+							<div>
+								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#fec32f]">The Gold Standard</p>
+								<p className="mb-2 font-inter text-2xl font-black text-[#faf7f2]">Air Fryer</p>
+								<p className="text-sm font-light leading-relaxed text-white/40">
+									Keeps the crust crispy and the filling perfectly hot all the way through.
+								</p>
+							</div>
+							<div className="mt-6 rounded-xl border border-[#fec32f]/20 bg-[#fec32f]/8 px-5 py-4">
+								<p className="font-mono text-xs font-black uppercase tracking-widest text-[#fec32f]">350°F — 3 to 5 mins</p>
+							</div>
+						</div>
+
+						<div className="flex flex-1 flex-col justify-between rounded-2xl border border-white/8 bg-white/4 p-7">
+							<div>
+								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-white/30">For Large Batches</p>
+								<p className="mb-2 font-inter text-2xl font-black text-[#faf7f2]">Oven</p>
+								<p className="text-sm font-light leading-relaxed text-white/40">
+									Best when feeding a crowd. Place on a wire rack for even heat circulation.
+								</p>
+							</div>
+							<div className="mt-6 rounded-xl border border-white/8 bg-white/4 px-5 py-4">
+								<p className="font-mono text-xs font-black uppercase tracking-widest text-white/40">375°F — 5 to 8 mins</p>
+							</div>
+						</div>
+
+						<div className="flex flex-1 flex-col justify-between rounded-2xl border border-red-900/30 bg-red-950/20 p-7">
+							<div>
+								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-red-400/70">Never Do This</p>
+								<p className="mb-2 font-inter text-2xl font-black text-[#faf7f2]">Microwave</p>
+								<p className="text-sm font-light leading-relaxed text-white/40">
+									Turns the crust soggy and ruins the texture. Do yourself a favor and use the air fryer.
+								</p>
+							</div>
+							<div className="mt-6 rounded-xl border border-red-900/30 bg-red-950/30 px-5 py-4">
+								<p className="font-mono text-xs font-black uppercase tracking-[0.15em] text-red-400/70">Not recommended — ever</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 }
