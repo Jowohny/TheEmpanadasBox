@@ -2,6 +2,7 @@ import LocationCard from '../components/LocationCard';
 import MarketLocationCard from '../components/MarketLocationCard';
 import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
+import { useNavigate } from 'react-router-dom';
 
 const deliveryServices = [
   { key: 'doordashLink',    label: 'DoorDash' },
@@ -10,6 +11,8 @@ const deliveryServices = [
 ]
 
 const OrderPickup = () => {
+	const navigate = useNavigate()
+
 
 	return (
 		<div className="min-w-screen min-h-screen">
@@ -109,8 +112,7 @@ const OrderPickup = () => {
 				)}
 			</div>
 
-			<div className="relative flex min-h-[38rem] items-center justify-between overflow-hidden border-b border-[#e2d8ca] bg-[#faf7f2] px-20 py-16">
-				<div className="absolute left-0 top-0 h-full w-3 bg-[#fec32f]" />
+			<div className="relative flex min-h-[38rem] items-center justify-between overflow-hidden border-b border-[#e2d8ca] bg-[#faf7f2] p-20">
 				<div className="absolute inset-0 bg-[url('/stamps.jpg')] bg-repeat bg-center opacity-[0.06]" />
 
 				<div className="relative z-10 ml-6">
@@ -144,6 +146,7 @@ const OrderPickup = () => {
 							Check Stamp Balance
 						</button>
 						<button
+							onClick={() => navigate('/Rewards')}
 							className="rounded-full border border-[#d4c9b8] bg-transparent px-8 py-4 font-mono text-xs font-black uppercase tracking-[0.16em] text-[#5f5a54]"
 						>
 							Learn More
@@ -160,18 +163,16 @@ const OrderPickup = () => {
 				</div>
 			</div>
 
-			<div className="relative overflow-hidden border-b border-[#e2d8ca] bg-[#0d0c0b] px-20 py-16">
-				<div className="absolute left-0 top-0 h-full w-3 bg-[#fec32f]" />
-
+			<div className="relative overflow-hidden border-b border-[#e2d8ca] bg-[#0d0c0b] px-20 py-28">
 				<div className="ml-6">
-					<p className="mb-3 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+					<p className="mb-6 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
 						Reheating Guide
 					</p>
-					<h2 className="mb-10 font-inter text-5xl font-black tracking-tight text-[#faf7f2]">
+					<h2 className="mb-12 font-inter text-5xl font-black tracking-tight text-[#faf7f2]">
 						How to Heat Your Empanadas
 					</h2>
 
-					<div className="flex gap-5">
+					<div className="flex gap-8">
 						<div className="flex flex-1 flex-col justify-between rounded-2xl border border-white/8 bg-white/4 p-7">
 							<div>
 								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#fec32f]">The Gold Standard</p>
@@ -185,7 +186,7 @@ const OrderPickup = () => {
 							</div>
 						</div>
 
-						<div className="flex flex-1 flex-col justify-between rounded-2xl border border-white/8 bg-white/4 p-7">
+						<div className="flex flex-1 flex-col justify-between rounded-2xl border border-white/8 bg-white/5 p-7">
 							<div>
 								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-white/30">For Large Batches</p>
 								<p className="mb-2 font-inter text-2xl font-black text-[#faf7f2]">Oven</p>
@@ -198,7 +199,7 @@ const OrderPickup = () => {
 							</div>
 						</div>
 
-						<div className="flex flex-1 flex-col justify-between rounded-2xl border border-red-900/30 bg-red-950/20 p-7">
+						<div className="flex flex-1 flex-col justify-between rounded-2xl border border-red-900/60 bg-red-950/50 p-7">
 							<div>
 								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-red-400/70">Never Do This</p>
 								<p className="mb-2 font-inter text-2xl font-black text-[#faf7f2]">Microwave</p>
@@ -212,6 +213,45 @@ const OrderPickup = () => {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className="border-b border-[#e2d8ca] bg-[#faf7f2] px-20 py-24 text-center">
+				<p className="mb-4 font-mono text-sm font-black uppercase tracking-[0.3em] text-[#fec32f]">
+					Order Support
+				</p>
+				<h2 className="mb-10 font-inter text-6xl font-black tracking-tight text-[#242424]">
+					Need help with an active order?
+				</h2>
+
+				<div className="mb-10 flex justify-center gap-8">
+					{[
+						{ label: 'Call Covington', number: '8592793297' },
+						{ label: 'Call Findlay Market', number: '8592793297' },
+					].map(({ label, number }) => (
+						<a
+							key={label}
+							href={`tel:${number}`}
+							className="rounded-full bg-[#fec32f] px-9 py-4 font-mono text-sm font-black uppercase tracking-[0.16em] text-[#765600] shadow-md"
+						>
+							{label}
+						</a>
+					))}
+					<a
+						className="rounded-full bg-[#fec32f] px-9 py-4 font-mono text-sm font-black uppercase tracking-[0.16em] text-[#765600] shadow-md"
+						onClick={() => navigate('/FAQs')}
+					>
+						Frequently Asked Questions
+					</a>
+				</div>
+
+				<p className="mb-2 text-lg font-light text-[#64605b]">
+					Looking for frozen shipping to another state?
+				</p>
+				<button
+					onClick={() => navigate('/ShipNationwide')}
+					className="cursor-pointer font-mono text-xl font-black uppercase tracking-[0.2em] text-[#242424] underline underline-offset-4"
+				>
+					Ship Nationwide
+				</button>
 			</div>
 		</div>
 	)
