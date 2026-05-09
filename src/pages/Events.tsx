@@ -1,4 +1,11 @@
+import EventTypeCard from "../components/EventTypeCard";
+import EventTypes from "../data/EventTypes";
+
 const Events = () => {
+	const scrollToId = (id: string) => {
+		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	};
+
 	return (
 		<div className="min-w-screen min-h-screen -mt-[8.25rem]">
 			<div className="relative flex items-center justify-end overflow-hidden">
@@ -25,16 +32,41 @@ const Events = () => {
 					<div className="flex flex-row gap-3 items-center justify-end">
 						<button
 							type="button"
+							onClick={() => scrollToId('inquiry')}
 							className="bg-[#bf8000] rounded-full px-8 py-4 font-mono font-semibold text-white tracking-wide text-sm uppercase shadow-lg border-2 border-black/20"
 						>
 							Request a Quote
 						</button>
 						<button
 							type="button"
+							onClick={() => scrollToId('packages')}
 							className="bg-white rounded-full px-8 py-4 font-mono font-semibold text-[#bf8000] tracking-wide text-sm uppercase shadow-md border-2 border-[#bf8000]/30"
 						>
 							See Packages
 						</button>
+					</div>
+				</div>
+			</div>
+
+			<div className="bg-[#faf7f2] px-20 py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div className="mb-14 ml-2 max-w-3xl">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+							What We Cater
+						</p>
+						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
+							Designed for <br /> <span className="italic text-[#D09501]">every</span> occasion.
+						</h2>
+						<div className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<p className="text-xl font-light tracking-wide text-[#64605b]">
+							From cocktail hour to client lunch — pick the moment, we'll bring the spread.
+						</p>
+					</div>
+
+					<div className="grid grid-cols-3 gap-8">
+						{EventTypes.map((eventType) => (
+							<EventTypeCard key={eventType.name} eventType={eventType} />
+						))}
 					</div>
 				</div>
 			</div>
