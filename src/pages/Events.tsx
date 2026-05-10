@@ -1,5 +1,7 @@
 import EventTypeCard from "../components/EventTypeCard";
+import SpaceCard from "../components/SpaceCard";
 import EventTypes from "../data/EventTypes";
+import EventSpaces from "../data/EventSpaces";
 
 const Events = () => {
 	const scrollToId = (id: string) => {
@@ -66,6 +68,29 @@ const Events = () => {
 					<div className="grid grid-cols-3 gap-8">
 						{EventTypes.map((eventType) => (
 							<EventTypeCard key={eventType.name} eventType={eventType} />
+						))}
+					</div>
+				</div>
+			</div>
+
+			<div id="spaces" className="bg-[#0d0c0b] px-20 py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div className="mx-auto mb-20 max-w-3xl text-center">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+							Venues
+						</p>
+						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
+							Discover our <span className="italic text-[#fec32f]">spaces.</span>
+						</h2>
+						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#fec32f]" />
+						<p className="text-xl font-light tracking-wide text-white/60">
+							Choose the perfect setting for your next gathering.
+						</p>
+					</div>
+
+					<div className="flex flex-col gap-24">
+						{EventSpaces.map((space, idx) => (
+							<SpaceCard key={space.name} space={space} reverse={idx % 2 === 1} />
 						))}
 					</div>
 				</div>
