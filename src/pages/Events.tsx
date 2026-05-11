@@ -2,6 +2,9 @@ import EventTypeCard from "../components/EventTypeCard";
 import SpaceCard from "../components/SpaceCard";
 import EventTypes from "../data/EventTypes";
 import EventSpaces from "../data/EventSpaces";
+import InquiryForm from "../components/InquiryForm";
+
+const INQUIRY_EMAIL = 'theempanadasbox1@gmail.com';
 
 const Events = () => {
 	const scrollToId = (id: string) => {
@@ -92,6 +95,55 @@ const Events = () => {
 						{EventSpaces.map((space, idx) => (
 							<SpaceCard key={space.name} space={space} reverse={idx % 2 === 1} />
 						))}
+					</div>
+				</div>
+			</div>
+
+			<div id="inquiry" className="bg-[#faf7f2] px-20 py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div className="mx-auto mb-16 max-w-3xl text-center">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+							Request a Quote
+						</p>
+						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
+							Tell us about <br /> your <span className="italic text-[#D09501]">event.</span>
+						</h2>
+						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<p className="text-xl font-light tracking-wide text-[#64605b]">
+							Send us the details — we'll reply within one business day with a custom quote.
+						</p>
+					</div>
+
+					<div className="grid grid-cols-5 gap-12">
+						<InquiryForm/>
+						<div className="col-span-2 flex flex-col gap-8 self-start rounded-[1.5rem] border border-[#ede5d8] bg-white p-8 shadow-sm">
+							<div>
+								<p className="mb-3 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">
+									Prefer to talk?
+								</p>
+								<h3 className="font-inter text-3xl font-black tracking-tight text-[#1a1209]">
+									Call us directly.
+								</h3>
+								<a href="tel:8592793297" className="mt-4 inline-block font-inter text-2xl font-bold text-[#bf8000]">
+									(859) 279-3297
+								</a>
+							</div>
+
+							<div>
+								<p className="mb-3 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">
+									Or skip the form.
+								</p>
+								<a
+									href={`mailto:${INQUIRY_EMAIL}`}
+									className="font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] underline underline-offset-4"
+								>
+									Email us directly →
+								</a>
+								<p className="mt-3 font-mono text-xs leading-relaxed text-[#5f5449]">
+									{INQUIRY_EMAIL}
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
