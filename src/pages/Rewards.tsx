@@ -1,3 +1,6 @@
+import StampWayCard from "../components/StampWayCard";
+import StampWays from "../data/StampWays";
+
 const Rewards = () => {
 	return (
 		<div className="min-w-screen min-h-screen -mt-[8.25rem]">
@@ -41,6 +44,22 @@ const Rewards = () => {
 						>
 							Sign In
 						</button>
+					</div>
+				</div>
+			</div>
+
+			<div className="bg-[#faf7f2] px-20 py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div className="mb-16 text-center">
+						<h2 className="font-inter text-6xl font-black tracking-tight text-[#1a1209]">
+							Earn Your <span className="italic text-[#D09501]">Stamps</span>
+						</h2>
+					</div>
+
+					<div className="grid grid-cols-5 items-start gap-6">
+						{StampWays.map((stampWay) => (
+							<StampWayCard key={stampWay.stamps + stampWay.category} stampWay={stampWay} />
+						))}
 					</div>
 				</div>
 			</div>
