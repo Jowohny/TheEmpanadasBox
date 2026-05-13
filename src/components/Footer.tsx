@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import FooterLinks from '../data/FooterNav';
 import SocialMedia from '../data/Media';
+import { useState } from 'react';
 
 const Footer = () => {
 	const navigate = useNavigate()
+	const [currentTab, setCurrentTab] = useState<string>('Home')
 
 	return (
 		<div className="bg-[#1a1209] text-[#faf7f2]">
@@ -32,8 +34,11 @@ const Footer = () => {
 							<li key={item.path} className="mb-2 break-inside-avoid">
 								<button
 									type="button"
-									onClick={() => navigate(item.path)}
-									className="font-mono text-sm text-[#faf7f2]/80"
+									onClick={() => {navigate(item.path), setCurrentTab(item.label)}}
+									className={
+										`font-mono text-sm
+										${currentTab === item.label ? 'text-[#faf7f2]/60' : 'text-[#faf7f2]'}`
+									}
 								>
 									{item.label}
 								</button>

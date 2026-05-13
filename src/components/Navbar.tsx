@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import FooterLinks from '../data/NavLinks';
+import NavLinks from '../data/NavLinks';
+import { useState } from 'react';
 
 const Navbar = () => {
 	const navigate = useNavigate();
+	const [currentTab, setCurrentTab] = useState<string>(NavLinks[0].label)
 
 	return (
 		<>
@@ -13,9 +15,14 @@ const Navbar = () => {
 				</div>
 
 				<div className='flex flex-row items-center gap-2'>
-					{FooterLinks.map((tab) => (
-						<button key={tab.label} onClick={() => navigate(tab.path)}
-							className='relative font-mono font-medium tracking-wide text-md text-[#3a3020] px-5 py-2 rounded-full hover:bg-[#bf8000]/10 hover:text-[#bf8000] transition-all duration-200'
+					{NavLinks.map((tab) => (
+						<button
+							key={tab.label} 
+							onClick={() => {navigate(tab.path), setCurrentTab(tab.label)}}
+							className={
+								`relative font-mono font-medium tracking-wide text-md px-5 py-2 rounded-full hover:bg-[#bf8000]/10 hover:text-[#bf8000] transition-all duration-200
+								${currentTab === tab.label ? 'bg-[#bf8000]/10 text-[#bf8000] border-[0.5px] border-[#bf8000]/40' : 'text-[#3a3020]'}`
+							}
 						>
 							{tab.label}
 						</button>
