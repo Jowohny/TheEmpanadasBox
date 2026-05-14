@@ -1,16 +1,20 @@
 import StampWayCard from "../components/StampWayCard";
+import TierCard from "../components/TierCard";
 import StampWays from "../data/StampWays";
+import RewardsTiers from "../data/RewardsTiers";
 
 const Rewards = () => {
 	return (
 		<div className="min-w-screen min-h-screen -mt-[8.25rem]">
 			<div className="relative flex items-center justify-center overflow-hidden">
 				<img
-					src="/EmpanadaPics/BYC.jpg"
+					src="/EmpanadaPics/EzCaterer Menu/Empanadas by the Dozen.jpg"
 					className="z-0 object-cover"
 					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
 				/>
-				<div className="absolute inset-0 z-10 bg-black/30" />
+
+	 			<div className="absolute inset-0 z-20 bg-radial-[at_50%_65%] from-black/60 via-black/10 to-transparent" />
+				<div className="absolute inset-0 bg-gradient-to-b from-white via-white/[0.0001] -mt-60 to-transparent z-10" />
 
 				<div className="absolute z-20 flex max-w-4xl flex-col items-center px-6 text-center">
 					<div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-md">
@@ -59,6 +63,28 @@ const Rewards = () => {
 					<div className="grid grid-cols-5 items-start gap-6">
 						{StampWays.map((stampWay) => (
 							<StampWayCard key={stampWay.stamps + stampWay.category} stampWay={stampWay} />
+						))}
+					</div>
+				</div>
+			</div>
+			<div className="bg-[#0d0c0b] px-20 py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div className="mx-auto mb-16 max-w-3xl text-center">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+							Redemption
+						</p>
+						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
+							Cash in your <span className="italic text-[#fec32f]">stamps.</span>
+						</h2>
+						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#fec32f]" />
+						<p className="text-xl font-light tracking-wide text-white/60">
+							Stamps stack up automatically. When you hit a tier, it's yours to claim.
+						</p>
+					</div>
+
+					<div className="grid grid-cols-4 gap-6">
+						{RewardsTiers.map((tier) => (
+							<TierCard key={tier.stamps} tier={tier} />
 						))}
 					</div>
 				</div>
