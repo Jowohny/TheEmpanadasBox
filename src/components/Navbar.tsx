@@ -21,7 +21,7 @@ const Navbar = () => {
 							onClick={() => {navigate(tab.path), setCurrentTab(tab.label)}}
 							className={
 								`relative font-mono font-medium tracking-wide text-md px-5 py-2 rounded-full hover:bg-[#bf8000]/10 hover:text-[#bf8000] transition-all duration-200
-								${currentTab === tab.label ? 'bg-[#bf8000]/10 text-[#bf8000] border-[0.5px] border-[#bf8000]/40' : 'text-[#3a3020]'}`
+								${currentTab === tab.label ? 'bg-[#c09100]/20 text-[#bf8000] border-[0.5px] border-[#bf8000]' : 'text-[#3a3020]'}`
 							}
 						>
 							{tab.label}
