@@ -89,6 +89,33 @@ const Rewards = () => {
 					</div>
 				</div>
 			</div>
+
+			<div className="bg-[#faf7f2] px-20 py-24">
+				<div className="mx-auto max-w-3xl text-center">
+					<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
+						Ready to start your <span className="italic text-[#D09501]">passport?</span>
+					</h2>
+					<div className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
+					<p className="mb-10 text-xl font-light tracking-wide text-[#64605b]">
+						Sign up today and the next bite already counts.
+					</p>
+
+					<div className="flex flex-row items-center justify-center gap-3">
+						<button
+							type="button"
+							className="rounded-full border-2 border-black/20 bg-[#fec32f] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
+						>
+							Join Now
+						</button>
+						<button
+							type="button"
+							className="rounded-full border-2 border-black/10 bg-[#1a1209] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-md"
+						>
+							Sign In
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };
