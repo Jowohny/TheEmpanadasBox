@@ -97,7 +97,8 @@ const Home = () => {
 						<p className="text-xl font-light tracking-wide text-[#7a6a55] mt-1">Pick your destinations for the ultimate 12-pack.</p>
 					</div>
 					<button 
-						type="button" 
+						type="button"
+						onClick={() => navigate('ShipNationwide')} 
 						className="bg-[#bf8000] inline-block rounded-full px-8 py-4 font-medium text-white tracking-wide text-sm uppercase shadow-md"
 					>
 						Build Your 12 Pack

@@ -43,7 +43,7 @@ const CartDrawer = () => {
 								Your cart <br /> is <span className="italic text-[#fec32f]">empty.</span>
 							</p>
 							<p className="mt-4 max-w-xs text-sm font-light text-white/60">
-								Pick a pack, a sampler, or a sauce - they all land here.
+								Pick a pack, a sampler, or a sauce <br /> They all land here.
 							</p>
 						</div>
 					) : (

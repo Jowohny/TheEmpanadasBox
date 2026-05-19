@@ -44,10 +44,10 @@ const Events = () => {
 						</button>
 						<button
 							type="button"
-							onClick={() => scrollToId('packages')}
+							onClick={() => scrollToId('destinations')}
 							className="bg-white rounded-full px-8 py-4 font-mono font-semibold text-[#bf8000] tracking-wide text-sm uppercase shadow-md border-2 border-[#bf8000]/30"
 						>
-							See Packages
+							See Destinations
 						</button>
 					</div>
 				</div>
@@ -76,7 +76,7 @@ const Events = () => {
 				</div>
 			</div>
 
-			<div id="spaces" className="bg-[#0d0c0b] px-20 py-24">
+			<div id="destinations" className="bg-[#0d0c0b] px-20 py-24">
 				<div className="mx-auto max-w-[90rem]">
 					<div className="mx-auto mb-20 max-w-3xl text-center">
 						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
