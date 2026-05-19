@@ -42,6 +42,21 @@ export const CustomPacks: CustomPack[] = [
 	}
 ]
 
-export const Sauces: Sauce[] = []
+export const Sauces: Sauce[] = [
+	{
+		id: 'sauce-chimichurri',
+		type: 'sauce',
+		name: 'Chimichurri',
+		description: 'Bright, herby, garlicky. Made in-house — the green sauce that goes on everything.',
+		image: '/EmpanadaPics/EzCaterer Menu/Chimichuri.jpg'
+	},
+	{
+		id: 'sauce-salsa-roja',
+		type: 'sauce',
+		name: 'Salsa Roja',
+		description: 'Smoky, tomato-forward, with a slow warm finish. The red counterpart to chimichurri.',
+		image: '/EmpanadaPics/EzCaterer Menu/Salsa Roja.jpg'
+	}
+]
 
 export const PresetBoxes: PresetBox[] = []

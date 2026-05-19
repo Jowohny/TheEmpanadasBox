@@ -89,8 +89,20 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 	const itemCount = lines.reduce((sum, line) => sum + line.quantity, 0)
 
 	const addLine = (input: CartLineInput) => {
-		const line = { ...input, id: newId() } as CartLine
-		setLines((prev) => [...prev, line])
+		setLines((prev) => {
+			if (input.type === 'sauce' || input.type === 'preset-box') {
+				const existingIndex = prev.findIndex(
+					(l) => l.type === input.type && l.product.id === input.product.id
+				)
+				if (existingIndex >= 0) {
+					return prev.map((l, i) =>
+						i === existingIndex ? { ...l, quantity: l.quantity + input.quantity } : l
+					)
+				}
+			}
+			const line = { ...input, id: newId() } as CartLine
+			return [...prev, line]
+		})
 	}
 
 	const removeLine = (id: string) => {

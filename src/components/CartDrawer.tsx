@@ -1,7 +1,7 @@
 import { useCart } from "../contexts/CartContext";
 
 const CartDrawer = () => {
-	const { lines, location, isDrawerOpen, closeDrawer } = useCart()
+	const { lines, location, isDrawerOpen, closeDrawer, removeLine, updateQuantity } = useCart()
 
 	return (
 		<>
@@ -47,7 +47,53 @@ const CartDrawer = () => {
 							</p>
 						</div>
 					) : (
-						<ul className="flex flex-col gap-5">
+						<ul className="flex flex-col gap-6">
+							{lines.map((line) => (
+								<li key={line.id} className="flex gap-4">
+									<img
+										src={line.product.image}
+										className="h-20 w-20 shrink-0 rounded-xl object-cover"
+									/>
+									<div className="flex flex-1 flex-col">
+										<div className="flex items-start justify-between gap-3">
+											<h3 className="font-inter text-base font-black leading-tight text-white">
+												{line.product.name}
+											</h3>
+											<button
+												type="button"
+												onClick={() => removeLine(line.id)}
+												className="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-white/40"
+											>
+												Remove
+											</button>
+										</div>
+										{line.type === 'custom-pack' && (
+											<p className="mt-1 text-xs font-light text-white/60">
+												{line.composition.map((c) => `${c.empanadaName} × ${c.count}`).join(', ')}
+											</p>
+										)}
+										<div className="mt-3 flex items-center gap-3">
+											<button
+												type="button"
+												onClick={() => updateQuantity(line.id, line.quantity - 1)}
+												className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 text-white"
+												aria-label="Decrease quantity"
+											>
+												-
+											</button>
+											<span className="font-mono text-sm font-black text-white">{line.quantity}</span>
+											<button
+												type="button"
+												onClick={() => updateQuantity(line.id, line.quantity + 1)}
+												className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 text-white"
+												aria-label="Increase quantity"
+											>
+												+
+											</button>
+										</div>
+									</div>
+								</li>
+							))}
 						</ul>
 					)}
 				</div>
