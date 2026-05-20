@@ -2,7 +2,7 @@ import CartDrawer from "../components/CartDrawer";
 import CartIcon from "../components/CartIcon";
 import LocationSwitcher from "../components/LocationSwitcher";
 import MenuItemCard from "../components/MenuItemCard";
-import { Sauces } from "../data/ShipProducts";
+import { PresetBoxes, Sauces } from "../data/ShipProducts";
 
 const ShipNationwide = () => {
 	return (
@@ -28,6 +28,29 @@ const ShipNationwide = () => {
 						<p className="text-xl font-light tracking-wide text-[#64605b]">
 							Pick a pack, build a box, send our world tour to your freezer — anywhere in the country.
 						</p>
+					</div>
+				</div>
+			</div>
+
+			<div className="bg-[#0d0c0b] px-20 py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div className="mx-auto mb-14 max-w-3xl text-center">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+							Sampler Boxes
+						</p>
+						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
+							Skip the <span className="italic text-[#fec32f]">building.</span>
+						</h2>
+						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#fec32f]" />
+						<p className="text-xl font-light tracking-wide text-white/60">
+							Pre-built boxes for when you'd rather not pick. Twelve empanadas, curated.
+						</p>
+					</div>
+
+					<div className="grid grid-cols-3 gap-8">
+						{PresetBoxes.map((box) => (
+							<MenuItemCard key={box.id} product={box} />
+						))}
 					</div>
 				</div>
 			</div>
