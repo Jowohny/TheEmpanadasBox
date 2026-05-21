@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import OrderPickup from './pages/OrderPickup';
 import ShipNationwide from './pages/ShipNationwide';
+import BoxBuilder from './pages/BoxBuilder';
 import Catering from './pages/Catering';
 import Rewards from './pages/Rewards';
 import Events from './pages/Events';
@@ -21,6 +22,7 @@ function App() {
 				<Route path="/" element={<Home/>} />
 				<Route path="/OrderPickup" element={<OrderPickup/>} />
 				<Route path="/ShipNationwide" element={<ShipNationwide/>} />
+				<Route path="/ShipNationwide/build/:size" element={<BoxBuilder/>} />
 				<Route path="/Catering" element={<Catering/>} />
 				<Route path="/Rewards" element={<Rewards/>} />
 				<Route path="/Events" element={<Events/>} />
