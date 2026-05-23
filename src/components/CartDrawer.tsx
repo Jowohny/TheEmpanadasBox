@@ -1,7 +1,20 @@
+import { useEffect } from "react";
 import { useCart } from "../contexts/CartContext";
 
 const CartDrawer = () => {
 	const { lines, location, isDrawerOpen, closeDrawer, removeLine, updateQuantity } = useCart()
+
+	useEffect(() => {
+		if (!isDrawerOpen) return
+		const prev = document.body.style.overflow
+		document.body.style.overflow = 'hidden'
+		return () => {
+			document.body.style.overflow = prev
+		}
+	}, [isDrawerOpen])
+
+	const allPriced = lines.length > 0 && lines.every((line) => typeof line.product.price === 'number')
+	const subtotal = lines.reduce((sum, line) => sum + (line.product.price ?? 0) * line.quantity, 0)
 
 	return (
 		<>
@@ -99,6 +112,16 @@ const CartDrawer = () => {
 				</div>
 
 				<footer className="border-t border-white/10 px-7 py-6">
+					{lines.length > 0 && (
+						<div className="mb-4 flex items-center justify-between">
+							<span className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-white/50">
+								Subtotal
+							</span>
+							<span className="font-inter text-base font-black text-white">
+								{allPriced ? `$${subtotal.toFixed(2)}` : 'See price at checkout'}
+							</span>
+						</div>
+					)}
 					<p className="mb-4 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-white/50">
 						Shipping from <span className="text-[#fec32f]">{location}</span>
 					</p>

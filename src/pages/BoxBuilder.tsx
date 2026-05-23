@@ -48,7 +48,7 @@ const BoxBuilder = () => {
 		if (!valid) navigate('/ShipNationwide', { replace: true })
 	}, [valid, navigate])
 
-	if (!valid) return null
+	if (!valid) navigate("/ShipNationwide")
 
 	const pack = CustomPacks.find((p) => p.size === sizeNum)
 	if (!pack) return null
