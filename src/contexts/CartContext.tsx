@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import type { Sauce, PresetBox, CustomPack } from '../data/ShipProducts';
+import type { Sauce, PresetBox, CustomPack, IndividualEmpanada } from '../data/ShipProducts';
 
 export type CartLocation = 'Covington' | 'Findlay Market'
 
@@ -25,11 +25,19 @@ export interface CustomPackLine {
 	composition: Array<{ empanadaName: string; count: number }>
 }
 
-export type CartLine = SauceLine | PresetLine | CustomPackLine
+export interface EmpanadaLine {
+	id: string
+	type: 'empanada'
+	product: IndividualEmpanada
+	quantity: number
+}
+
+export type CartLine = SauceLine | PresetLine | CustomPackLine | EmpanadaLine
 export type CartLineInput =
 	| Omit<SauceLine, 'id'>
 	| Omit<PresetLine, 'id'>
 	| Omit<CustomPackLine, 'id'>
+	| Omit<EmpanadaLine, 'id'>
 
 interface CartContextValue {
 	lines: CartLine[]
@@ -90,7 +98,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
 	const addLine = (input: CartLineInput) => {
 		setLines((prev) => {
-			if (input.type === 'sauce' || input.type === 'preset-box') {
+			if (input.type === 'sauce' || input.type === 'preset-box' || input.type === 'empanada') {
 				const existingIndex = prev.findIndex(
 					(l) => l.type === input.type && l.product.id === input.product.id
 				)

@@ -1,8 +1,8 @@
-import type { Sauce, PresetBox } from "../data/ShipProducts";
+import type { Sauce, PresetBox, IndividualEmpanada } from "../data/ShipProducts";
 import { useCart } from "../contexts/CartContext";
 
 type MenuItemCardProps = {
-	product: Sauce | PresetBox
+	product: Sauce | PresetBox | IndividualEmpanada
 }
 
 const MenuItemCard = ({ product }: MenuItemCardProps) => {
@@ -11,8 +11,10 @@ const MenuItemCard = ({ product }: MenuItemCardProps) => {
 	const handleAdd = () => {
 		if (product.type === 'sauce') {
 			addLine({ type: 'sauce', product, quantity: 1 })
-		} else {
+		} else if (product.type === 'preset-box') {
 			addLine({ type: 'preset-box', product, quantity: 1 })
+		} else {
+			addLine({ type: 'empanada', product, quantity: 1 })
 		}
 		openDrawer()
 	}
