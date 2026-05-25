@@ -13,7 +13,7 @@ export interface Location {
 
 const Locations: Location[] = [
 	{
-		name: 'The Empanadas Box\nCovington',
+		name: 'Empanada Box\nCovington',
 		address: '212 W Pike St, Covington, KY 41011',
 		hours: ['Monday: CLOSED', 'Tuesday: 11AM-8PM', 'Wednesday: 11AM-8PM', 'Thursday: 11AM-8PM', 'Friday: 11AM-8PM', 'Saturday: 11AM-8PM', 'Sunday: 11AM-8PM'],
 		doordashLink: 'https://www.doordash.com/store/the-empanadas-box-covington-24170096/16918546/?pickup=true&rwg_token=AFd1xnEs_QVgfQDaAbo5IBvmE5OVfAxSJ6pUYUDX1wlQPGXXEHssFZE3WkZ9TF-SoQ0yH1B_wzGMwMDkYbERyVemnMk0FLiH_A==&utm_campaign=gpa',
@@ -25,7 +25,7 @@ const Locations: Location[] = [
 		storeFront: '/covington.jpg'
 	},
 	{
-		name: 'The Empanadas Box\nFindlay Market',
+		name: 'Empanada Box\nFindlay Market',
 		address: '1807 Elm St, Cincinnati, OH 45202',
 		hours: ['Monday: CLOSED', 'Tuesday: 11AM-7PM', 'Wednesday: 11AM-7PM', 'Thursday: 11AM-7PM', 'Friday: 11AM-7PM', 'Saturday: 11AM-7PM', 'Sunday: 11AM-5PM'],
 		doordashLink: 'https://www.doordash.com/store/the-empanadas-box-cincinnati-33894621/?utm_campaign=gpa&pickup=true&rwg_token=AFd1xnGhSQ8sIzws6EWbRLuSJ5Qc0AiasX9wzL2fl-jPLOEoFZE98NRvFrYor98p2vPHtXz4uqeNL_ja9HzdDK0E6vVsVRywNA%3D%3D',

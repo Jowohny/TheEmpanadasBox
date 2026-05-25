@@ -224,22 +224,10 @@ const OrderPickup = () => {
 					Order Support
 				</p>
 				<h2 className="mb-10 font-inter text-5xl font-black tracking-tight text-[#242424]">
-					Need help with an active order?
+					Need Help?
 				</h2>
 
-				<div className="mb-10 flex justify-center gap-4">
-					{[
-						{ label: 'Call Covington',    number: '8592793297' },
-						{ label: 'Call Findlay Market', number: '8592793297' },
-					].map(({ label, number }) => (
-						<a
-							key={label}
-							href={`tel:${number}`}
-							className="cursor-pointer rounded-full bg-[#fec32f] px-9 py-4 font-mono text-xs font-black uppercase tracking-[0.16em] text-[#765600] shadow-md transition-colors duration-200 hover:bg-[#eeb11f]"
-						>
-							{label}
-						</a>
-					))}
+				<div className="mb-12 flex justify-center">
 					<button
 						onClick={() => navigate('/FAQs')}
 						className="cursor-pointer rounded-full border border-[#d4c9b8] px-9 py-4 font-mono text-xs font-black uppercase tracking-[0.16em] text-[#5f5a54] transition-colors duration-200 hover:border-[#fec32f] hover:text-[#242424]"
@@ -248,15 +236,30 @@ const OrderPickup = () => {
 					</button>
 				</div>
 
-				<p className="mb-2 text-lg font-light text-[#64605b]">
-					Looking for frozen shipping to another state?
-				</p>
-				<button
-					onClick={() => navigate('/ShipNationwide')}
-					className="cursor-pointer font-mono text-xs font-black uppercase tracking-[0.2em] text-[#242424] underline underline-offset-4 transition-colors duration-200 hover:text-[#fec32f]"
-				>
-					Ship Nationwide
-				</button>
+				<div className="mx-auto grid max-w-3xl grid-cols-2 gap-12">
+					<div>
+						<p className="mb-2 text-lg font-light text-[#64605b]">
+							Looking to cater an event?
+						</p>
+						<button
+							onClick={() => navigate('/Catering')}
+							className="cursor-pointer font-mono text-xs font-black uppercase tracking-[0.2em] text-[#242424] underline underline-offset-4 transition-colors duration-200 hover:text-[#fec32f]"
+						>
+							Catering
+						</button>
+					</div>
+					<div>
+						<p className="mb-2 text-lg font-light text-[#64605b]">
+							Looking to ship our empanadas to your house?
+						</p>
+						<button
+							onClick={() => navigate('/ShipNationwide')}
+							className="cursor-pointer font-mono text-xs font-black uppercase tracking-[0.2em] text-[#242424] underline underline-offset-4 transition-colors duration-200 hover:text-[#fec32f]"
+						>
+							Shipped Boxes
+						</button>
+					</div>
+				</div>
 			</div>
 
 		</div>

@@ -11,7 +11,7 @@ const Navbar = () => {
 			<div className='min-w-full h-[5.5rem] flex flex-row items-center justify-between px-6 bg-white/60 backdrop-blur-2xl'>
 				<div onClick={() => navigate('/')} className='flex flex-row items-center gap-3'>
 					<img src='/empanadasboxlogo.png' className='w-14 h-14 aspect-square rounded-xl' />
-					<h1 className='font-black text-xl tracking-wide text-[#1a1209]'>The Empanadas Box</h1>
+					<h1 className='font-black text-xl tracking-wide text-[#1a1209]'>Empanada Box</h1>
 				</div>
 
 				<div className='flex flex-row items-center gap-2'>

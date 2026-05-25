@@ -6,7 +6,7 @@ export interface Link {
 const NavLinks: Link[] = [
 	{ label: 'Home', path: '/' },
 	{ label: 'Order Pickup', path: '/OrderPickup' },
-	{ label: 'Ship Nationwide', path: '/ShipNationwide' },
+	{ label: 'Shipped Boxes', path: '/ShipNationwide' },
 	{ label: 'Catering', path: '/Catering' },
 	{ label: 'Events', path: '/Events' },
 	{ label: 'Rewards', path: '/Rewards' },

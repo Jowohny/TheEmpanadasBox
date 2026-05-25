@@ -5,10 +5,6 @@ type LocationCardProps = {
 	location: Location
 }
 
-const formatPhoneNumber = (phoneNumber: string) => {
-	return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6)}`
-};
-
 const LocationCard = ({ location }: LocationCardProps ) => {
 	const [changeInteract, setChangeInteract] = useState<"photo" | "map">("photo");
 
@@ -91,10 +87,12 @@ const LocationCard = ({ location }: LocationCardProps ) => {
 						Open in Maps
 					</a>
 					<a
-						href={`tel:${location.phoneNumber}`}
+						href="#"
+						target="_blank"
+						rel="noopener noreferrer"
 						className="rounded-full border border-[#d8cab5] bg-white px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#1a1209]"
 					>
-						Call {formatPhoneNumber(location.phoneNumber)}
+						Order Here
 					</a>
 				</div>
 			</div>

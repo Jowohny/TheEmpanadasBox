@@ -35,6 +35,7 @@ const Home = () => {
 					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
 				/>
 				<div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent z-10" />
+				<div className="absolute top-0 bottom-0 left-[44%] w-px bg-[#1a1209]/15 z-10" />
 				<div className="absolute text-left ml-16 z-20 max-w-2xl">
 					<h1 className="text-8xl uppercase font-inter font-black mb-6 scale-y-[1.1] tracking-wide leading-[0.9] text-[#1a1209]">
 						your freezer's <br />
@@ -94,14 +95,14 @@ const Home = () => {
 				<div className="flex flex-row w-full justify-between px-12 py-10 items-center border-b border-[#e8dfd0]">
 					<div className="flex flex-col gap-1">
 						<h1 className="text-6xl tracking-wide font-black font-inter text-[#1a1209] leading-none">The World Tour</h1>
-						<p className="text-xl font-light tracking-wide text-[#7a6a55] mt-1">Pick your destinations for the ultimate 12-pack.</p>
+						<p className="text-xl font-light tracking-wide text-[#7a6a55] mt-1">Pick your destinations for the ultimate 24-pack.</p>
 					</div>
 					<button 
 						type="button"
 						onClick={() => navigate('ShipNationwide')} 
 						className="bg-[#bf8000] inline-block rounded-full px-8 py-4 font-medium text-white tracking-wide text-sm uppercase shadow-md"
 					>
-						Build Your 12 Pack
+						Build Your 24 Pack
 					</button>
 				</div>
 				<div className="flex flex-row justify-center items-center gap-6 px-8 py-14">
