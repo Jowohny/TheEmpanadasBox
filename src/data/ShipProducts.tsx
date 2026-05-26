@@ -1,5 +1,3 @@
-import Empanadas from "./Empanadas";
-
 export interface BaseProduct {
 	id: string
 	squareCatalogId?: string
@@ -11,7 +9,7 @@ export interface BaseProduct {
 
 export interface CustomPack extends BaseProduct {
 	type: 'custom-pack'
-	size: 8 | 12
+	size: 24 | 36
 }
 
 export interface Sauce extends BaseProduct {
@@ -32,19 +30,19 @@ export type ShipProduct = CustomPack | Sauce | PresetBox | IndividualEmpanada
 
 export const CustomPacks: CustomPack[] = [
 	{
-		id: 'custom-pack-8',
+		id: 'custom-pack-24',
 		type: 'custom-pack',
-		size: 8,
-		name: 'Build an 8-Pack',
-		description: 'An eight-pack of empanadas, mix and match.',
+		size: 24,
+		name: 'Build a 24-Pack',
+		description: 'A 24-pack of empanadas, mix and match.',
 		image: '/EmpanadaPics/Items Photos/JAMAICA.jpg'
 	},
 	{
-		id: 'custom-pack-12',
+		id: 'custom-pack-36',
 		type: 'custom-pack',
-		size: 12,
-		name: 'Build a 12-Pack',
-		description: 'The full passport - twelve empanadas, your call.',
+		size: 36,
+		name: 'Build a 36-Pack',
+		description: 'The full passport — thirty-six empanadas, your call.',
 		image: '/EmpanadaPics/Items Photos/SINGAPORE.jpg'
 	}
 ]
@@ -65,14 +63,5 @@ export const Sauces: Sauce[] = [
 		image: '/EmpanadaPics/EzCaterer Menu/Salsa Roja.jpg'
 	}
 ]
-
-export const EmpanadaProducts: IndividualEmpanada[] = Empanadas.map((e) => ({
-	id: `empanada-${e.name.toLowerCase().replace(/\s+/g, '-')}`,
-	type: 'empanada',
-	name: e.name,
-	description: e.description,
-	image: e.image,
-	tags: e.tags
-}))
 
 export const PresetBoxes: PresetBox[] = []
