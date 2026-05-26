@@ -21,7 +21,7 @@ const BoxVisualization = ({ slots, empanadas, onClear }: BoxVisualizationProps) 
 				</p>
 			</div>
 
-			<div className="grid grid-cols-4 gap-3">
+			<div className={`grid gap-3 ${slots.length === 36 ? 'grid-cols-6' : 'grid-cols-4'}`}>
 				{slots.map((slotName, i) => {
 					const empanada = slotName ? lookup.get(slotName) : null
 					return (

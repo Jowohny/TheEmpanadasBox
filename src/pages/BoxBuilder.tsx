@@ -8,22 +8,13 @@ import { useCart } from "../contexts/CartContext";
 import Empanadas from "../data/Empanadas";
 import { CustomPacks } from "../data/ShipProducts";
 
-const VALID_SIZES = [8, 12] as const
+const VALID_SIZES = [24, 36] as const
 type PackSize = typeof VALID_SIZES[number]
 
 const isValidSize = (n: number): n is PackSize =>
 	(VALID_SIZES as readonly number[]).includes(n)
 
-function distribute(flavors: string[], size: number): CompositionEntry[] {
-	const n = flavors.length
-	if (n === 0) return []
-	const base = Math.floor(size / n)
-	const remainder = size % n
-	return flavors.map((name, i) => ({
-		name,
-		count: base + (i < remainder ? 1 : 0)
-	}))
-}
+const STEP = 4
 
 function compositionToSlots(composition: CompositionEntry[], size: number): Array<string | null> {
 	const slots: Array<string | null> = []
@@ -42,13 +33,12 @@ const BoxBuilder = () => {
 	const valid = isValidSize(sizeNum)
 
 	const [composition, setComposition] = useState<CompositionEntry[]>([])
-	const [autofill, setAutofill] = useState(true)
 
 	useEffect(() => {
 		if (!valid) navigate('/ShipNationwide', { replace: true })
 	}, [valid, navigate])
 
-	if (!valid) navigate("/ShipNationwide")
+	if (!valid) return null
 
 	const pack = CustomPacks.find((p) => p.size === sizeNum)
 	if (!pack) return null
@@ -57,26 +47,14 @@ const BoxBuilder = () => {
 	const slots = compositionToSlots(composition, sizeNum)
 
 	const handleClickEmpanada = (name: string) => {
-		if (autofill) {
-			const existingIndex = composition.findIndex((c) => c.name === name)
-			let flavors: string[]
-			if (existingIndex >= 0) {
-				flavors = composition.filter((_, i) => i !== existingIndex).map((c) => c.name)
-			} else {
-				if (composition.length >= sizeNum) return
-				flavors = [...composition.map((c) => c.name), name]
-			}
-			setComposition(distribute(flavors, sizeNum))
+		if (totalSlots + STEP > sizeNum) return
+		const existingIndex = composition.findIndex((c) => c.name === name)
+		if (existingIndex >= 0) {
+			setComposition((prev) =>
+				prev.map((c, i) => (i === existingIndex ? { ...c, count: c.count + STEP } : c))
+			)
 		} else {
-			if (totalSlots >= sizeNum) return
-			const existingIndex = composition.findIndex((c) => c.name === name)
-			if (existingIndex >= 0) {
-				setComposition((prev) =>
-					prev.map((c, i) => (i === existingIndex ? { ...c, count: c.count + 1 } : c))
-				)
-			} else {
-				setComposition((prev) => [...prev, { name, count: 1 }])
-			}
+			setComposition((prev) => [...prev, { name, count: STEP }])
 		}
 	}
 
@@ -84,17 +62,10 @@ const BoxBuilder = () => {
 		setComposition((prev) =>
 			prev.flatMap((c) => {
 				if (c.name !== name) return [c]
-				if (c.count <= 1) return []
-				return [{ ...c, count: c.count - 1 }]
+				if (c.count <= STEP) return []
+				return [{ ...c, count: c.count - STEP }]
 			})
 		)
-	}
-
-	const handleToggleAutofill = () => {
-		if (!autofill) {
-			setComposition((prev) => distribute(prev.map((c) => c.name), sizeNum))
-		} 
-		setAutofill((a) => !a)
 	}
 
 	const handleCommit = () => {
@@ -126,7 +97,7 @@ const BoxBuilder = () => {
 
 					<div className="mb-12 max-w-3xl">
 						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
-							Custom Build
+							Build Your Box
 						</p>
 						<h1 className="mb-4 font-inter text-7xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
 							Build your <span className="italic text-[#D09501]">{sizeNum}-pack.</span>
@@ -141,11 +112,9 @@ const BoxBuilder = () => {
 						<EmpanadaPicker
 							empanadas={Empanadas}
 							composition={composition}
-							autofill={autofill}
 							packSize={sizeNum}
 							onClickEmpanada={handleClickEmpanada}
 							onDecrement={handleDecrement}
-							onToggleAutofill={handleToggleAutofill}
 							onCommit={handleCommit}
 						/>
 						<BoxVisualization
