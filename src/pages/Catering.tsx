@@ -1,4 +1,4 @@
-const CATERING_URL = 'https://www.ezcater.com/catering/the-empanadas-box-3';
+const CATERING_URL = 'https://theempanadasboxcatering.square.site/';
 
 const Catering = () => {
 	return (

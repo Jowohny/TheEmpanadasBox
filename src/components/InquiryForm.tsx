@@ -8,7 +8,7 @@ const InquiryForm = () => {
 	const [phone, setPhone] = useState('');
 	const [eventDate, setEventDate] = useState('');
 	const [headcount, setHeadcount] = useState('');
-	const [eventType, setEventType] = useState('Wedding');
+	const [eventType, setEventType] = useState('Corporate');
 	const [notes, setNotes] = useState('');
 
 	const handleInquiry = (e: FormEvent<HTMLFormElement>) => {
@@ -92,9 +92,8 @@ const InquiryForm = () => {
 						onChange={(e) => setEventType(e.target.value)}
 						className="rounded-xl bg-[#efe7d9] px-4 py-3 font-mono text-sm text-[#1a1209] focus:outline-none focus:ring-2 focus:ring-[#fec32f]"
 					>
-						<option>Wedding</option>
 						<option>Corporate</option>
-						<option>Private Party</option>
+						<option>Party</option>
 						<option>Other</option>
 					</select>
 				</label>

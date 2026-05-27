@@ -119,29 +119,17 @@ const Events = () => {
 						<div className="col-span-2 flex flex-col gap-8 self-start rounded-[1.5rem] border border-[#ede5d8] bg-white p-8 shadow-sm">
 							<div>
 								<p className="mb-3 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">
-									Prefer to talk?
-								</p>
-								<h3 className="font-inter text-3xl font-black tracking-tight text-[#1a1209]">
-									Call us directly.
-								</h3>
-								<a href="tel:8592793297" className="mt-4 inline-block font-inter text-2xl font-bold text-[#bf8000]">
-									(859) 279-3297
-								</a>
-							</div>
-
-							<div>
-								<p className="mb-3 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">
 									Or skip the form.
 								</p>
+								<h3 className="font-inter text-2xl font-black tracking-tight text-[#1a1209]">
+									Email us at:
+								</h3>
 								<a
 									href={`mailto:${INQUIRY_EMAIL}`}
-									className="font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] underline underline-offset-4"
+									className="mt-4 inline-block font-inter text-xl font-bold text-[#bf8000] underline underline-offset-4"
 								>
-									Email us directly →
-								</a>
-								<p className="mt-3 font-mono text-xs leading-relaxed text-[#5f5449]">
 									{INQUIRY_EMAIL}
-								</p>
+								</a>
 							</div>
 						</div>
 					</div>
