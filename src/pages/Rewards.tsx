@@ -1,7 +1,9 @@
+import MembershipTierCard from "../components/MembershipTierCard";
 import StampWayCard from "../components/StampWayCard";
 import TierCard from "../components/TierCard";
-import StampWays from "../data/StampWays";
+import MembershipTiers from "../data/MembershipTiers";
 import RewardsTiers from "../data/RewardsTiers";
+import StampWays from "../data/StampWays";
 
 const Rewards = () => {
 	return (
@@ -85,6 +87,29 @@ const Rewards = () => {
 					<div className="grid grid-cols-4 gap-6">
 						{RewardsTiers.map((tier) => (
 							<TierCard key={tier.stamps} tier={tier} />
+						))}
+					</div>
+				</div>
+			</div>
+
+			<div className="bg-[#faf7f2] px-20 py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div className="mx-auto mb-16 max-w-3xl text-center">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+							Membership
+						</p>
+						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
+							Level up your <span className="italic text-[#D09501]">passport.</span>
+						</h2>
+						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<p className="text-xl font-light tracking-wide text-[#64605b]">
+							Stack more stamps on every order — the more you visit, the faster they pile up.
+						</p>
+					</div>
+
+					<div className="grid grid-cols-3 gap-6">
+						{MembershipTiers.map((tier) => (
+							<MembershipTierCard key={tier.name} tier={tier} />
 						))}
 					</div>
 				</div>
