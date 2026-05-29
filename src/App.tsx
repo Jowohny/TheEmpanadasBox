@@ -9,6 +9,7 @@ import BoxBuilder from './pages/BoxBuilder';
 import Catering from './pages/Catering';
 import Rewards from './pages/Rewards';
 import Events from './pages/Events';
+import FAQs from './pages/FAQs';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
 				<Route path="/Catering" element={<Catering/>} />
 				<Route path="/Rewards" element={<Rewards/>} />
 				<Route path="/Events" element={<Events/>} />
+				<Route path="/FAQs" element={<FAQs/>} />
 				<Route path="*" element={<h1>404 <br /> Page Not Found</h1>} />
 			</Routes>
 
