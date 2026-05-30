@@ -2,6 +2,8 @@ import LocationCard from '../components/LocationCard';
 import MarketLocationCard from '../components/MarketLocationCard';
 import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
+import RewardsTiers from '../data/RewardsTiers';
+import TierCard from '../components/TierCard';
 import { useNavigate } from 'react-router-dom';
 
 const OrderPickup = () => {
@@ -128,14 +130,11 @@ const OrderPickup = () => {
 					</p>
 
 					<div className="mb-9 flex gap-4">
-						{[
-							{ stamps: '50', reward: '1 Free Empanada' },
-							{ stamps: '70', reward: 'Free Combo'      },
-						].map(({ stamps, reward }) => (
-							<div key={stamps} className="rounded-xl border border-[#e2d8ca] bg-white/60 px-5 py-4">
+						{RewardsTiers.map(({ stamps, reward }) => (
+							<div key={stamps} className="rounded-xl border border-[#e2d8ca] bg-white/60 text-center px-5 py-4">
 								<p className="font-inter text-3xl font-black leading-none text-[#242424]">{stamps}</p>
 								<p className="mt-1 font-mono text-[10px] font-black uppercase tracking-[0.18em] text-[#fec32f]">Stamps</p>
-								<p className="mt-2 font-inter text-sm font-medium text-[#5f5a54]">{reward}</p>
+								<p className="mt-2 font-inter text-xs font-bold text-[#5f5a54]">{reward}</p>
 							</div>
 						))}
 					</div>

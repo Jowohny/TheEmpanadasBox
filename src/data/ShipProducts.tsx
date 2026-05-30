@@ -64,4 +64,40 @@ export const Sauces: Sauce[] = [
 	}
 ]
 
-export const PresetBoxes: PresetBox[] = []
+export const PresetBoxes: PresetBox[] = [
+	{
+		id: 'preset-world-tour-sampler',
+		type: 'preset-box',
+		name: 'World Tour Sampler',
+		description: 'Twelve empanadas, one of each flavor. The full passport in a single box — the easiest way to taste the whole tour.',
+		image: '/EmpanadaPics/EzCaterer Menu/Empanadas by the Dozen.jpg',
+		contents: [
+			'3 each of all 36 flavors',
+			'Ships frozen, ready to heat'
+		]
+	},
+	{
+		id: 'preset-crowd-pleaser-pack',
+		type: 'preset-box',
+		name: 'Crowd-Pleaser Pack',
+		description: 'Our four top-selling flavors, three of each. Built for picky eaters, big appetites, and anyone who just wants the hits.',
+		image: '/EmpanadaPics/EzCaterer Menu/Full Menu.jpg',
+		contents: [
+			'Buenos Aires, Bordeaux, Jamaica, Philly',
+			'8 of each — 24 total',
+			'Ships frozen, ready to heat'
+		]
+	},
+	{
+		id: 'preset-veggie-tour',
+		type: 'preset-box',
+		name: 'Veggie Tour',
+		description: 'A vegetarian-and-vegan-only spread, three of each of our four meatless flavors. No compromise, all flavor.',
+		image: '/EmpanadaPics/Items Photos/CAPRI.jpg',
+		contents: [
+			'Capri, Louisiana, Mumbai, Singapore',
+			'8 of each — 24 total',
+			'Vegetarian + vegan only'
+		]
+	}
+]

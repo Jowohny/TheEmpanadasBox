@@ -30,13 +30,13 @@ const FAQs: FAQ[] = [
 				<ol>
 					<li>Preheat your oven to 400°F.</li>
 					<li>Line a baking tray with parchment paper and space your thawed empanadas evenly.</li>
-					<li>Bake for 10–15 minutes until the crust is golden brown and flaky.</li>
+					<li>Bake for 10-15 minutes until the crust is golden brown and flaky.</li>
 				</ol>
 				<h4>Air Fryer Method</h4>
 				<ol>
 					<li>Set your air fryer to 400°F.</li>
-					<li>Place 1–3 empanadas in the basket (do not overcrowd).</li>
-					<li>Cook for 12–14 minutes, flipping halfway through, for a perfect crust and a hot filling.</li>
+					<li>Place 1-3 empanadas in the basket (do not overcrowd).</li>
+					<li>Cook for 12-14 minutes, flipping halfway through, for a perfect crust and a hot filling.</li>
 				</ol>
 			</div>
 		)
@@ -67,7 +67,7 @@ const FAQs: FAQ[] = [
 		question: 'Can I sell your empanadas at my cafe, grocery store, or market?',
 		answer: (
 			<p>
-				We love partnering with local businesses! We offer competitive wholesale pricing for cafes, coffee shops, specialty grocers, and food trucks looking to add a high-quality, delicious item to their menu. Please reach out to <a href="mailto:theempanadasbox1@gmail.com">theempanadasbox1@gmail.com</a> if interested!
+				We love partnering with local businesses! We offer competitive wholesale pricing for cafes, coffee shops, specialty grocers, and food trucks looking to add a high-quality, delicious item to their menu. Please reach out to <a href="mailto:theempanadasbox1@gmail.com">catering@empanadasbox.com</a> if interested!
 			</p>
 		)
 	},
@@ -75,7 +75,7 @@ const FAQs: FAQ[] = [
 		question: 'How are wholesale orders delivered or shipped?',
 		answer: (
 			<p>
-				We can arrange for local delivery/pickup or schedule regular palletized shipping depending on your location and storage capacity. All wholesale orders are shipped frozen and securely packed. Please reach out to <a href="mailto:theempanadasbox1@gmail.com">theempanadasbox1@gmail.com</a> if interested!
+				We can arrange for local delivery/pickup or schedule regular palletized shipping depending on your location and storage capacity. All wholesale orders are shipped frozen and securely packed. Please reach out to <a href="mailto:theempanadasbox1@gmail.com">general@empanadasbox.com</a> if interested!
 			</p>
 		)
 	}
