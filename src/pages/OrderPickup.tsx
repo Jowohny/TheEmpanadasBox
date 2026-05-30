@@ -3,7 +3,6 @@ import MarketLocationCard from '../components/MarketLocationCard';
 import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
 import RewardsTiers from '../data/RewardsTiers';
-import TierCard from '../components/TierCard';
 import { useNavigate } from 'react-router-dom';
 
 const OrderPickup = () => {

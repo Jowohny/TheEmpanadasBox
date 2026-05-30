@@ -1,11 +1,14 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import FooterLinks from '../data/FooterNav';
 import SocialMedia from '../data/Media';
-import { useState } from 'react';
 
 const Footer = () => {
 	const navigate = useNavigate()
-	const [currentTab, setCurrentTab] = useState<string>('Home')
+	const { pathname } = useLocation()
+	const activeTab = FooterLinks.find((link) => {                                                                                                       
+		if (link.path === '/') return pathname === '/'                                                                                                  
+	 	return pathname === link.path || pathname.startsWith(link.path + '/')                                                                           
+	})?.label  
 
 	return (
 		<div className="bg-[#1a1209] text-[#faf7f2]">
@@ -34,10 +37,10 @@ const Footer = () => {
 							<li key={item.path} className="mb-2 break-inside-avoid">
 								<button
 									type="button"
-									onClick={() => {navigate(item.path), setCurrentTab(item.label)}}
+									onClick={() => {navigate(item.path)}}
 									className={
 										`font-mono text-sm
-										${currentTab === item.label ? 'text-[#faf7f2]/60' : 'text-[#faf7f2]'}`
+										${activeTab === item.label ? 'text-[#faf7f2]/60' : 'text-[#faf7f2]'}`
 									}
 								>
 									{item.label}
