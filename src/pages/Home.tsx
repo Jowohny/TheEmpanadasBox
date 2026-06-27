@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReviewCard from "../components/ReviewCard";
-import EmpanadaCard from "../components/EmpanadaCard";
 import Empanadas from "../data/Empanadas";
 import Reviews from "../data/Reviews";
 
@@ -91,28 +90,74 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="bg-[#faf7f2] p-8 min-h-screen">
-				<div className="flex flex-row w-full justify-between px-12 py-10 items-center border-b border-[#e8dfd0]">
-					<div className="flex flex-col gap-1">
-						<h1 className="text-6xl tracking-wide font-black font-inter text-[#1a1209] leading-none">The World Tour</h1>
-						<p className="text-xl font-light tracking-wide text-[#7a6a55] mt-1">Pick your destinations for the ultimate 24-pack.</p>
+			{(() => {
+				const prev = Empanadas[currentEmpanadas[0]]
+				const active = Empanadas[currentEmpanadas[1]]
+				const next = Empanadas[currentEmpanadas[2]]
+				const counter = String(currentEmpanadas[1] + 1).padStart(2, '0')
+				const total = String(Empanadas.length).padStart(2, '0')
+				const tagline = active.description.split(', ').join(' · ')
+				return (
+					<div className="bg-[#faf7f2] h-[80vh] flex flex-col px-20 py-10">
+						<div className="flex items-center justify-between">
+							<p className="font-mono text-base font-black uppercase tracking-[0.3em] text-[#bf8000]">
+								The World Tour
+							</p>
+							<p className="font-mono text-base font-black uppercase tracking-[0.3em] text-[#bf8000]">
+								{counter} / {total}
+							</p>
+						</div>
+
+						<div className="flex-1 flex items-center justify-center gap-16 py-4 min-h-0">
+							<button
+								type="button"
+								onClick={useNextEmpanadas}
+								aria-label={`Previous: ${prev.name}`}
+								className="shrink-0 h-[14vh] w-[14vh] rounded-full overflow-hidden opacity-35 hover:opacity-60"
+							>
+								<img src={prev.image} className="h-full w-full object-cover" />
+							</button>
+
+							<div className="shrink-0 h-[40vh] w-[40vh] rounded-full overflow-hidden">
+								<img src={active.image} alt={active.name} className="h-full w-full object-cover" />
+							</div>
+
+							<button
+								type="button"
+								onClick={usePreviousEmpanadas}
+								aria-label={`Next: ${next.name}`}
+								className="shrink-0 h-[14vh] w-[14vh] rounded-full overflow-hidden opacity-35 hover:opacity-60"
+							>
+								<img src={next.image} className="h-full w-full object-cover" />
+							</button>
+						</div>
+
+						<div className="text-center">
+							<h2 className="font-inter text-9xl font-black uppercase scale-y-[1.05] tracking-tight leading-[0.85] text-[#1a1209]">
+								{active.name}
+							</h2>
+							<div className="mx-auto my-6 h-[2px] w-12 bg-[#bf8000]" />
+							<p className="text-xl font-light tracking-wide text-[#64605b]">
+								{tagline}
+							</p>
+						</div>
+
+						<div className="mt-6 flex items-center justify-between">
+							<div className="flex gap-8 font-mono text-6xl text-[#7a6a55]">
+								<button type="button" onClick={useNextEmpanadas} aria-label="Previous" className="hover:text-[#bf8000]">←</button>
+								<button type="button" onClick={usePreviousEmpanadas} aria-label="Next" className="hover:text-[#bf8000]">→</button>
+							</div>
+							<button
+								type="button"
+								onClick={() => navigate('ShipNationwide')}
+								className="bg-[#bf8000] rounded-full px-12 py-6 font-semibold text-white tracking-wide text-base uppercase shadow-md"
+							>
+								Build Your 24 Pack →
+							</button>
+						</div>
 					</div>
-					<button 
-						type="button"
-						onClick={() => navigate('ShipNationwide')} 
-						className="bg-[#bf8000] inline-block rounded-full px-8 py-4 font-medium text-white tracking-wide text-sm uppercase shadow-md"
-					>
-						Build Your 24 Pack
-					</button>
-				</div>
-				<div className="flex flex-row justify-center items-center gap-6 px-8 py-14">
-					<button onClick={useNextEmpanadas} type="button" className="w-12 h-12 flex items-center justify-center rounded-full border border-[#d9cfc0] bg-white text-[#7a6a55] text-xl shrink-0">←</button>
-					{currentEmpanadas.map((index) => (
-						<EmpanadaCard key={`empanada-${index}`} empanada={Empanadas[index]} />
-					))}
-					<button onClick={usePreviousEmpanadas} type="button" className="w-12 h-12 flex items-center justify-center rounded-full border border-[#d9cfc0] bg-white text-[#7a6a55] text-xl shrink-0">→</button>
-				</div>
-			</div>
+				)
+			})()}
 
 			<div className="bg-black/10 flex justify-between items-center min-h-screen px-28">
 				<div className="flex flex-col">
