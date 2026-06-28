@@ -34,7 +34,7 @@ export const CustomPacks: CustomPack[] = [
 		type: 'custom-pack',
 		size: 24,
 		name: 'Build a 24-Pack',
-		description: 'A 24-pack of empanadas, mix and match.',
+		description: 'A 24-pack of empanadas, mix and match as you please.',
 		image: '/EmpanadaPics/Items Photos/JAMAICA.jpg'
 	},
 	{
@@ -42,7 +42,7 @@ export const CustomPacks: CustomPack[] = [
 		type: 'custom-pack',
 		size: 36,
 		name: 'Build a 36-Pack',
-		description: 'The full passport — thirty-six empanadas, your call.',
+		description: 'A 36-pack of empanadas, for those with more mouths to feed.',
 		image: '/EmpanadaPics/Items Photos/SINGAPORE.jpg'
 	}
 ]
@@ -72,7 +72,7 @@ export const PresetBoxes: PresetBox[] = [
 		description: 'Twelve empanadas, one of each flavor. The full passport in a single box — the easiest way to taste the whole tour.',
 		image: '/EmpanadaPics/EzCaterer Menu/Empanadas by the Dozen.jpg',
 		contents: [
-			'3 each of all 36 flavors',
+			'3 each of all 12 flavors - 36 total',
 			'Ships frozen, ready to heat'
 		]
 	},
@@ -84,7 +84,7 @@ export const PresetBoxes: PresetBox[] = [
 		image: '/EmpanadaPics/EzCaterer Menu/Full Menu.jpg',
 		contents: [
 			'Buenos Aires, Bordeaux, Jamaica, Philly',
-			'8 of each — 24 total',
+			'9 of each — 36 total',
 			'Ships frozen, ready to heat'
 		]
 	},
@@ -96,8 +96,10 @@ export const PresetBoxes: PresetBox[] = [
 		image: '/EmpanadaPics/Items Photos/CAPRI.jpg',
 		contents: [
 			'Capri, Louisiana, Mumbai, Singapore',
-			'8 of each — 24 total',
-			'Vegetarian + vegan only'
+			'9 of each — 36 total',
+			'Vegetarian and Vegan only',
+			'Ships frozen, ready to heat'
 		]
 	}
 ]
+

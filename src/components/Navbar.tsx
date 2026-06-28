@@ -34,6 +34,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		setMoreOpen(false)
+		window.scrollTo(0,0)
 	}, [pathname])
 
 	return (
@@ -74,7 +75,7 @@ const Navbar = () => {
 						</button>
 
 						{moreOpen && (
-							<div className='absolute left-0 top-full mt-2 min-w-[12rem] rounded-2xl border border-[#e8dfd0] bg-white/95 backdrop-blur-2xl py-2'>
+							<div className='absolute left-0 top-full mt-2 min-w-[12rem] rounded-2xl border border-[#e8dfd0] bg-white/95 backdrop-blur-2xl py-2 z-50'>
 								{moreLinks.map((link) => {
 									const linkActive =
 										link.path === '/'
@@ -111,7 +112,6 @@ const Navbar = () => {
 					</button>
 				</div>
 			</div>
-			<div className='h-2 bg-linear-to-b from-white/60 to-transparent backdrop-blur-2xl'/>
 		</>
 	)
 }
