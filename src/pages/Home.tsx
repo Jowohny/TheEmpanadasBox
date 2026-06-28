@@ -98,7 +98,7 @@ const Home = () => {
 				const total = String(Empanadas.length).padStart(2, '0')
 				const tagline = active.description.split(', ').join(' · ')
 				return (
-					<div className="bg-[#faf7f2] h-[80vh] flex flex-col px-20 py-10">
+					<div className="bg-[#faf7f2] h-[95vh] flex flex-col px-20 py-10">
 						<div className="flex items-center justify-between">
 							<p className="font-mono text-base font-black uppercase tracking-[0.3em] text-[#bf8000]">
 								The World Tour
@@ -207,30 +207,27 @@ const Home = () => {
 					className="absolute inset-0 z-0 h-full w-full object-cover"
 				/>
 				<div className="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
-				<div className="relative z-20 m-16 p-10 rounded-3xl border border-white/20 bg-black/30 shadow-2xl backdrop-blur-md max-w-4xl">
-					<p className="font-mono text-xs font-medium tracking-[0.25em] uppercase text-[#fec32f] mb-6">Subscription Plan</p>
-					<h1 className="font-inter font-black uppercase leading-[0.83] tracking-wide text-white text-8xl mb-10">
+				<div className="relative z-20 ml-20 max-w-3xl">
+					<p className="font-mono text-sm font-black uppercase tracking-[0.3em] text-[#fec32f] mb-8">
+						Subscribe
+					</p>
+					<h2 className="font-inter font-black uppercase scale-y-[1.05] tracking-tight leading-[0.85] text-white text-8xl mb-8">
 						Never have an <br />
-						<span className="text-[#fec32f] italic">empty freezer</span> <br />
-						<span className="text-[17rem] leading-[0.75] tracking-tighter">again</span>
-					</h1>
-					<div className="w-16 h-[2px] bg-[#fec32f] mb-6" />
-					<p className="font-mono text-lg font-medium tracking-wide text-white/80 mb-8">Subscribe and Save 10% on every order.</p>
-					<div className="flex flex-row items-center gap-6">
-						<button 
-							type="button"
-							onClick={() => navigate('ShipNationwide')} 
-							className="bg-[#fec32f] font-mono inline-block rounded-full px-8 py-4 font-semibold text-black tracking-wide"
-						>
-							Build Your Subscription →
-						</button>
-						<div className="flex flex-row items-center gap-3 border-l border-white/20 pl-6">
-							<div className="flex flex-col leading-snug">
-								<h2 className="text-sm text-white font-semibold tracking-wide">Free Shipping</h2>
-								<p className="text-sm text-gray-400 font-mono">on all subscription orders</p>
-							</div>
-						</div>
+						<span className="italic text-[#fec32f]">empty freezer.</span>
+					</h2>
+					<div className="h-[2px] w-12 bg-[#fec32f] mb-8" />
+					<div className="mb-12 flex flex-col gap-3 font-mono text-lg text-white/85">
+						<p>Save 10% on every order.</p>
+						<p>Free shipping every time.</p>
+						<p>Skip, pause, or cancel anytime.</p>
 					</div>
+					<button
+						type="button"
+						onClick={() => navigate('ShipNationwide')}
+						className="bg-[#fec32f] rounded-full px-12 py-6 font-semibold text-black tracking-wide text-base uppercase shadow-md"
+					>
+						Start Your Subscription →
+					</button>
 				</div>
 			</div>
 
