@@ -19,7 +19,9 @@ const Navbar = () => {
 	})
 
 	const [moreOpen, setMoreOpen] = useState(false)
+	const [mobileOpen, setMobileOpen] = useState(false)
 	const moreRef = useRef<HTMLDivElement>(null)
+	const navRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		if (!moreOpen) return
@@ -33,19 +35,31 @@ const Navbar = () => {
 	}, [moreOpen])
 
 	useEffect(() => {
+		if (!mobileOpen) return
+		const onClick = (e: MouseEvent) => {
+			if (navRef.current && !navRef.current.contains(e.target as Node)) {
+				setMobileOpen(false)
+			}
+		}
+		document.addEventListener('mousedown', onClick)
+		return () => document.removeEventListener('mousedown', onClick)
+	}, [mobileOpen])
+
+	useEffect(() => {
 		setMoreOpen(false)
+		setMobileOpen(false)
 		window.scrollTo(0,0)
 	}, [pathname])
 
 	return (
-		<>
-			<div className='min-w-full h-[5.5rem] flex flex-row items-center justify-between px-6 bg-white/60 backdrop-blur-2xl'>
-				<div onClick={() => navigate('/')} className='flex flex-row items-center gap-3'>
-					<img src='/empanadasboxlogo.png' className='w-14 h-14 aspect-square rounded-xl' />
-					<h1 className='font-black text-xl tracking-wide text-[#1a1209]'>Empanada Box</h1>
+		<div ref={navRef} className='relative'>
+			<div className='min-w-full h-[5.5rem] flex flex-row items-center justify-between px-4 lg:px-6 bg-white/60 backdrop-blur-2xl'>
+				<div onClick={() => navigate('/')} className='flex flex-row items-center gap-2 lg:gap-3'>
+					<img src='/empanadasboxlogo.png' className='w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 aspect-square rounded-xl' />
+					<h1 className='font-black text-base md:text-lg lg:text-xl tracking-wide text-[#1a1209]'>Empanada Box</h1>
 				</div>
 
-				<div className='flex flex-row items-center gap-2'>
+				<div className='hidden lg:flex flex-row items-center gap-2'>
 					{NavLinks.map((tab) => (
 						<button
 							key={tab.label}
@@ -103,16 +117,52 @@ const Navbar = () => {
 					</div>
 				</div>
 
-				<div className='flex flex-row items-center gap-3'>
+				<div className='flex flex-row items-center gap-2 lg:gap-3'>
 					<button
-						type="button"
-						className='bg-[#bf8000] rounded-full font-mono font-semibold tracking-wider text-sm text-white px-7 py-3 shadow-md border-2 border-black/10 uppercase hover:bg-[#a06b00] transition-all duration-200'
+						type='button'
+						className='bg-[#bf8000] rounded-full font-mono font-semibold tracking-wider text-xs lg:text-sm text-white px-4 lg:px-7 py-2 lg:py-3 shadow-md border-2 border-black/10 uppercase hover:bg-[#a06b00] transition-all duration-200'
 					>
 						Shop Now →
 					</button>
+					<button
+						type='button'
+						aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+						onClick={() => setMobileOpen((v) => !v)}
+						className='lg:hidden text-3xl text-[#3a3020] hover:text-[#bf8000] leading-none w-10 h-10 flex items-center justify-center'
+					>
+						{mobileOpen ? '✕' : '☰'}
+					</button>
 				</div>
 			</div>
-		</>
+
+			{mobileOpen && (
+				<div className='lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-t border-[#e8dfd0] flex flex-col py-2 z-50'>
+					{[...NavLinks, ...moreLinks].map((tab) => {
+						const linkActive = tab.path === '/'
+							? pathname === '/'
+							: pathname === tab.path || pathname.startsWith(tab.path + '/')
+						return (
+							<button
+								key={tab.label}
+								type='button'
+								onClick={() => {
+									navigate(tab.path)
+									setMobileOpen(false)
+								}}
+								className={
+									`block w-full text-left font-mono font-medium tracking-wide text-base px-5 py-3 hover:bg-[#bf8000]/10 hover:text-[#bf8000] transition-colors duration-150
+									${linkActive ? 'text-[#bf8000]' : 'text-[#3a3020]'}`
+								}
+							>
+								{tab.label}
+							</button>
+						)
+					})}
+				</div>
+			)}
+
+			<div className='h-2 bg-linear-to-b from-white/60 to-transparent backdrop-blur-2xl'/>
+		</div>
 	)
 }
 
