@@ -9,15 +9,15 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 	return (
 		<a href={review.link} target="_blank" rel="noopener noreferrer">
 			<div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-2 border-yellow-700/10 shadow-xl bg-white">
-				<div className="relative flex flex-1 flex-col p-6">
+				<div className="relative flex flex-1 flex-col p-4 md:p-6">
 					<div className="flex items-start justify-between gap-3">
 						<div className="flex flex-1 items-center gap-3">
-							<img src={review.pfp} className="h-12 w-12 rounded-full border-2 border-[#f5efe6] object-cover shadow-inner"/>
+							<img src={review.pfp} className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-[#f5efe6] object-cover shadow-inner"/>
 							<div className="min-w-0">
-								<h2 className="font-inter text-lg font-bold tracking-tight text-[#1a1209] truncate">
+								<h2 className="font-inter text-base md:text-lg font-bold tracking-tight text-[#1a1209] truncate">
 									{review.name}
 								</h2>
-								<p className="font-mono text-xs font-semibold uppercase tracking-[0.1rem] text-[#bf8000]">
+								<p className="font-mono text-[10px] md:text-xs font-semibold uppercase tracking-[0.1rem] text-[#bf8000]">
 									Google review
 								</p>
 							</div>
@@ -26,11 +26,11 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 
 					<div className="py-2 flex gap-0.5">
 						{Array.from({ length: 5 }).map((_, i) => (
-							<img key={i} src="/star.svg" className="h-5 w-5"/>
+							<img key={i} src="/star.svg" className="h-4 w-4 md:h-5 md:w-5"/>
 						))}
 					</div>
 
-					<p className="line-clamp-5 font-serif text-md text-[#4a4034]">
+					<p className="line-clamp-5 font-serif text-sm md:text-md text-[#4a4034]">
 						{review.message}
 					</p>
 
@@ -43,8 +43,8 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 					)}
 				</div>
 
-				<div className="border-t border-[#f0ebe3] bg-gray-300/20 px-6 py-3">
-					<span className="font-mono text-xs font-semibold uppercase tracking-wide text-green-900/90">
+				<div className="border-t border-[#f0ebe3] bg-gray-300/20 px-4 md:px-6 py-2 md:py-3">
+					<span className="font-mono text-[10px] md:text-xs font-semibold uppercase tracking-wide text-green-900/90">
 						Read full review →
 					</span>
 				</div>
