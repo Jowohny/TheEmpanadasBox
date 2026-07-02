@@ -16,8 +16,8 @@ const MarketLocationCard = ({ marketLocation }: MarketLocationCardProps ) => {
 
 	return (
 		<div className="overflow-hidden rounded-[2rem] border border-[#d9cdbf] bg-[#faf7f2] shadow-xl">
-		<div className="relative h-[24rem] w-full bg-[#d5c1a2]">
-			<div className="absolute right-5 top-5 z-20 inline-flex rounded-full border border-black/10 bg-white/90 p-1 shadow-lg">
+		<div className="relative h-[16rem] md:h-[20rem] lg:h-[24rem] w-full bg-[#d5c1a2]">
+			<div className="absolute right-3 top-3 md:right-5 md:top-5 z-20 inline-flex rounded-full border border-black/10 bg-white/90 p-1 shadow-lg">
 				<button
 					type="button"
 					onClick={() =>
@@ -58,11 +58,11 @@ const MarketLocationCard = ({ marketLocation }: MarketLocationCardProps ) => {
 						className="h-full w-full object-cover"
 					/>
 					<div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-black via-[#1a1209]/30 to-transparent" />
-					<div className="absolute bottom-0 left-0 right-0 z-10 p-6 text-[#faf7f2]">
-						<p className="mb-2 font-mono text-xs uppercase tracking-[0.24em] text-[#fec32f]">
+					<div className="absolute bottom-0 left-0 right-0 z-10 p-4 md:p-5 lg:p-6 text-[#faf7f2]">
+						<p className="mb-2 font-mono text-[10px] md:text-xs uppercase tracking-[0.24em] text-[#fec32f]">
 							Pickup Location
 						</p>
-						<h2 className="font-inter text-4xl font-black leading-tight" style={{ whiteSpace: "pre-line" }}>
+						<h2 className="font-inter text-2xl md:text-3xl lg:text-4xl font-black leading-tight" style={{ whiteSpace: "pre-line" }}>
 							{marketLocation.name}
 						</h2>
 					</div>
@@ -70,53 +70,49 @@ const MarketLocationCard = ({ marketLocation }: MarketLocationCardProps ) => {
 			)}
 		</div>
 
-		<div className="grid gap-3 p-7">
+		<div className="grid gap-3 p-5 md:p-6 lg:p-7">
 			<div>
-				<p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[#bf8000]">
-					Visit Us
-				</p>
-				<h3 className="text-2xl font-black tracking-tight text-[#1a1209]">
-					{marketLocation.name}
-				</h3>
-				<p className="leading-relaxed text-[#5f5449]">
+				<p className="text-sm md:text-base leading-relaxed text-[#5f5449] font-semibold mb-4">
 					{marketLocation.address}
 				</p>
 
-				<div className="my-6 flex gap-3">
+				<div className="md:my-1 lg:my-2 flex flex-wrap gap-2 md:gap-3">
 					<a
 						href={marketLocation.mapsLink}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="rounded-full bg-[#bf8000] px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-white"
+						className="rounded-full bg-[#bf8000] px-4 md:px-5 py-2 md:py-3 font-mono text-[10px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white"
 					>
 						Open in Maps
 					</a>
 					<a
 						href={`tel:${marketLocation.phoneNumber}`}
-						className="rounded-full border border-[#d8cab5] bg-white px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#1a1209]"
+						className="rounded-full border border-[#d8cab5] bg-white px-4 md:px-5 py-2 md:py-3 font-mono text-[10px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#1a1209]"
 					>
 						Call {formatPhoneNumber(marketLocation.phoneNumber)}
 					</a>
 				</div>
 			</div>
 
-			<h1 className="flex flex-row items-start text-lg font-bold">
-				<span className="mr-1 pb-2 text-5xl leading-[0.7] font-black text-black/30">*</span>
-				Disclamer:
-				<div className="ml-2 leading-snug" style={{ whiteSpace: "pre-line" }}>
+			<h1 className="flex flex-col lg:flex-row items-start text-sm md:text-base lg:text-lg font-bold">
+				<div className="flex flex-row items-start">
+					<span className="mr-1 text-3xl md:text-4xl lg:text-5xl leading-[0.7] font-black text-black/30">*</span>
+					Disclamer:
+				</div>
+				<div className="ml-2 mt-1 leading-snug text-xs md:text-sm lg:text-base md:tracking-tight lg:tracking-normal" style={{ whiteSpace: "pre-line" }}>
 					{marketLocation.duration}
 				</div>
 			</h1>
 
-			<div className="rounded-[1.5rem] bg-[#efe7d9] p-6">
-				<p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[#8f6440]">
+			<div className="rounded-[1.5rem] bg-[#efe7d9] p-4 md:p-5 lg:p-6">
+				<p className="mb-3 md:mb-4 font-mono text-[10px] md:text-xs font-semibold uppercase tracking-[0.22em] text-[#8f6440]">
 					Hours
 				</p>
-				<div className="gap-3 grid grid-cols-2 flex items-stretch grow">
+				<div className="gap-2 md:gap-3 grid grid-cols-1 lg:grid-cols-2 items-stretch">
 					{marketLocation.hours.map((hour) => (
 						<div
 							key={`${marketLocation.name}-${hour}`}
-							className="rounded-2xl border border-white/60 bg-white/60 px-4 py-3 text-sm font-black text-[#4f4338] tracking-wide"
+							className="rounded-2xl border border-white/60 bg-white/60 px-3 md:px-4 py-2 md:py-3 text-xs md:text-sm font-black text-[#4f4338] tracking-wide"
 						>
 							{hour}
 						</div>
