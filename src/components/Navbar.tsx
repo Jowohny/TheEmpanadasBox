@@ -89,7 +89,7 @@ const Navbar = () => {
 						</button>
 
 						{moreOpen && (
-							<div className='absolute left-0 top-full mt-2 min-w-[12rem] rounded-2xl border border-[#e8dfd0] bg-white/95 backdrop-blur-2xl py-2 z-50'>
+							<div className='absolute xl:left-0 md:-left-24 lg:text-right top-full mt-2 min-w-[12rem] rounded-2xl border border-[#e8dfd0] bg-white/95 backdrop-blur-2xl py-2 z-50'>
 								{moreLinks.map((link) => {
 									const linkActive =
 										link.path === '/'
@@ -118,12 +118,6 @@ const Navbar = () => {
 				</div>
 
 				<div className='flex flex-row items-center gap-2 lg:gap-3'>
-					<button
-						type='button'
-						className='bg-[#bf8000] rounded-full font-mono font-semibold tracking-wider text-xs lg:text-sm text-white px-4 lg:px-7 py-2 lg:py-3 shadow-md border-2 border-black/10 uppercase hover:bg-[#a06b00] transition-all duration-200'
-					>
-						Shop Now →
-					</button>
 					<button
 						type='button'
 						aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -160,8 +154,6 @@ const Navbar = () => {
 					})}
 				</div>
 			)}
-
-			<div className='h-2 bg-linear-to-b from-white/60 to-transparent backdrop-blur-2xl'/>
 		</div>
 	)
 }
