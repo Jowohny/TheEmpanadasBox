@@ -12,29 +12,29 @@ const Catering = () => {
 				<div className="absolute inset-0 z-10 bg-radial-[at_50%_65%] from-black/60 via-black/20 to-transparent" />
 				<div className="absolute inset-0 z-10 -mt-60 bg-gradient-to-b from-white via-white/[0.0001] to-transparent" />
 
-				<div className="absolute z-20 flex max-w-4xl flex-col items-center px-6 text-center">
-					<div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-md">
-						<span className="font-mono text-xs font-black uppercase tracking-[0.22em] text-white">
+				<div className="absolute z-20 flex max-w-4xl flex-col items-center px-4 md:px-6 text-center">
+					<div className="mb-6 md:mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 md:px-4 py-1.5 md:py-2 backdrop-blur-md">
+						<span className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.22em] text-white">
 							Catering
 						</span>
 					</div>
 
-					<h1 className="mb-6 font-inter text-8xl font-black uppercase leading-[0.85] tracking-wide text-white">
+					<h1 className="mb-5 md:mb-6 font-inter text-4xl md:text-6xl lg:text-8xl font-black uppercase leading-[0.85] tracking-wide text-white">
 						Bring the box <br />
 						to your <span className="italic text-[#fec32f]">crew.</span>
 					</h1>
 
-					<div className="mb-6 h-[2px] w-12 bg-[#fec32f]" />
+					<div className="mb-5 md:mb-6 h-[2px] w-12 bg-[#fec32f]" />
 
-					<p className="mb-10 max-w-2xl font-mono text-lg font-medium tracking-wide text-white/80">
-						Boxed lunches, drop-off platters, full-spread catering — order ahead through our ezCater storefront.
+					<p className="mb-8 md:mb-10 max-w-2xl font-mono text-sm md:text-base lg:text-lg font-medium tracking-wide text-white px-2">
+						Boxed lunches, drop-off platters, full-spread catering. <br /> Order ahead through our ezCater storefront.
 					</p>
 
 					<a
 						href={CATERING_URL}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="rounded-full border-2 border-black/20 bg-[#fec32f] px-10 py-5 font-mono text-base font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
+						className="rounded-full border-2 border-black/20 bg-[#fec32f] px-6 md:px-8 lg:px-10 py-3 md:py-4 lg:py-5 font-mono text-xs md:text-sm lg:text-base font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
 					>
 						View Catering Menu →
 					</a>
