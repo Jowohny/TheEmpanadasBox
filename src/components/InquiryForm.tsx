@@ -27,8 +27,8 @@ const InquiryForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleInquiry} className="col-span-3 flex flex-col gap-5">
-			<div className="grid grid-cols-2 gap-5">
+		<form onSubmit={handleInquiry} className="lg:col-span-3 flex flex-col gap-4 md:gap-5">
+			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
 				<label className="flex flex-col">
 					<span className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Name</span>
 					<input
@@ -51,7 +51,7 @@ const InquiryForm = () => {
 				</label>
 			</div>
 
-			<div className="grid grid-cols-2 gap-5">
+			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
 				<label className="flex flex-col">
 					<span className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Phone</span>
 					<input
@@ -73,7 +73,7 @@ const InquiryForm = () => {
 				</label>
 			</div>
 
-			<div className="grid grid-cols-2 gap-5">
+			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
 				<label className="flex flex-col">
 					<span className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Headcount</span>
 					<input
@@ -112,7 +112,7 @@ const InquiryForm = () => {
 
 			<button
 				type="submit"
-				className="mt-2 self-start rounded-full bg-[#bf8000] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-lg border-2 border-black/20"
+				className="mt-2 w-full self-start rounded-full bg-[#bf8000] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-lg border-2 border-black/20 md:w-auto"
 			>
 				Send Inquiry →
 			</button>
