@@ -18,7 +18,7 @@ const EventTypeCard = ({ eventType }: EventTypeCardProps) => {
 					<p className="mb-2 font-mono text-xs font-black uppercase tracking-[0.24em] text-[#fec32f]">
 						{eventType.tagline}
 					</p>
-					<h3 className="font-inter text-4xl font-black leading-tight tracking-tight">
+					<h3 className="font-inter text-3xl font-black leading-tight tracking-tight md:text-4xl">
 						{eventType.name}
 					</h3>
 				</div>

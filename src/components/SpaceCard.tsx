@@ -7,17 +7,17 @@ type SpaceCardProps = {
 
 const SpaceCard = ({ space, reverse }: SpaceCardProps) => {
 	return (
-		<div className={`flex items-center gap-16 ${reverse ? 'flex-row-reverse' : 'flex-row'}`}>
-			<div className="w-1/2 shrink-0">
+		<div className={`flex flex-col gap-8 md:items-center md:gap-16 ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+			<div className="w-full shrink-0 md:w-1/2">
 				<img
 					src={space.image}
 					loading="lazy"
-					className="h-[28rem] w-full rounded-[1.5rem] object-cover"
+					className="h-64 w-full rounded-[1.5rem] object-cover md:h-[28rem]"
 				/>
 			</div>
 
-			<div className="flex w-1/2 flex-col">
-				<h3 className="font-inter text-5xl font-black tracking-tight text-[#faf7f2]">
+			<div className="flex w-full flex-col md:w-1/2">
+				<h3 className="font-inter text-3xl font-black tracking-tight text-[#faf7f2] md:text-5xl">
 					{space.name}
 				</h3>
 				<p className="mt-2 font-mono text-sm font-medium tracking-wide text-[#fec32f]">
