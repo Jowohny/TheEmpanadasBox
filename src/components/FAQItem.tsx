@@ -13,9 +13,9 @@ const FAQItem = ({ faq }: FAQItemProps) => {
 			<button
 				type="button"
 				onClick={() => setIsOpen((v) => !v)}
-				className="flex w-full items-center justify-between gap-6 py-6 text-left"
+				className="flex w-full items-center justify-between gap-4 py-5 text-left md:gap-6 md:py-6"
 			>
-				<h3 className="font-inter text-xl font-black tracking-tight text-[#1a1209]">
+				<h3 className="font-inter text-lg font-black tracking-tight text-[#1a1209] md:text-xl">
 					{faq.question}
 				</h3>
 				<span
