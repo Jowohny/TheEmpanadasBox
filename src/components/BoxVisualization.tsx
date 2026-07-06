@@ -11,7 +11,7 @@ const BoxVisualization = ({ slots, empanadas, onClear }: BoxVisualizationProps) 
 	const hasPicks = slots.some((s) => s !== null)
 
 	return (
-		<div className="rounded-[1.5rem] border border-[#ede5d8] bg-white p-6 shadow-sm">
+		<div className="relative h-fit rounded-[1.5rem] border border-[#ede5d8] bg-white p-6 pb-16 shadow-sm">
 			<div className="mb-4 flex items-center justify-between">
 				<p className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">
 					Your Box
@@ -21,7 +21,7 @@ const BoxVisualization = ({ slots, empanadas, onClear }: BoxVisualizationProps) 
 				</p>
 			</div>
 
-			<div className={`grid gap-3 ${slots.length === 36 ? 'grid-cols-6' : 'grid-cols-4'}`}>
+			<div className="grid grid-cols-3 gap-3">
 				{slots.map((slotName, i) => {
 					const empanada = slotName ? lookup.get(slotName) : null
 					return (
@@ -49,12 +49,12 @@ const BoxVisualization = ({ slots, empanadas, onClear }: BoxVisualizationProps) 
 					)
 				})}
 			</div>
-			<div className="mt-5 flex justify-end">
+			<div className="absolute bottom-4 right-4">
 				<button
 					type="button"
 					onClick={onClear}
 					disabled={!hasPicks}
-					className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#8a6f45] disabled:cursor-not-allowed disabled:opacity-30"
+					className="font-mono font-black uppercase tracking-widest text-[#8a6f45] disabled:cursor-not-allowed disabled:opacity-30"
 				>
 					Clear All Empanadas
 				</button>

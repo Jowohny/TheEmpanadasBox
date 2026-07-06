@@ -36,11 +36,7 @@ const ShipNationwide = () => {
 
 				<div className="grid grid-cols-[180px_1fr] gap-x-10 gap-y-16">
 					<SectionLabel>Custom Boxes</SectionLabel>
-					<div className="grid grid-cols-2 gap-6">
-						{CustomPacks.map((pack) => (
-							<PackCard key={pack.id} pack={pack} />
-						))}
-					</div>
+					<PackCard pack={CustomPacks[0]} />
 
 					<SectionLabel>Sampler Boxes</SectionLabel>
 					<div className="grid grid-cols-3 gap-6">
