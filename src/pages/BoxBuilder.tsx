@@ -19,9 +19,9 @@ const STEP = 4
 function compositionToSlots(composition: CompositionEntry[], size: number): Array<string | null> {
 	const slots: Array<string | null> = []
 	for (const { name, count } of composition) {
-		for (let i = 0; i < count; i++) slots.push(name)
+		for (let i = 0; i < count / STEP; i++) slots.push(name)
 	}
-	while (slots.length < size) slots.push(null)
+	while (slots.length < size / STEP) slots.push(null)
 	return slots
 }
 
@@ -37,6 +37,10 @@ const BoxBuilder = () => {
 	useEffect(() => {
 		if (!valid) navigate('/ShipNationwide', { replace: true })
 	}, [valid, navigate])
+
+	useEffect(() => {
+		setComposition([])
+	}, [sizeNum])
 
 	if (!valid) return null
 
@@ -106,6 +110,21 @@ const BoxBuilder = () => {
 						<p className="text-xl font-light tracking-wide text-[#64605b]">
 							Pick your flavors, watch the box fill up, then add it to your cart.
 						</p>
+
+						<div className="mt-6 flex w-fit self-start rounded-full border border-[#ede5d8] bg-white p-1">
+							{VALID_SIZES.map((s) => (
+								<button
+									key={s}
+									type="button"
+									onClick={() => navigate(`/ShipNationwide/build/${s}`)}
+									className={`rounded-full px-5 py-2 font-mono text-xs font-black uppercase tracking-[0.18em] transition-colors ${
+										s === sizeNum ? 'bg-[#bf8000] text-white' : 'text-[#8a6f45]'
+									}`}
+								>
+									{s} Pack
+								</button>
+							))}
+						</div>
 					</div>
 
 					<div className="grid grid-cols-[38%_1fr] gap-12">
