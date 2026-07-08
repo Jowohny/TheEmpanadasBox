@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 interface EmpanadaSymbolsProps {
   symbol: "spicy" | "vegetarian" | "vegan" | string;
 }
+
 export const EmpanadaSymbols = ({symbol}: EmpanadaSymbolsProps) => {
 	const [color, setColor] = useState('')
 	const [letters, setLetters] = useState('')

@@ -10,7 +10,7 @@ const Empanadas: Empanada[] = [
 			name: 'Buenos Aires',
 			image: '/EmpanadaPics/Items Photos/BUENOS AIRES.jpg',
 			description: 'Ground beef, onion, bell pepper, green onion',
-			tags: ['beef']
+			tags: ['beef', 'spicy']
 		},
 		{
 			name: 'Bordeaux',
@@ -40,7 +40,7 @@ const Empanadas: Empanada[] = [
 			name: 'Louisiana',
 			image: '/EmpanadaPics/Items Photos/LOUISIANA.jpg',
 			description: 'Cajun corn, onion, bell pepper, vegan cheese, green onion',
-			tags: ['vegan', 'spicy']
+			tags: ['vegan']
 		},
 		{
 			name: 'Miami',

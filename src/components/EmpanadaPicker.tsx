@@ -1,4 +1,5 @@
 import type { Empanada } from "../data/Empanadas";
+import { EmpanadaSymbols } from "./EmpanadaSymbols";
 
 export type CompositionEntry = { name: string; count: number }
 
@@ -28,12 +29,24 @@ const EmpanadaPicker = ({
 	return (
 		<div className="flex flex-col gap-6">
 			<div className="rounded-[1.5rem] border border-[#ede5d8] bg-white p-5 shadow-sm">
-				<p className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">
+				<p className="font-mono text-sm font-black uppercase tracking-[0.2em] text-[#bf8000]">
 					Pick Your Flavors
 				</p>
-				<p className="mt-1 text-sm font-light text-[#5f5449]">
+				<p className="tracking-wide mt-1 text-[#5f5449]">
 					Each pick adds {STEP} empanadas of that flavor.
 				</p>
+			</div>
+
+			<div className="flex flex-row gap-8 font-black text-lg">
+				<div className="flex place-items-center">
+					<EmpanadaSymbols symbol={'spicy'} />&nbsp;Spicy
+				</div>
+				<div className="flex place-items-center">
+					<EmpanadaSymbols symbol={'vegetarian'} />&nbsp;Vegetarian
+				</div>
+				<div className="flex place-items-center">
+					<EmpanadaSymbols symbol={'vegan'} />&nbsp;Vegan
+				</div>
 			</div>
 
 			<div className="grid grid-cols-2 gap-3">
@@ -54,7 +67,7 @@ const EmpanadaPicker = ({
 								type="button"
 								onClick={() => onClickEmpanada(empanada.name)}
 								disabled={disabled}
-								className={`flex w-full items-center gap-3 p-3 text-left disabled:cursor-not-allowed ${
+								className={`flex w-full items-center gap-3 px-3 pt-3 pb-6 text-left disabled:cursor-not-allowed ${
 									disabled ? 'opacity-40' : ''
 								}`}
 							>
@@ -87,6 +100,14 @@ const EmpanadaPicker = ({
 									<span className="min-w-[1ch] text-center"> x{count}</span>
 								</div>
 							)}
+
+							<div className="flex absolute top-2 right-2 gap-1">
+								{empanada.tags
+									.filter((tag) => tag === 'spicy' || tag === 'vegetarian' || tag === 'vegan')
+									.map((tag) => (
+										<EmpanadaSymbols key={tag} symbol={tag} />
+									))}
+							</div>
 						</div>
 					)
 				})}
