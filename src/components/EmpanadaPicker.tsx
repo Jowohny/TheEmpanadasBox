@@ -35,9 +35,7 @@ const EmpanadaPicker = ({
 					Pick Your Flavors
 				</p>
 				<p className="tracking-wide mt-1 text-[#5f5449]">
-					Each pick adds {STEP} empanadas of that flavor. <br />
-					To add empandas to your box, tap/click any of the cards or use the <span className="text-lg font-black leading-none">+</span> on bottom of each card. <br />
-					To remove empandas from your box, use the <span className="font-black text-xl leading-none">-</span> on the bottom of each card.
+					Each pick adds {STEP} empanadas of that flavor.
 				</p>
 			</div>
 
@@ -96,7 +94,7 @@ const EmpanadaPicker = ({
 								</div>
 							</button>
 
-							<div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 rounded-full bg-[#1a1209] px-2 py-[0.5px] font-mono text-[10px] font-black text-[#fec32f]">
+							<div className="w-5/8 absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center justify-between gap-2 rounded-full bg-[#1a1209] px-2 py-1.5 font-mono text-[10px] font-black text-[#fec32f]">
 								<button
 									type="button"
 									onClick={(e) => {
@@ -104,11 +102,11 @@ const EmpanadaPicker = ({
 										onDecrement(empanada.name)
 									}}
 									disabled={count === 0}
-									className="text-2xl leading-none disabled:cursor-not-allowed disabled:opacity-30"
+									className="leading-none disabled:cursor-not-allowed disabled:opacity-30"
 								>
-									-
+									[-]
 								</button>
-								<span className="min-w-[1ch] text-center">x{count}</span>
+								<span className="min-w-[1ch] text-[12px] leading-none text-center">{count} Empanadas</span>
 								<button
 									type="button"
 									onClick={(e) => {
@@ -116,9 +114,9 @@ const EmpanadaPicker = ({
 										onClickEmpanada(empanada.name)
 									}}
 									disabled={cannotAddMore}
-									className="text-2xl leading-none disabled:cursor-not-allowed disabled:opacity-30"
+									className="leading-none disabled:cursor-not-allowed disabled:opacity-30"
 								>
-									+
+									[+]
 								</button>
 							</div>
 
