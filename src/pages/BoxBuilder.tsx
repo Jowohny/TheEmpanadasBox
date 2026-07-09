@@ -72,6 +72,16 @@ const BoxBuilder = () => {
 		)
 	}
 
+	const handleSurprise = () => {
+		const picks = sizeNum / STEP
+		const counts = new Map<string, number>()
+		for (let i = 0; i < picks; i++) {
+			const name = Empanadas[Math.floor(Math.random() * Empanadas.length)].name
+			counts.set(name, (counts.get(name) ?? 0) + STEP)
+		}
+		setComposition(Array.from(counts, ([name, count]) => ({ name, count })))
+	}
+
 	const handleCommit = () => {
 		if (totalSlots !== sizeNum) return
 		addLine({
@@ -135,6 +145,7 @@ const BoxBuilder = () => {
 							onClickEmpanada={handleClickEmpanada}
 							onDecrement={handleDecrement}
 							onCommit={handleCommit}
+							onSurprise={handleSurprise}
 						/>
 						<BoxVisualization
 							slots={slots}

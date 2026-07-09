@@ -10,6 +10,7 @@ type EmpanadaPickerProps = {
 	onClickEmpanada: (name: string) => void
 	onDecrement: (name: string) => void
 	onCommit: () => void
+	onSurprise: () => void
 }
 
 const STEP = 4
@@ -20,7 +21,8 @@ const EmpanadaPicker = ({
 	packSize,
 	onClickEmpanada,
 	onDecrement,
-	onCommit
+	onCommit,
+	onSurprise
 }: EmpanadaPickerProps) => {
 	const totalSlots = composition.reduce((sum, c) => sum + c.count, 0)
 	const isFull = totalSlots >= packSize
@@ -33,11 +35,13 @@ const EmpanadaPicker = ({
 					Pick Your Flavors
 				</p>
 				<p className="tracking-wide mt-1 text-[#5f5449]">
-					Each pick adds {STEP} empanadas of that flavor.
+					Each pick adds {STEP} empanadas of that flavor. <br />
+					To add empandas to your box, tap/click any of the cards or use the <span className="text-lg font-black leading-none">+</span> on bottom of each card. <br />
+					To remove empandas from your box, use the <span className="font-black text-xl leading-none">-</span> on the bottom of each card.
 				</p>
 			</div>
 
-			<div className="flex flex-row gap-8 font-black text-lg">
+			<div className="flex flex-row items-center gap-8 font-black text-lg">
 				<div className="flex place-items-center">
 					<EmpanadaSymbols symbol={'spicy'} />&nbsp;Spicy
 				</div>
@@ -47,6 +51,13 @@ const EmpanadaPicker = ({
 				<div className="flex place-items-center">
 					<EmpanadaSymbols symbol={'vegan'} />&nbsp;Vegan
 				</div>
+				<button
+					type="button"
+					onClick={onSurprise}
+					className="ml-auto rounded-full border-2 border-[#bf8000] bg-white px-5 py-2 font-mono text-xs font-black uppercase tracking-[0.18em] text-[#bf8000] shadow-sm"
+				>
+					Surprise Me
+				</button>
 			</div>
 
 			<div className="grid grid-cols-2 gap-3">
@@ -67,7 +78,7 @@ const EmpanadaPicker = ({
 								type="button"
 								onClick={() => onClickEmpanada(empanada.name)}
 								disabled={disabled}
-								className={`flex w-full items-center gap-3 px-3 pt-3 pb-6 text-left disabled:cursor-not-allowed ${
+								className={`flex w-full items-center gap-3 px-3 pt-3 pb-8 text-left disabled:cursor-not-allowed ${
 									disabled ? 'opacity-40' : ''
 								}`}
 							>
@@ -85,21 +96,31 @@ const EmpanadaPicker = ({
 								</div>
 							</button>
 
-							{isPicked && (
-								<div className="absolute right-2 top-2 inline-flex items-center gap-2 rounded-full bg-[#1a1209] px-3 py-1 font-mono text-[10px] font-black text-[#fec32f]">
-									<button
-										type="button"
-										onClick={(e) => {
-											e.stopPropagation()
-											onDecrement(empanada.name)
-										}}
-										className="text-[#fec32f] scale-x-[2]"
-									>
-										-
-									</button>
-									<span className="min-w-[1ch] text-center"> x{count}</span>
-								</div>
-							)}
+							<div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 rounded-full bg-[#1a1209] px-2 py-[0.5px] font-mono text-[10px] font-black text-[#fec32f]">
+								<button
+									type="button"
+									onClick={(e) => {
+										e.stopPropagation()
+										onDecrement(empanada.name)
+									}}
+									disabled={count === 0}
+									className="text-2xl leading-none disabled:cursor-not-allowed disabled:opacity-30"
+								>
+									-
+								</button>
+								<span className="min-w-[1ch] text-center">x{count}</span>
+								<button
+									type="button"
+									onClick={(e) => {
+										e.stopPropagation()
+										onClickEmpanada(empanada.name)
+									}}
+									disabled={cannotAddMore}
+									className="text-2xl leading-none disabled:cursor-not-allowed disabled:opacity-30"
+								>
+									+
+								</button>
+							</div>
 
 							<div className="flex absolute top-2 right-2 gap-1">
 								{empanada.tags
