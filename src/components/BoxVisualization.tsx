@@ -12,7 +12,7 @@ const BoxVisualization = ({ slots, empanadas, onClear }: BoxVisualizationProps) 
 
 	return (
 		<div className="relative h-fit rounded-[1.5rem] border border-[#ede5d8] bg-white p-6 pb-16 shadow-sm">
-			<div className={`w-full text-center font-black absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-8xl font-playfair px-8 z-100 ${hasPicks ? 'hidden' : 'opacity-20'}`}>
+			<div className={`w-full text-center font-black absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-8xl font-playfair px-8 z-10 ${hasPicks ? 'hidden' : 'opacity-20'}`}>
 				Select a flavor to start filling your box!
 			</div>
 			<div className={`${hasPicks ? '' : 'opacity-60'}`}>
