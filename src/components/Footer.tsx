@@ -17,9 +17,9 @@ const Footer = () => {
 					<button
 						type="button"
 						onClick={() => navigate('/')}
-						className="flex items-center gap-3 text-left"
+						className="group flex items-center gap-3 text-left"
 					>
-						<img src="/empanadasboxlogo.png" style={{ filter: 'invert(50%)' }} className="h-12 w-12 lg:h-14 lg:w-14" />
+						<img src="/empanadasboxlogo.png" style={{ filter: 'invert(50%)' }} className="h-12 w-12 lg:h-14 lg:w-14 transition-transform duration-200 group-hover:scale-105" />
 						<span className="font-inter text-lg lg:text-xl font-bold tracking-wide">The Empanadas Box</span>
 					</button>
 					<p className="mt-4 font-mono text-xs md:text-sm text-[#faf7f2]/65">
@@ -39,7 +39,7 @@ const Footer = () => {
 									type="button"
 									onClick={() => {navigate(item.path)}}
 									className={
-										`font-mono text-sm
+										`inline-block font-mono text-sm transition-all duration-200 hover:translate-x-0.5 hover:text-[#fec32f]
 										${activeTab === item.label ? 'text-[#faf7f2]/60' : 'text-[#faf7f2]'}`
 									}
 								>
@@ -59,7 +59,7 @@ const Footer = () => {
 							<li key={media.name} className="mb-2">
 								<button
 									type="button"
-									className="font-mono text-sm text-[#faf7f2]/80"
+									className="inline-block font-mono text-sm text-[#faf7f2]/80 transition-all duration-200 hover:translate-x-0.5 hover:text-[#fec32f]"
 								>
 									<a href={media.link} target="_blank" rel="noopener noreferrer">{media.name}</a>
 								</button>

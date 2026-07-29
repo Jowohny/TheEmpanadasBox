@@ -54,8 +54,8 @@ const Navbar = () => {
 	return (
 		<div ref={navRef} className='relative'>
 			<div className='min-w-full h-[5.5rem] flex flex-row items-center justify-between px-4 lg:px-6 bg-white/60 backdrop-blur-2xl'>
-				<div onClick={() => navigate('/')} className='flex flex-row items-center gap-2 lg:gap-3'>
-					<img src='/empanadasboxlogo.png' className='w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 aspect-square rounded-xl' />
+				<div onClick={() => navigate('/')} className='group flex flex-row items-center gap-2 lg:gap-3 cursor-pointer'>
+					<img src='/empanadasboxlogo.png' className='w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 aspect-square rounded-xl transition-transform duration-200 group-hover:scale-105' />
 					<h1 className='font-black text-base md:text-lg lg:text-xl tracking-wide text-[#1a1209]'>Empanada Box</h1>
 				</div>
 
@@ -89,7 +89,7 @@ const Navbar = () => {
 						</button>
 
 						{moreOpen && (
-							<div className='absolute xl:left-0 md:-left-24 lg:text-right top-full mt-2 min-w-[12rem] rounded-2xl border border-[#e8dfd0] bg-white/95 backdrop-blur-2xl py-2 z-50'>
+							<div className='absolute xl:left-0 md:-left-24 lg:text-right top-full mt-2 min-w-[12rem] rounded-2xl border border-[#e8dfd0] bg-white/95 backdrop-blur-2xl py-2 z-50 origin-top motion-safe:animate-[dropdown-in_0.18s_ease-out]'>
 								{moreLinks.map((link) => {
 									const linkActive =
 										link.path === '/'
@@ -130,7 +130,7 @@ const Navbar = () => {
 			</div>
 
 			{mobileOpen && (
-				<div className='lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-t border-[#e8dfd0] flex flex-col py-2 z-50'>
+				<div className='lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-t border-[#e8dfd0] flex flex-col py-2 z-50 origin-top motion-safe:animate-[dropdown-in_0.2s_ease-out]'>
 					{[...NavLinks, ...moreLinks].map((tab) => {
 						const linkActive = tab.path === '/'
 							? pathname === '/'
