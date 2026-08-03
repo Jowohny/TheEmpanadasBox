@@ -15,7 +15,7 @@ function App() {
   return (
 		<>
 			<Banner />
-			<div className="sticky top-0 z-40 w-screen">
+			<div className="sticky top-0 z-40 w-screen motion-safe:animate-[drop-in_0.5s_ease-out_0.12s_both]">
 				<Navbar />
 			</div>
 

@@ -8,7 +8,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 
 	return (
 		<a href={review.link} target="_blank" rel="noopener noreferrer">
-			<div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-2 border-yellow-700/10 shadow-xl bg-white">
+			<div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-2 border-yellow-700/10 shadow-xl bg-white transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl motion-safe:animate-[card-in_0.5s_ease-out] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
 				<div className="relative flex flex-1 flex-col p-4 md:p-6">
 					<div className="flex items-start justify-between gap-3">
 						<div className="flex flex-1 items-center gap-3">
@@ -45,7 +45,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 
 				<div className="border-t border-[#f0ebe3] bg-gray-300/20 px-4 md:px-6 py-2 md:py-3">
 					<span className="font-mono text-[10px] md:text-xs font-semibold uppercase tracking-wide text-green-900/90">
-						Read full review →
+						Read full review <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
 					</span>
 				</div>
 			</div>
