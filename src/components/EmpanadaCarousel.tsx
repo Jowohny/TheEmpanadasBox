@@ -12,23 +12,35 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 const len = Empanadas.length;
 
 const EmpandaCarousel = () => {
-	const [currentEmpanadas, setCurrentEmpanadas] = useState<number[]>([0, 1, 2])
+	const [active, setActive] = useState(0)
 	const navigate = useNavigate()
 
 	const section = useRef<HTMLDivElement>(null)
-	const nameRef = useRef<HTMLHeadingElement>(null)
-	const imgRef = useRef<HTMLImageElement>(null)
+	const viewport = useRef<HTMLDivElement>(null)
+	const track = useRef<HTMLDivElement>(null)
+	const items = useRef<(HTMLDivElement | null)[]>([])
+	const info = useRef<HTMLDivElement>(null)
+	const activeRef = useRef(0)
+	const first = useRef(true)
+	activeRef.current = active
 
-	const useNextEmpanadas = () => {
-		setCurrentEmpanadas(currentEmpanadas.map(index => (index - 1 + len) % len))
-	}
-
-	const usePreviousEmpanadas = () => {
-		setCurrentEmpanadas(currentEmpanadas.map(index => (index + 1 + len) % len))
-	}
-
-	const setEmpanadaTo = (i: number) => {
-		setCurrentEmpanadas([(i - 1 + len) % len, i, (i + 1) % len])
+	// Slide the track so item `i` sits dead-center, scale it up, dim the rest.
+	const positionTo = (i: number, animate: boolean) => {
+		const vp = viewport.current, tr = track.current, it = items.current[i]
+		if (!vp || !tr || !it) return
+		const d = animate ? 0.55 : 0
+		gsap.to(tr, {
+			x: vp.clientWidth / 2 - (it.offsetLeft + it.offsetWidth / 2),
+			duration: d, ease: "power3.out", overwrite: true,
+		})
+		items.current.forEach((el, idx) => {
+			if (!el) return
+			gsap.to(el, {
+				scale: idx === i ? 1.5 : 0.85,
+				autoAlpha: idx === i ? 1 : 0.4,
+				duration: d, ease: "power3.out", overwrite: true,
+			})
+		})
 	}
 
 	useGSAP(() => {
@@ -44,24 +56,32 @@ const EmpandaCarousel = () => {
 			refreshPriority: 1,
 			onUpdate: self => {
 				const i = Math.min(len - 1, Math.floor(self.progress * len))
-				if (i !== last) { last = i; setEmpanadaTo(i) }
+				if (i !== last) { last = i; setActive(i) }
 			},
 		})
 	}, { scope: section })
 
-	const activeIndex = currentEmpanadas[1]
 	useGSAP(() => {
-		if (reducedMotion()) return
-		gsap.fromTo(nameRef.current, { yPercent: 30, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" })
-		gsap.fromTo(imgRef.current, { scale: 0.92, autoAlpha: 0.5 }, { scale: 1, autoAlpha: 1, duration: 0.45, ease: "power2.out" })
-	}, { dependencies: [activeIndex], scope: section })
+		const animate = !first.current && !reducedMotion()
+		first.current = false
+		positionTo(active, animate)
+		if (animate) {
+			gsap.fromTo(info.current, { autoAlpha: 0.3, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out", overwrite: true })
+		}
+	}, { dependencies: [active], scope: section })
 
-	const prev = Empanadas[currentEmpanadas[0]]
-	const active = Empanadas[currentEmpanadas[1]]
-	const next = Empanadas[currentEmpanadas[2]]
-	const counter = String(currentEmpanadas[1] + 1).padStart(2, '0')
+	useGSAP(() => {
+		const onResize = () => positionTo(activeRef.current, false)
+		window.addEventListener("resize", onResize)
+		return () => window.removeEventListener("resize", onResize)
+	}, { scope: section })
+
+	const go = (dir: number) => setActive(a => Math.min(len - 1, Math.max(0, a + dir)))
+
+	const current = Empanadas[active]
+	const counter = String(active + 1).padStart(2, '0')
 	const total = String(len).padStart(2, '0')
-	const tagline = active.description.split(', ').join(' · ')
+	const tagline = current.description.split(', ').join(' · ')
 
 	return (
 		<div ref={section} className="bg-[#faf7f2] min-h-[80vh] lg:h-[88vh] flex flex-col px-6 md:px-12 lg:px-20 py-10">
@@ -74,33 +94,23 @@ const EmpandaCarousel = () => {
 				</p>
 			</div>
 
-			<div className="flex-1 flex items-center justify-center gap-4 md:gap-8 lg:gap-16 py-4 min-h-0">
-				<button
-					type="button"
-					onClick={useNextEmpanadas}
-					aria-label={`Previous: ${prev.name}`}
-					className="hidden md:block shrink-0 h-[14vh] w-[14vh] rounded-full overflow-hidden opacity-35 hover:opacity-60"
-				>
-					<img src={prev.image} className="h-full w-full object-cover" />
-				</button>
-
-				<div className="shrink-0 h-[55vw] w-[55vw] md:h-[35vh] md:w-[35vh] lg:h-[40vh] lg:w-[40vh] rounded-full overflow-hidden">
-					<img ref={imgRef} src={active.image} alt={active.name} className="h-full w-full object-cover" />
+			<div ref={viewport} className="relative flex-1 min-h-0 overflow-hidden flex items-center -mx-6 md:-mx-12 lg:-mx-20">
+				<div ref={track} className="flex items-center gap-8 md:gap-16 shrink-0">
+					{Empanadas.map((emp, i) => (
+						<div
+							key={emp.name}
+							ref={el => { items.current[i] = el }}
+							className="shrink-0 h-[38vw] w-[38vw] md:h-[20vh] md:w-[20vh] rounded-full overflow-hidden"
+						>
+							<img src={emp.image} alt={emp.name} className="h-full w-full object-cover" />
+						</div>
+					))}
 				</div>
-
-				<button
-					type="button"
-					onClick={usePreviousEmpanadas}
-					aria-label={`Next: ${next.name}`}
-					className="hidden md:block shrink-0 h-[14vh] w-[14vh] rounded-full overflow-hidden opacity-35 hover:opacity-60"
-				>
-					<img src={next.image} className="h-full w-full object-cover" />
-				</button>
 			</div>
 
-			<div className="text-center">
-				<h2 ref={nameRef} className="font-inter text-4xl md:text-7xl lg:text-9xl font-black uppercase scale-y-[1.05] tracking-tight leading-[0.85] text-[#1a1209]">
-					{active.name}
+			<div ref={info} className="text-center">
+				<h2 className="font-inter text-4xl md:text-7xl lg:text-9xl font-black uppercase scale-y-[1.05] tracking-tight leading-[0.85] text-[#1a1209]">
+					{current.name}
 				</h2>
 				<div className="mx-auto my-6 h-[2px] w-12 bg-[#bf8000]" />
 				<p className="text-base md:text-lg lg:text-xl font-light tracking-wide text-[#64605b]">
@@ -110,8 +120,8 @@ const EmpandaCarousel = () => {
 
 			<div className="mt-6 flex items-center justify-between">
 				<div className="flex gap-4 md:gap-6 lg:gap-8 font-mono text-3xl md:text-5xl lg:text-6xl text-[#7a6a55]">
-					<button type="button" onClick={useNextEmpanadas} aria-label="Previous" className="hover:text-[#bf8000]">←</button>
-					<button type="button" onClick={usePreviousEmpanadas} aria-label="Next" className="hover:text-[#bf8000]">→</button>
+					<button type="button" onClick={() => go(-1)} aria-label="Previous" className="hover:text-[#bf8000]">←</button>
+					<button type="button" onClick={() => go(1)} aria-label="Next" className="hover:text-[#bf8000]">→</button>
 				</div>
 				<button
 					type="button"
