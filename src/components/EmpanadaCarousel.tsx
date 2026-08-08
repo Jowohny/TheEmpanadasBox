@@ -24,7 +24,6 @@ const EmpandaCarousel = () => {
 	const first = useRef(true)
 	activeRef.current = active
 
-	// Slide the track so item `i` sits dead-center, scale it up, dim the rest.
 	const positionTo = (i: number, animate: boolean) => {
 		const vp = viewport.current, tr = track.current, it = items.current[i]
 		if (!vp || !tr || !it) return
