@@ -3,18 +3,49 @@ import SpaceCard from "../components/SpaceCard";
 import EventTypes from "../data/EventTypes";
 import EventSpaces from "../data/EventSpaces";
 import InquiryForm from "../components/InquiryForm";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const INQUIRY_EMAIL = 'theempanadasbox1@gmail.com';
 
+const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const Events = () => {
+	const container = useRef<HTMLDivElement>(null)
+
 	const scrollToId = (id: string) => {
 		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
 
+	useGSAP(() => {
+		if (reducedMotion()) return
+
+		gsap.set("[data-reveal]", { autoAlpha: 0, y: 40 })
+		ScrollTrigger.batch("[data-reveal]", {
+			start: "top 88%",
+			onEnter: batch =>
+				gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.12, overwrite: true }),
+		})
+
+		gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach(el => {
+			gsap.set(el, { scale: 1.25 })
+			gsap.fromTo(el,
+				{ yPercent: -12 },
+				{ yPercent: 12, ease: "none",
+					scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } },
+			)
+		})
+	}, { scope: container })
+
 	return (
-		<div className="min-w-screen min-h-screen -mt-[8.25rem]">
+		<div ref={container} className="min-w-screen min-h-screen -mt-[8.25rem]">
 			<div className="relative flex items-center justify-end overflow-hidden">
 				<img
+					data-parallax
 					src="/EmpanadaPics/EzCaterer Menu/Empanada Party Pack - 50 Ppl.jpg"
 					className="z-0 object-cover"
 					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
@@ -22,19 +53,19 @@ const Events = () => {
 				<div className="absolute inset-0 bg-gradient-to-l from-white via-white/75 to-transparent z-10" />
 
 				<div className="absolute z-20 mr-6 max-w-sm text-right md:mr-10 md:max-w-lg lg:mr-16 lg:max-w-2xl">
-					<p className="mb-4 font-mono text-[10px] font-black uppercase tracking-[0.3em] text-[#bf8000] md:mb-6 md:text-xs">
+					<p data-reveal className="mb-4 font-mono text-[10px] font-black uppercase tracking-[0.3em] text-[#bf8000] md:mb-6 md:text-xs">
 						Private Events
 					</p>
-					<h1 className="font-inter font-black uppercase text-4xl scale-y-[1.05] leading-[0.85] tracking-wide text-[#1a1209] mb-6 md:text-6xl lg:text-8xl">
+					<h1 data-reveal className="font-inter font-black uppercase text-4xl scale-y-[1.05] leading-[0.85] tracking-wide text-[#1a1209] mb-6 md:text-6xl lg:text-8xl">
 						Bring the <br />
 						<span className="italic text-[#D09501]">world tour</span> <br />
 						to your event
 					</h1>
-					<div className="ml-auto h-[2px] w-12 bg-[#bf8000] mb-6" />
-					<p className="font-mono text-sm font-semibold tracking-wide text-slate-800 mb-6 md:mb-8 md:text-base">
+					<div data-reveal className="ml-auto h-[2px] w-12 bg-[#bf8000] mb-6" />
+					<p data-reveal className="font-mono text-sm font-semibold tracking-wide text-slate-800 mb-6 md:mb-8 md:text-base">
 						Weddings, corporate gatherings, parties — we cater the spread that travels around the world in five bites.
 					</p>
-					<div className="flex flex-col items-end gap-3 md:flex-row md:items-center md:justify-end">
+					<div data-reveal className="flex flex-col items-end gap-3 md:flex-row md:items-center md:justify-end">
 						<button
 							type="button"
 							onClick={() => scrollToId('inquiry')}
@@ -55,7 +86,7 @@ const Events = () => {
 
 			<div className="bg-[#faf7f2] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
 				<div className="mx-auto max-w-[90rem]">
-					<div className="mb-10 ml-2 max-w-3xl md:mb-14">
+					<div data-reveal className="mb-10 ml-2 max-w-3xl md:mb-14">
 						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 							What We Cater
 						</p>
@@ -68,7 +99,7 @@ const Events = () => {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+					<div data-reveal className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 						{EventTypes.map((eventType) => (
 							<EventTypeCard key={eventType.name} eventType={eventType} />
 						))}
@@ -78,7 +109,7 @@ const Events = () => {
 
 			<div id="destinations" className="bg-[#0d0c0b] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
 				<div className="mx-auto max-w-[90rem]">
-					<div className="mx-auto mb-12 max-w-3xl text-center md:mb-20">
+					<div data-reveal className="mx-auto mb-12 max-w-3xl text-center md:mb-20">
 						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
 							Venues
 						</p>
@@ -93,7 +124,9 @@ const Events = () => {
 
 					<div className="flex flex-col gap-16 md:gap-24">
 						{EventSpaces.map((space, idx) => (
-							<SpaceCard key={space.name} space={space} reverse={idx % 2 === 1} />
+							<div data-reveal key={space.name}>
+								<SpaceCard space={space} reverse={idx % 2 === 1} />
+							</div>
 						))}
 					</div>
 				</div>
@@ -101,7 +134,7 @@ const Events = () => {
 
 			<div id="inquiry" className="bg-[#faf7f2] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
 				<div className="mx-auto max-w-[90rem]">
-					<div className="mx-auto mb-12 max-w-3xl text-center md:mb-16">
+					<div data-reveal className="mx-auto mb-12 max-w-3xl text-center md:mb-16">
 						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 							Request a Quote
 						</p>
@@ -114,7 +147,7 @@ const Events = () => {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-12">
+					<div data-reveal className="grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-12">
 						<InquiryForm/>
 						<div className="lg:col-span-2 flex flex-col gap-8 self-start rounded-[1.5rem] border border-[#ede5d8] bg-white p-8 shadow-sm">
 							<div>
@@ -140,5 +173,3 @@ const Events = () => {
 };
 
 export default Events;
-
-//emergency commit, busy work + wrecked car + police pulled over = no commit
