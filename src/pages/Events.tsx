@@ -4,9 +4,12 @@ import EventTypes from "../data/EventTypes";
 import EventSpaces from "../data/EventSpaces";
 import InquiryForm from "../components/InquiryForm";
 import { useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { scroller } from 'react-scroll';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,9 +19,23 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 
 const Events = () => {
 	const container = useRef<HTMLDivElement>(null)
+	const { hash } = useLocation()
+
+	useEffect(() => {
+    if (hash) {
+			const timer = setTimeout(() => {
+				const idHash = hash.replace('#', '');
+				scroller.scrollTo(idHash, {
+					duration: 1000, smooth: "easeInOutQuad"
+				})
+			}, 500)
+
+			return () => clearTimeout(timer)
+    }
+  }, [hash]); 
 
 	const scrollToId = (id: string) => {
-		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		scroller.scrollTo(id, { duration: 1000, smooth: 'easeInOutQuad' });
 	};
 
 	useGSAP(() => {

@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const CONTACT_EMAIL = 'theempanadasbox1@gmail.com';
+
 
 const fieldClass =
 	'border-0 border-b-2 border-[#1a1209]/15 bg-transparent px-0 py-1 font-inter text-lg text-[#1a1209] ' +
@@ -13,6 +17,7 @@ const ContactUs = () => {
 	const [phone, setPhone] = useState('');
 	const [topic, setTopic] = useState('General');
 	const [message, setMessage] = useState('');
+	const navigate = useNavigate();
 
 	return (
 		<div className="min-h-screen bg-[#faf7f2]">
@@ -80,6 +85,29 @@ const ContactUs = () => {
 
 					</div>
 				</form>
+
+				<div className="mt-16 grid grid-cols-2 border-t border-[#1a1209]/10 pt-8">
+					<div>
+						<p className="mb-1 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Prefer email?</p>
+						<a href={`mailto:${CONTACT_EMAIL}`} className="font-inter text-lg font-bold text-[#1a1209] underline underline-offset-4 decoration-[#bf8000]">
+							{CONTACT_EMAIL}
+						</a>
+					</div>
+
+					<div>
+						<p className="mb-1 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Events or Quotes?</p>
+						<p className="font-inter text-lg font-light text-[#64605b]">
+							For any large parties or events you might want to rent out a space for, refer to this 
+							&nbsp;<span onClick={() => navigate('/events#inquiry')} className='text-[#bf8000] underline cursor-pointer'>form</span> instead.
+						</p>
+					</div>
+
+					<div>
+						<p className="mb-1 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Response time</p>
+						<p className="font-inter text-lg font-light text-[#64605b]">Within one business day.</p>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	);

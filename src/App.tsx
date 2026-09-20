@@ -10,6 +10,8 @@ import Catering from './pages/Catering';
 import Rewards from './pages/Rewards';
 import Events from './pages/Events';
 import FAQs from './pages/FAQs';
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
 				<Route path="/Rewards" element={<Rewards/>} />
 				<Route path="/Events" element={<Events/>} />
 				<Route path="/FAQs" element={<FAQs/>} />
+				<Route path="/AboutUs" element={<AboutUs/>} />
+				<Route path="/ContactUs" element={<ContactUs/>} />
 				<Route path="*" element={<h1>404 <br /> Page Not Found</h1>} />
 			</Routes>
 
