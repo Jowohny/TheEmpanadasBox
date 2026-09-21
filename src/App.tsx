@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
@@ -14,6 +14,8 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 
 function App() {
+	const location = useLocation()
+
   return (
 		<>
 			<Banner />
@@ -21,19 +23,21 @@ function App() {
 				<Navbar />
 			</div>
 
-			<Routes>
-				<Route path="/" element={<Home/>} />
-				<Route path="/OrderPickup" element={<OrderPickup/>} />
-				<Route path="/ShipNationwide" element={<ShipNationwide/>} />
-				<Route path="/ShipNationwide/build/:size" element={<BoxBuilder/>} />
-				<Route path="/Catering" element={<Catering/>} />
-				<Route path="/Rewards" element={<Rewards/>} />
-				<Route path="/Events" element={<Events/>} />
-				<Route path="/FAQs" element={<FAQs/>} />
-				<Route path="/AboutUs" element={<AboutUs/>} />
-				<Route path="/ContactUs" element={<ContactUs/>} />
-				<Route path="*" element={<h1>404 <br /> Page Not Found</h1>} />
-			</Routes>
+			<div key={location.pathname} className="motion-safe:animate-[page-in_0.7s_ease-out]">
+				<Routes>
+					<Route path="/" element={<Home/>} />
+					<Route path="/OrderPickup" element={<OrderPickup/>} />
+					<Route path="/ShipNationwide" element={<ShipNationwide/>} />
+					<Route path="/ShipNationwide/build/:size" element={<BoxBuilder/>} />
+					<Route path="/Catering" element={<Catering/>} />
+					<Route path="/Rewards" element={<Rewards/>} />
+					<Route path="/Events" element={<Events/>} />
+					<Route path="/FAQs" element={<FAQs/>} />
+					<Route path="/AboutUs" element={<AboutUs/>} />
+					<Route path="/ContactUs" element={<ContactUs/>} />
+					<Route path="*" element={<h1>404 <br /> Page Not Found</h1>} />
+				</Routes>
+			</div>
 
 			<Footer />
 		</>		
