@@ -6,7 +6,7 @@ type TierCardProps = {
 
 const TierCard = ({ tier }: TierCardProps) => {
 	return (
-		<div className="flex flex-col items-center rounded-[1.5rem] border border-white/8 bg-white/4 p-8 text-center">
+		<div data-reveal className="flex flex-col items-center rounded-[1.5rem] border border-white/8 bg-white/4 p-8 text-center">
 			<p className="font-inter text-6xl font-black leading-none text-[#fec32f]">
 				{tier.stamps}
 			</p>

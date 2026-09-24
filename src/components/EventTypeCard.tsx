@@ -6,7 +6,7 @@ type EventTypeCardProps = {
 
 const EventTypeCard = ({ eventType }: EventTypeCardProps) => {
 	return (
-		<div className="flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-sm border border-[#ede5d8]">
+		<div data-reveal className="flex flex-col bg-white rounded-[1.5rem] overflow-hidden shadow-sm border border-[#ede5d8]">
 			<div className="relative h-72 w-full overflow-hidden">
 				<img
 					src={eventType.image}

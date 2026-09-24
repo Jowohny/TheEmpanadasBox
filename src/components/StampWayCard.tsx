@@ -8,7 +8,7 @@ const StampWayCard = ({ stampWay }: StampWayCardProps) => {
 	const { stamps, category, description, icon, featured } = stampWay;
 
 	return (
-		<div className={`relative flex flex-col items-center rounded-[1.5rem] border border-[#ede5d8] bg-white p-7 text-center shadow-sm ${featured ? '-translate-y-4' : ''}`}>
+		<div data-stamp className={`relative flex flex-col items-center rounded-[1.5rem] border border-[#ede5d8] bg-white p-7 text-center shadow-sm ${featured ? '-translate-y-4' : ''}`}>
 			{featured && (
 				<div className="absolute -right-3 -top-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#1a1209] shadow-md">
 					<img src="/star.svg" className="h-4 w-4" />

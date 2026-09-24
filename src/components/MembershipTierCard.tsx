@@ -6,7 +6,7 @@ type MembershipTierCardProps = {
 
 const MembershipTierCard = ({ tier }: MembershipTierCardProps) => {
 	return (
-		<div className="flex flex-col gap-4 rounded-[1.5rem] border border-[#ede5d8] bg-white p-8 shadow-sm">
+		<div data-reveal className="flex flex-col gap-4 rounded-[1.5rem] border border-[#ede5d8] bg-white p-8 shadow-sm">
 			<p className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">
 				Tier
 			</p>

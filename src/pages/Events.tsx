@@ -56,6 +56,27 @@ const Events = () => {
 					scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } },
 			)
 		})
+
+		gsap.utils.toArray<HTMLElement>("[data-slide]").forEach(el => {
+			gsap.from(el, {
+				xPercent: el.dataset.slide === "right" ? 14 : -14, autoAlpha: 0,
+				duration: 1, ease: "power3.out",
+				scrollTrigger: { trigger: el, start: "top 85%", once: true },
+			})
+		})
+
+		gsap.utils.toArray<HTMLElement>("[data-rule]").forEach(el => {
+			gsap.from(el, {
+				scaleX: 0, transformOrigin: "left center", duration: 0.9, ease: "power3.out",
+				scrollTrigger: { trigger: el, start: "top 90%", once: true },
+			})
+		})
+
+		gsap.utils.toArray<HTMLImageElement>("[data-image]").forEach((el, i) => {
+			gsap.from(el, {
+				xPercent: i%2==0 ? -20 : 20, autoAlpha: 0, duration: 0.8
+			})
+		})
 	}, { scope: container })
 
 	return (
@@ -110,13 +131,13 @@ const Events = () => {
 						<h2 className="mb-4 font-inter text-4xl font-black leading-[0.95] tracking-tight text-[#1a1209] md:text-5xl lg:text-6xl">
 							Designed for <br /> <span className="italic text-[#D09501]">every</span> occasion.
 						</h2>
-						<div className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<div data-rule className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
 						<p className="text-base font-light tracking-wide text-[#64605b] md:text-lg lg:text-xl">
 							From cocktail hour to client lunch — pick the moment, we'll bring the spread.
 						</p>
 					</div>
 
-					<div data-reveal className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+					<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 						{EventTypes.map((eventType) => (
 							<EventTypeCard key={eventType.name} eventType={eventType} />
 						))}
@@ -124,7 +145,7 @@ const Events = () => {
 				</div>
 			</div>
 
-			<div id="destinations" className="bg-[#0d0c0b] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
+			<div id="destinations" className="overflow-hidden bg-[#0d0c0b] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
 				<div className="mx-auto max-w-[90rem]">
 					<div data-reveal className="mx-auto mb-12 max-w-3xl text-center md:mb-20">
 						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
@@ -133,7 +154,7 @@ const Events = () => {
 						<h2 className="mb-4 font-inter text-4xl font-black leading-[0.95] tracking-tight text-[#faf7f2] md:text-5xl lg:text-6xl">
 							Discover our <span className="italic text-[#fec32f]">spaces.</span>
 						</h2>
-						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#fec32f]" />
+						<div data-rule className="mx-auto mb-5 h-[2px] w-12 bg-[#fec32f]" />
 						<p className="text-base font-light tracking-wide text-white/60 md:text-lg lg:text-xl">
 							Choose the perfect setting for your next gathering.
 						</p>
@@ -141,9 +162,7 @@ const Events = () => {
 
 					<div className="flex flex-col gap-16 md:gap-24">
 						{EventSpaces.map((space, idx) => (
-							<div data-reveal key={space.name}>
-								<SpaceCard space={space} reverse={idx % 2 === 1} />
-							</div>
+							<SpaceCard key={space.name} space={space} reverse={idx % 2 === 1} />
 						))}
 					</div>
 				</div>
@@ -158,7 +177,7 @@ const Events = () => {
 						<h2 className="mb-4 font-inter text-4xl font-black leading-[0.95] tracking-tight text-[#1a1209] md:text-5xl lg:text-6xl">
 							Tell us about <br /> your <span className="italic text-[#D09501]">event.</span>
 						</h2>
-						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<div data-rule className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
 						<p className="text-base font-light tracking-wide text-[#64605b] md:text-lg lg:text-xl">
 							Send us the details — we'll reply within one business day with a custom quote.
 						</p>

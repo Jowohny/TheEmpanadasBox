@@ -8,7 +8,7 @@ type SpaceCardProps = {
 const SpaceCard = ({ space, reverse }: SpaceCardProps) => {
 	return (
 		<div className={`flex flex-col gap-8 md:items-center md:gap-16 ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
-			<div className="w-full shrink-0 md:w-1/2">
+			<div data-slide={reverse ? 'right' : 'left'} className="w-full shrink-0 md:w-1/2">
 				<img
 					src={space.image}
 					loading="lazy"
@@ -16,7 +16,7 @@ const SpaceCard = ({ space, reverse }: SpaceCardProps) => {
 				/>
 			</div>
 
-			<div className="flex w-full flex-col md:w-1/2">
+			<div data-slide={reverse ? 'left' : 'right'} className="flex w-full flex-col md:w-1/2">
 				<h3 className="font-inter text-3xl font-black tracking-tight text-[#faf7f2] md:text-5xl">
 					{space.name}
 				</h3>

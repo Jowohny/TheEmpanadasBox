@@ -35,6 +35,12 @@ const Rewards = () => {
 			)
 		})
 
+		gsap.from("[data-stamp]", {
+			autoAlpha: 0, y: 40, duration: 0.9, ease: "power3.out",
+			stagger: { grid: [1, 5], from: "edges", amount: 0.5 },
+			scrollTrigger: { trigger: "[data-stamp-grid]", start: "top 85%", once: true },
+		})
+
 		gsap.utils.toArray<HTMLElement>("[data-rule]").forEach(el => {
 			gsap.from(el, {
 				scaleX: 0, transformOrigin: "left center", duration: 0.9, ease: "power3.out",
@@ -87,13 +93,13 @@ const Rewards = () => {
 
 			<div className="bg-[#faf7f2] px-20 py-24">
 				<div className="mx-auto max-w-[90rem]">
-					<div data-reveal className="mb-16 text-center">
-						<h2 className="font-inter text-6xl font-black tracking-tight text-[#1a1209]">
+					<div data-reveal className="mx-auto mb-16 text-center">
+						<h2 className="font-inter text-6xl font-black tracking-tight text-[#1a1209] mb-4">
 							Earn Your <span className="italic text-[#D09501]">Stamps</span>
 						</h2>
-					</div>
-
-					<div data-reveal className="grid grid-cols-5 items-start gap-6">
+						<div data-rule className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						</div>
+					<div data-stamp-grid className="grid grid-cols-5 items-start gap-6">
 						{StampWays.map((stampWay) => (
 							<StampWayCard key={stampWay.stamps + stampWay.category} stampWay={stampWay} />
 						))}
@@ -116,7 +122,7 @@ const Rewards = () => {
 						</p>
 					</div>
 
-					<div data-reveal className="grid grid-cols-4 gap-6">
+					<div className="grid grid-cols-4 gap-6">
 						{RewardsTiers.map((tier) => (
 							<TierCard key={tier.stamps} tier={tier} />
 						))}
@@ -139,7 +145,7 @@ const Rewards = () => {
 						</p>
 					</div>
 
-					<div data-reveal className="grid grid-cols-3 gap-6">
+					<div className="grid grid-cols-3 gap-6">
 						{MembershipTiers.map((tier) => (
 							<MembershipTierCard key={tier.name} tier={tier} />
 						))}

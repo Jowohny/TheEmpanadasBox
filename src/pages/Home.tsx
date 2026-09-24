@@ -52,6 +52,13 @@ const Home = () => {
 			scrollTrigger: { trigger: "[data-stars]", start: "top 85%", once: true },
 		})
 
+		gsap.utils.toArray<HTMLElement>("[data-rule]").forEach(el => {
+			gsap.from(el, {
+				scaleX: 0, transformOrigin: "left center", duration: 0.9, ease: "power3.out",
+				scrollTrigger: { trigger: el, start: "top 90%", once: true },
+			})
+		})
+
 		if (countRef.current) {
 			const span = countRef.current
 			const obj = { v: 0 }
@@ -116,12 +123,12 @@ const Home = () => {
 				<div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/50 to-transparent z-10" />
 
 				<div className="absolute text-right text-white mr-6 md:mr-12 lg:mr-16 z-20">
-					<h1 className="text-5xl md:text-7xl lg:text-9xl uppercase font-inter font-black mb-8 leading-[0.85] tracking-wide">
+					<h1 className="text-5xl md:text-7xl lg:text-9xl uppercase font-inter font-black mb-6 leading-[0.85] tracking-wide">
 						<span data-reveal className="block">flavors</span>
 						<span data-reveal className="block">without</span>
 						<span data-reveal className="block">borders</span>
 					</h1>
-					<div data-reveal className="w-20 h-[2px] bg-[#bf8000] mb-6 inline-block" />
+					<div data-rule className="ml-auto mr-4 w-16 h-[2px] bg-[#bf8000] mb-6" />
 					<p data-reveal className="font-mono text-base md:text-lg lg:text-xl font-semibold text-[#fec32f]">
 						We did the traveling so you don't have to.
 					</p>
@@ -188,7 +195,7 @@ const Home = () => {
 						Never have an <br />
 						<span className="italic text-[#fec32f]">empty freezer.</span>
 					</h2>
-					<div data-reveal className="h-[2px] w-12 bg-[#fec32f] mb-8" />
+					<div data-rule className="h-[2px] w-12 bg-[#fec32f] mb-8" />
 					<div data-reveal className="mb-12 flex flex-col gap-3 font-mono text-base md:text-lg text-white/85">
 						<p>Save 10% on every order.</p>
 						<p>Free shipping every time.</p>
