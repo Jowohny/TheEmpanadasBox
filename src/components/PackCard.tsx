@@ -9,14 +9,14 @@ const PackCard = ({ pack }: PackCardProps) => {
 	const navigate = useNavigate()
 
 	return (
-		<div className="flex max-w-md flex-col overflow-hidden rounded-[1.5rem] border border-[#ede5d8] bg-white shadow-sm">
+		<div className="flex flex-col overflow-hidden rounded-[1.5rem] border border-[#ede5d8] bg-white shadow-sm">
 			<div className="relative h-72 w-full overflow-hidden">
 				<div className="absolute bottom-4 left-4 z-10">
 					<p className="font-mono text-xs font-black uppercase tracking-[0.24em] text-[#fec32f]">
-						Custom Boxes
+						{pack.size} Empanadas
 					</p>
 					<h3 className="font-inter text-3xl font-black leading-tight text-white">
-						For The Right Occasion
+						{pack.name}
 					</h3>
 				</div>
 				<img
@@ -28,7 +28,7 @@ const PackCard = ({ pack }: PackCardProps) => {
 			</div>
 			<div className="flex flex-1 flex-col gap-3 px-7 pb-7 pt-5">
 				<p className="text-base font-light leading-snug text-[#5f5449] mb-1">
-					Click the button below that will take you directly to our custom empanada box creater!
+					{pack.description}
 				</p>
 				<button
 					type="button"

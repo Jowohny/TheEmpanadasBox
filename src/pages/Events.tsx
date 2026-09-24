@@ -67,7 +67,7 @@ const Events = () => {
 					className="z-0 object-cover"
 					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
 				/>
-				<div className="absolute inset-0 bg-gradient-to-l from-white via-white/75 to-transparent z-10" />
+				<div className="absolute inset-y-0 right-0 bg-white lg:bg-transparent lg:bg-gradient-to-l lg:from-white lg:via-white/95 lg:to-transparent lg:w-[80%] z-10" />
 
 				<div className="absolute z-20 mr-6 max-w-sm text-right md:mr-10 md:max-w-lg lg:mr-16 lg:max-w-2xl">
 					<p data-reveal className="mb-4 font-mono text-[10px] font-black uppercase tracking-[0.3em] text-[#bf8000] md:mb-6 md:text-xs">

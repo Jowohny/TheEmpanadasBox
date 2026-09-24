@@ -72,8 +72,7 @@ const Home = () => {
 					className='z-0 w-full h-full object-cover'
 					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
 				/>
-				<div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent z-10" />
-				<div className="hidden lg:block absolute top-0 bottom-0 left-[44%] w-px bg-[#1a1209]/15 z-10" />
+				<div className="absolute inset-0 bg-white lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[70%] z-10" />
 				<div className="absolute text-left ml-6 md:ml-12 lg:ml-16 z-20 max-w-md md:max-w-xl lg:max-w-2xl">
 					<h1 data-reveal className="text-4xl md:text-6xl lg:text-8xl uppercase font-inter font-black mb-6 scale-y-[1.1] tracking-wide leading-[0.9] text-[#1a1209]">
 						your freezer's <br />
@@ -94,7 +93,7 @@ const Home = () => {
 						<button
 							type="button"
 							onClick={() => navigate('ShipNationwide')}
-							className="bg-white rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-[#bf8000] tracking-wide text-xs md:text-sm uppercase shadow-md border-2 border-[#bf8000]/30"
+							className="bg-white rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-gray-800 tracking-wide text-xs md:text-sm uppercase shadow-md border-2 border-gray-800/50"
 						>
 							Ship Nationwide
 						</button>

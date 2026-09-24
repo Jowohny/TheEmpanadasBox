@@ -34,50 +34,50 @@ const Rewards = () => {
 					scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } },
 			)
 		})
+
+		gsap.utils.toArray<HTMLElement>("[data-rule]").forEach(el => {
+			gsap.from(el, {
+				scaleX: 0, transformOrigin: "left center", duration: 0.9, ease: "power3.out",
+				scrollTrigger: { trigger: el, start: "top 90%", once: true },
+			})
+		})
 	}, { scope: container })
 
 	return (
 		<div ref={container} className="min-w-screen min-h-screen -mt-[8.25rem]">
-			<div className="relative flex items-center justify-center overflow-hidden">
+			<div className="relative flex items-center justify-start overflow-hidden">
 				<img
 					data-parallax
 					src="/EmpanadaPics/EzCaterer Menu/Empanadas by the Dozen.jpg"
 					className="z-0 object-cover"
 					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
 				/>
+				<div className="absolute inset-y-0 left-0 bg-white lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[70%] z-10" />
 
-	 			<div className="absolute inset-0 z-20 bg-radial-[at_50%_65%] from-black/60 via-black/10 to-transparent" />
-				<div className="absolute inset-0 bg-gradient-to-b from-white via-white/[0.0001] -mt-60 to-transparent z-10" />
-
-				<div className="absolute z-20 flex max-w-4xl flex-col items-center px-6 text-center">
-					<div data-reveal className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-md">
-						<span className="font-mono text-xs font-black uppercase tracking-[0.22em] text-white">
-							Loyalty Program
-						</span>
-					</div>
-
-					<h1 data-reveal className="mb-6 font-inter text-8xl font-black uppercase leading-[0.85] tracking-wide text-white">
-						Rewards every time
-						<br />
-						<span className="italic text-[#fec32f]">you eat!</span>
-					</h1>
-
-					<div data-reveal className="mb-6 h-[2px] w-12 bg-[#fec32f]" />
-
-					<p data-reveal className="mb-10 max-w-2xl font-mono text-lg font-medium tracking-wide text-white/80">
-						Join for free and earn Passport Stamps every time you shop <br /> because tasting the world should pay off.
+				<div className="absolute z-20 ml-16 max-w-3xl text-left">
+					<p data-reveal className="mb-6 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+						Loyalty Program
 					</p>
-
+					<h1 data-reveal className="font-inter font-black uppercase text-8xl scale-y-[1.05] leading-[0.85] tracking-wide text-[#1a1209] mb-6">
+						Rewards <br />
+						every time <br />
+						<span className="italic text-[#D09501]">you eat!</span>
+					</h1>
+					<div data-reveal className="h-[2px] w-12 bg-[#bf8000] mb-6" />
+					<p data-reveal className="font-mono text-base font-semibold tracking-wide text-slate-800 mb-8">
+						Join for free and earn Passport Stamps every time you <br />
+						shop because tasting the world should pay off.
+					</p>
 					<div data-reveal className="flex flex-row items-center gap-3">
 						<button
 							type="button"
-							className="rounded-full border-2 border-black/20 bg-[#fec32f] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
+							className="bg-[#bf8000] rounded-full px-8 py-4 font-mono font-semibold text-white tracking-wide text-sm uppercase shadow-lg border-2 border-black/20"
 						>
 							Join Now
 						</button>
 						<button
 							type="button"
-							className="rounded-full border-2 border-white/10 bg-[#1a1209] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-md"
+							className="bg-white rounded-full px-8 py-4 font-mono font-semibold text-[#bf8000] tracking-wide text-sm uppercase shadow-md border-2 border-[#bf8000]/30"
 						>
 							Sign In
 						</button>
@@ -100,6 +100,7 @@ const Rewards = () => {
 					</div>
 				</div>
 			</div>
+
 			<div className="bg-[#0d0c0b] px-20 py-24">
 				<div className="mx-auto max-w-[90rem]">
 					<div data-reveal className="mx-auto mb-16 max-w-3xl text-center">
@@ -109,7 +110,7 @@ const Rewards = () => {
 						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
 							Cash in your <span className="italic text-[#fec32f]">stamps.</span>
 						</h2>
-						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#fec32f]" />
+						<div data-rule className="mx-auto mb-5 h-[2px] w-12 bg-[#fec32f]" />
 						<p className="text-xl font-light tracking-wide text-white/60">
 							Stamps stack up automatically. When you hit a tier, it's yours to claim.
 						</p>
@@ -132,7 +133,7 @@ const Rewards = () => {
 						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
 							Level up your <span className="italic text-[#D09501]">passport.</span>
 						</h2>
-						<div className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<div data-rule className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
 						<p className="text-xl font-light tracking-wide text-[#64605b]">
 							Stack more stamps on every order — the more you visit, the faster they pile up.
 						</p>
@@ -151,7 +152,7 @@ const Rewards = () => {
 					<h2 data-reveal className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
 						Ready to start your <span className="italic text-[#D09501]">passport?</span>
 					</h2>
-					<div data-reveal className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
+					<div data-rule className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
 					<p data-reveal className="mb-10 text-xl font-light tracking-wide text-[#64605b]">
 						Sign up today and the next bite already counts.
 					</p>

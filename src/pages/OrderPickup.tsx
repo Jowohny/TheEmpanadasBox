@@ -4,10 +4,10 @@ import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
 import RewardsTiers from '../data/RewardsTiers';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,36 +16,41 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 const OrderPickup = () => {
 	const navigate = useNavigate()
 	const container = useRef<HTMLDivElement>(null)
-	const hero = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
 		if (reducedMotion()) return
 
 		gsap.set("[data-reveal]", { autoAlpha: 0, y: 40 })
 		ScrollTrigger.batch("[data-reveal]", {
-			start: "top 88%",
+			start: "top 80%",
 			onEnter: batch =>
 				gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.12, overwrite: true }),
 		})
 
-		gsap.fromTo(hero.current,
-			{ backgroundPosition: "center 45%" },
-			{ backgroundPosition: "center 55%", ease: "none",
-				scrollTrigger: { trigger: hero.current, start: "top top", end: "bottom top", scrub: true } },
-		)
+		gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach(el => {
+			gsap.set(el, { scale: 1.25 })
+			gsap.fromTo(el,
+				{ yPercent: -12 },
+				{ yPercent: 12, ease: "none",
+					scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } },
+			)
+		})
 	}, { scope: container })
 
 	return (
 		<div ref={container} className="min-w-screen min-h-screen">
-			<div
-				ref={hero}
-				className="min-h-screen w-full relative flex flex-col items-center justify-end -mt-[8.25rem] pb-8 md:pb-12 overflow-hidden bg-cover bg-center"
-				style={{ backgroundImage: 'url("/EmpanadaPics/Singapore Case.png")' }}
-			>
-				<div className="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent" />
-				<div className="absolute inset-0 bg-gradient-to-t from-white/50 via-white/5 to-transparent" />
+			<div	className="min-h-screen w-full relative flex flex-col items-center justify-end -mt-[8.25rem] pb-8 md:pb-12 overflow-hidden bg-cover bg-center">
+				<div className="absolute inset-0 bg-white lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[60%] z-10" />
+				<div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/10 to-transparent z-10" />
 
-				<div className="absolute top-1/2 left-0 -translate-y-1/2 ml-6 md:ml-8 lg:ml-12 max-w-[92vw]">
+				<img
+					data-parallax
+					src="/EmpanadaPics/EzCaterer Menu/Empanada Party Pack - 50 Ppl.jpg"
+					className="z-0 object-cover"
+					style={{ width: '100vw', height: 'calc(100vh - 2.25rem)' }}
+				/>
+
+				<div className="absolute top-1/2 left-0 -translate-y-1/2 ml-6 md:ml-8 lg:ml-12 max-w-[92vw] z-20">
 					<div data-reveal className="inline-block font-mono font-bold uppercase text-[10px] md:text-xs tracking-widest bg-red-400/40 text-red-900 rounded-full py-1 px-3 md:px-4 mb-4 md:mb-8">
 						The World Tour Experience
 					</div>
@@ -54,14 +59,13 @@ const OrderPickup = () => {
 						<h2 data-reveal className="text-[#a33522]">Heat Up.</h2>
 						<h2 data-reveal className="text-[#765600] mb-4 md:mb-6 lg:mb-8">Eat Up.</h2>
 					</div>
-					<p data-reveal className="font-sans text-base md:text-2xl lg:text-3xl text-gray-600 tracking-wide font-medium">
-						Our handcrafted crusts are designed to travel. <br className="hidden md:block" />
-						Journey from our kitchen to your table without <br className="hidden md:block" />
-						losing a single note of flavor.
+					<p data-reveal className="ont-mono text-sm font-semibold tracking-wide text-slate-800 mb-6 md:mb-8 md:text-base">
+						Our handcrafted crusts are designed to travel. Journey from our <br />
+						kitchen to your table without losing a single note of flavor.
 					</p>
 				</div>
 
-				<div data-reveal className="relative flex flex-col items-center gap-3">
+				<div data-reveal className="relative flex flex-col items-center gap-3 z-20">
 					<div className="w-16 md:w-24 h-[2px] bg-[#bf8000] mb-2" />
 					<p className="font-mono text-xs md:text-base font-bold tracking-[0.2em] uppercase text-black text-center px-4">
 						Fresh. Frozen. Ready when you are.
@@ -143,7 +147,12 @@ const OrderPickup = () => {
 
 			<div className="relative flex flex-col lg:flex-row min-h-[38rem] items-center lg:justify-between overflow-hidden border-b border-[#e2d8ca] bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-12 md:py-16 gap-10 lg:gap-0">
 				<div className="absolute left-0 top-0 h-full w-2 md:w-3 bg-[#fec32f]" />
-				<div className="absolute inset-0 bg-[url('/stamps.jpg')] bg-repeat bg-center opacity-[0.06]" />
+				
+				<img
+					data-parallax
+					src="/stamps.jpg"
+					className="absolute inset-0 z-0 h-full w-full object-cover opacity-[0.1]"
+				/>
 
 				<div className="relative z-10 ml-4 md:ml-6 max-w-full lg:max-w-[42rem]">
 					<p data-reveal className="mb-3 md:mb-4 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
