@@ -75,12 +75,14 @@ const Rewards = () => {
 						shop because tasting the world should pay off.
 					</p>
 					<div data-reveal className="flex flex-row items-center gap-3">
-						<button
-							type="button"
-							className="bg-[#bf8000] rounded-full px-8 py-4 font-mono font-semibold text-white tracking-wide text-sm uppercase shadow-lg border-2 border-black/20"
-						>
-							Check Stamp Balance
-						</button>
+						<a href="https://profile.squareup.com/merchantportal/ZYF2F37ACHYN0/loyalty" target="_blank" rel="noopener noreferrer">
+							<button
+								type="button"
+								className="bg-[#bf8000] rounded-full px-8 py-4 font-mono font-semibold text-white tracking-wide text-sm uppercase shadow-lg border-2 border-black/20"
+							>
+								Check Stamp Balance
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -158,12 +160,14 @@ const Rewards = () => {
 					</p>
 
 					<div data-reveal className="flex flex-row items-center justify-center gap-3">
-						<button
-							type="button"
-							className="rounded-full border-2 border-black/20 bg-[#fec32f] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
-						>
-							Check Stamp Balance
-						</button>
+						<a href="https://profile.squareup.com/merchantportal/ZYF2F37ACHYN0/loyalty" target="_blank" rel="noopener noreferrer">
+							<button
+								type="button"
+								className="rounded-full border-2 border-black/20 bg-[#fec32f] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
+							>
+								Join Now
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>

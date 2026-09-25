@@ -26,14 +26,15 @@ const EventSpaces: EventSpace[] = [
 		],
 		details: [
 			{ label: 'Rental Fee', value: 'Starting at $500' },
-			{ label: 'Bar Minimum', value: '$1,500' }
+			{ label: 'Bar Minimum', value: '$1,500' },
+			{ label: 'Ocupancy', value: '~35-40 people' }
 		],
 		detailsNote: 'Tuesday – Sunday'
 	},
 	{
 		name: 'Full Restaurant Buyout',
 		tagline: 'The Ultimate Experience',
-		description: 'Take over the entire destination. Complete access to the main dining area, the back bar, and dedicated service staff to create a fully customized, unforgettable event for your large group.',
+		description: 'Take over the entire destination. Complete access to the main dining area, the back bar, front patio, and dedicated service staff to create a fully customized, unforgettable event for your large group.',
 		image: '/findlay.png',
 		amenities: [
 			'Full Staff Allocation',
@@ -42,7 +43,8 @@ const EventSpaces: EventSpace[] = [
 		],
 		details: [
 			{ label: 'Rental Fee', value: 'Custom Quote' },
-			{ label: 'Minimum', value: 'Custom Quote' }
+			{ label: 'Minimum', value: 'Custom Quote' },
+			{ label: 'Ocupancy', value: '~100+ people' }
 		]
 	}
 ]

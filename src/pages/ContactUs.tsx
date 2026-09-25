@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const CONTACT_EMAIL = 'theempanadasbox1@gmail.com';
+const CONTACT_EMAIL = 'general@theempanadasbox.com';
 
 
 const fieldClass =
