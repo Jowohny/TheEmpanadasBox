@@ -51,7 +51,7 @@ const FAQs: FAQ[] = [
 		question: 'Do you offer catering for private or corporate events?',
 		answer: (
 			<p>
-				Yes! Our empanadas are the perfect, mess-free finger food for corporate meetings, weddings, private parties, and community gatherings. You can place an order <Link to="/Catering">here</Link> or email us at <a href="catering@empanadasbox.com">catering@empanadasbox.com</a>.
+				Yes! Our empanadas are the perfect, mess-free finger food for corporate meetings, weddings, private parties, and community gatherings. You can place an order <Link to="/Catering">here</Link> or email us at <a href="catering@theempanadasbox.com">catering@empanadasbox.com</a>.
 			</p>
 		)
 	},
@@ -59,7 +59,7 @@ const FAQs: FAQ[] = [
 		question: 'How far in advance do I need to place a catering order?',
 		answer: (
 			<p>
-				For large event orders, we require at least 2 days' notice. If you want to place a catering order on short notice, under 2 days, please reach out to <a href="catering@empanadasbox.com">catering@empanadasbox.com</a>.
+				For large event orders, we require at least 2 days' notice. If you want to place a catering order on short notice, under 2 days, please reach out to <a href="mailto:catering@theempanadasbox.com">catering@theempanadasbox.com</a>.
 			</p>
 		)
 	},
@@ -67,7 +67,7 @@ const FAQs: FAQ[] = [
 		question: 'Can I sell your empanadas at my cafe, grocery store, or market?',
 		answer: (
 			<p>
-				We love partnering with local businesses! We offer competitive wholesale pricing for cafes, coffee shops, specialty grocers, and food trucks looking to add a high-quality, delicious item to their menu. Please reach out to <a href="mailto:general@empanadasbox.com">general@empanadasbox.com</a> if interested!
+				We love partnering with local businesses! We offer competitive wholesale pricing for cafes, coffee shops, specialty grocers, and food trucks looking to add a high-quality, delicious item to their menu. Please reach out to <a href="mailto:general@theempanadasbox.com">general@empanadasbox.com</a> if interested!
 			</p>
 		)
 	},
@@ -75,7 +75,7 @@ const FAQs: FAQ[] = [
 		question: 'How are wholesale orders delivered or shipped?',
 		answer: (
 			<p>
-				We can arrange for local delivery/pickup or schedule regular palletized shipping depending on your location and storage capacity. All wholesale orders are shipped frozen and securely packed. Please reach out to <a href="mailto:theempanadasbox1@gmail.com">general@empanadasbox.com</a> if interested!
+				We can arrange for local delivery/pickup or schedule regular palletized shipping depending on your location and storage capacity. All wholesale orders are shipped frozen and securely packed. Please reach out to <a href="mailto:general@theempandasbox.com">general@theempanadasbox.com</a> if interested!
 			</p>
 		)
 	}

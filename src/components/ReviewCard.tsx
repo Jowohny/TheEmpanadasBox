@@ -33,14 +33,6 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 					<p className="line-clamp-5 font-serif text-sm md:text-md text-[#4a4034]">
 						{review.message}
 					</p>
-
-					{review.images.length > 0 && (
-						<div className="mt-3 flex gap-2">
-							{review.images.map((src) => (
-								<img key={src} src={src} className="w-[31.5%] shrink-0 rounded-lg border border-[#ede5d8] object-cover" loading="lazy" referrerPolicy="no-referrer"/>
-							))}
-						</div>
-					)}
 				</div>
 
 				<div className="border-t border-[#f0ebe3] bg-gray-300/20 px-4 md:px-6 py-2 md:py-3">

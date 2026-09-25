@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 
-const INQUIRY_EMAIL = 'theempanadasbox1@gmail.com';
+const INQUIRY_EMAIL = 'general@theempanadasbox.com';
 
 const InquiryForm = () => {
 	const [name, setName] = useState('');

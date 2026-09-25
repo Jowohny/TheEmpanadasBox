@@ -13,8 +13,6 @@ import { scroller } from 'react-scroll';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const INQUIRY_EMAIL = 'general@theempanadasbox.com';
-
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const Events = () => {
@@ -197,10 +195,10 @@ const Events = () => {
 									Email us at:
 								</h3>
 								<a
-									href={`mailto:${INQUIRY_EMAIL}`}
+									href={'mailto:general@theempanadasbox.com'}
 									className="mt-4 inline-block font-inter text-xl font-bold text-[#bf8000] underline underline-offset-4"
 								>
-									{INQUIRY_EMAIL}
+									general@theempanadasbox.com
 								</a>
 							</div>
 						</div>
