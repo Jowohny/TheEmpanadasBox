@@ -7,7 +7,7 @@ const CartIcon = () => {
 		<button
 			type="button"
 			onClick={openDrawer}
-			className="fixed right-6 top-36 z-30 inline-flex items-center gap-2 rounded-full border-2 border-black/20 bg-[#fec32f] px-5 py-3 shadow-lg"
+			className="fixed right-4 md:right-6 top-36 z-30 inline-flex items-center gap-2 rounded-full border-2 border-black/20 bg-[#fec32f] px-4 py-2.5 md:px-5 md:py-3 shadow-lg"
 		>
 			<img src="/icons/shoppingcart.svg" className="h-5" />
 			<span className="font-mono text-xs font-black uppercase tracking-[0.2em] text-[#1a1209]">

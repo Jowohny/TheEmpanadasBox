@@ -5,12 +5,6 @@ type MarketLocationCardProps = {
 	marketLocation: MarketLocation
 }
 
-const formatPhoneNumber = (phoneNumber: string) => {
-	if (phoneNumber.length !== 10) return phoneNumber;
-
-	return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6)}`;
-};
-
 const MarketLocationCard = ({ marketLocation }: MarketLocationCardProps ) => {
 	const [changeInteract, setChangeInteract] = useState<"photo" | "map">("photo");
 
@@ -84,12 +78,6 @@ const MarketLocationCard = ({ marketLocation }: MarketLocationCardProps ) => {
 						className="rounded-full bg-[#bf8000] px-4 md:px-5 py-2 md:py-3 font-mono text-[10px] md:text-xs font-semibold uppercase tracking-[0.18em] text-white"
 					>
 						Open in Maps
-					</a>
-					<a
-						href={`tel:${marketLocation.phoneNumber}`}
-						className="rounded-full border border-[#d8cab5] bg-white px-4 md:px-5 py-2 md:py-3 font-mono text-[10px] md:text-xs font-semibold uppercase tracking-[0.18em] text-[#1a1209]"
-					>
-						Call {formatPhoneNumber(marketLocation.phoneNumber)}
 					</a>
 				</div>
 			</div>

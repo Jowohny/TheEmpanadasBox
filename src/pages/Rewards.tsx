@@ -79,13 +79,7 @@ const Rewards = () => {
 							type="button"
 							className="bg-[#bf8000] rounded-full px-8 py-4 font-mono font-semibold text-white tracking-wide text-sm uppercase shadow-lg border-2 border-black/20"
 						>
-							Join Now
-						</button>
-						<button
-							type="button"
-							className="bg-white rounded-full px-8 py-4 font-mono font-semibold text-[#bf8000] tracking-wide text-sm uppercase shadow-md border-2 border-[#bf8000]/30"
-						>
-							Sign In
+							Check Stamp Balance
 						</button>
 					</div>
 				</div>
@@ -168,13 +162,7 @@ const Rewards = () => {
 							type="button"
 							className="rounded-full border-2 border-black/20 bg-[#fec32f] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
 						>
-							Join Now
-						</button>
-						<button
-							type="button"
-							className="rounded-full border-2 border-black/10 bg-[#1a1209] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-md"
-						>
-							Sign In
+							Check Stamp Balance
 						</button>
 					</div>
 				</div>

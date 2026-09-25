@@ -13,7 +13,7 @@ import { scroller } from 'react-scroll';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const INQUIRY_EMAIL = 'theempanadasbox1@gmail.com';
+const INQUIRY_EMAIL = 'general@theempanadasbox.com';
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

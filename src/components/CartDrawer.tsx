@@ -26,11 +26,11 @@ const CartDrawer = () => {
 			/>
 
 			<aside
-				className={`fixed right-0 top-0 z-50 flex h-screen w-[28rem] flex-col bg-[#0d0c0b] text-white shadow-2xl transition-transform duration-300 ${
+				className={`fixed right-0 top-0 z-50 flex h-screen w-full sm:w-[28rem] flex-col bg-[#0d0c0b] text-white shadow-2xl transition-transform duration-300 ${
 					isDrawerOpen ? 'translate-x-0' : 'translate-x-full'
 				}`}
 			>
-				<header className="flex items-start justify-between border-b border-white/10 px-7 py-6">
+				<header className="flex items-start justify-between border-b border-white/10 px-5 py-5 md:px-7 md:py-6">
 					<div>
 						<p className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#fec32f]">
 							Cart
@@ -49,7 +49,7 @@ const CartDrawer = () => {
 					</button>
 				</header>
 
-				<div className="flex-1 overflow-y-auto px-7 py-6">
+				<div className="flex-1 overflow-y-auto px-5 py-5 md:px-7 md:py-6">
 					{lines.length === 0 ? (
 						<div className="flex h-full flex-col items-center justify-center text-center">
 							<p className="font-inter text-3xl font-black leading-tight text-white">
@@ -111,7 +111,7 @@ const CartDrawer = () => {
 					)}
 				</div>
 
-				<footer className="border-t border-white/10 px-7 py-6">
+				<footer className="border-t border-white/10 px-5 py-5 md:px-7 md:py-6">
 					{lines.length > 0 && (
 						<div className="mb-4 flex items-center justify-between">
 							<span className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-white/50">

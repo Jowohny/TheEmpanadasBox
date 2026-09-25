@@ -20,16 +20,16 @@ const MenuItemCard = ({ product }: MenuItemCardProps) => {
 	}
 
 	return (
-		<div className="flex flex-col overflow-hidden rounded-[1.5rem] border border-[#ede5d8] bg-white shadow-sm">
-			<div className="bg-[#f5efe6] p-5">
+		<div className="flex flex-col overflow-hidden rounded-2xl md:rounded-[1.5rem] border border-[#ede5d8] bg-white shadow-sm">
+			<div className="bg-[#f5efe6] p-4 md:p-5">
 				<img
 					src={product.image}
 					loading="lazy"
 					className="aspect-[4/3] w-full rounded-xl object-cover"
 				/>
 			</div>
-			<div className="flex flex-1 flex-col gap-3 p-6">
-				<h3 className="font-inter text-2xl font-black tracking-tight text-[#1a1209]">
+			<div className="flex flex-1 flex-col gap-3 p-5 md:p-6">
+				<h3 className="font-inter text-xl md:text-2xl font-black tracking-tight text-[#1a1209]">
 					{product.name}
 				</h3>
 				<p className="text-sm font-light leading-relaxed text-[#5f5449]">
@@ -37,7 +37,7 @@ const MenuItemCard = ({ product }: MenuItemCardProps) => {
 				</p>
 
 				{product.type === 'preset-box' && product.contents && product.contents.length > 0 && (
-					<ul className="mt-1 flex flex-col gap-1.5">
+					<ul className="mt-1 flex flex-col gap-1.5 mb-2">
 						{product.contents.map((item) => (
 							<li key={item} className="flex items-start gap-2 text-xs text-[#3a3020]">
 								<span className="mt-[1px] leading-none text-[#bf8000]">✓</span>
@@ -50,7 +50,7 @@ const MenuItemCard = ({ product }: MenuItemCardProps) => {
 				<button
 					type="button"
 					onClick={handleAdd}
-					className="mt-auto self-start rounded-full border-2 border-black/20 bg-[#bf8000] px-6 py-3 font-mono text-xs font-black uppercase tracking-[0.18em] text-white shadow-md"
+					className="mt-auto self-start rounded-full border-2 border-black/20 bg-[#bf8000] px-5 py-2.5 md:px-6 md:py-3 font-mono text-xs font-black uppercase tracking-[0.18em] text-white shadow-md"
 				>
 					Add to Cart →
 				</button>
