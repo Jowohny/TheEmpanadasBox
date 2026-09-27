@@ -1,7 +1,9 @@
 import EventTypeCard from "../components/EventTypeCard";
 import SpaceCard from "../components/SpaceCard";
+import PackageRow from "../components/PackageRow";
 import EventTypes from "../data/EventTypes";
 import EventSpaces from "../data/EventSpaces";
+import EventPackages from "../data/EventPackages";
 import InquiryForm from "../components/InquiryForm";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
@@ -167,6 +169,31 @@ const Events = () => {
 					<div className="flex flex-col gap-16 md:gap-24">
 						{EventSpaces.map((space, idx) => (
 							<SpaceCard key={space.name} space={space} reverse={idx % 2 === 1} />
+						))}
+					</div>
+				</div>
+			</div>
+
+			<div id="packages" className="bg-white px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div data-reveal className="mb-10 max-w-3xl md:mb-14">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+							Event Packages
+						</p>
+						<h2 className="mb-4 font-inter text-4xl font-black leading-[0.95] tracking-tight text-[#1a1209] md:text-5xl lg:text-6xl">
+							Pick your <span className="italic text-[#D09501]">package.</span>
+						</h2>
+						<div data-rule className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<p className="text-base font-light tracking-wide text-[#64605b] md:text-lg lg:text-xl">
+							Every package includes unlimited open bar pours during your 2-hour hosted window.
+						</p>
+					</div>
+
+					<div className="flex flex-col">
+						{EventPackages.map((pack) => (
+							<div key={pack.name}>
+								<PackageRow pack={pack} />
+							</div>
 						))}
 					</div>
 				</div>
