@@ -8,44 +8,57 @@ export interface EventSpace {
 	tagline: string
 	description: string
 	image: string
+	idealFor?: string
 	amenities: string[]
 	details: SpaceDetail[]
+	minimums?: SpaceDetail[]
 	detailsNote?: string
 }
 
 const EventSpaces: EventSpace[] = [
 	{
-		name: 'The Back Bar',
+		name: 'The Back Bar & Lounge',
 		tagline: 'Intimate & Exclusive',
-		description: 'An exclusive, semi-private area with direct access to our lively bar. Perfect for cocktail receptions, small gatherings, and celebrations that want to feel the energy of the main room while maintaining a dedicated space.',
+		description: 'A private event space tucked behind our main counter, complete with a dedicated 3-tap draft system, custom cocktail bar, and private seating.',
 		image: '/covington.jpg',
+		idealFor: 'Birthday celebrations, happy hours, rehearsal dinners, and showers.',
 		amenities: [
-			'Dedicated Bartender',
-			'Lounge & High-Top Seating',
+			'Dedicated 3-Tap Draft System',
+			'Custom Cocktail Bar',
+			'Private Seating',
 			'A/V Capabilities'
 		],
 		details: [
-			{ label: 'Rental Fee', value: 'Starting at $500' },
-			{ label: 'Bar Minimum', value: '$1,500' },
-			{ label: 'Ocupancy', value: '~35-40 people' }
+			{ label: 'Capacity', value: '20–40 guests' },
+			{ label: 'Seated Dining', value: '30 guests' },
+			{ label: 'Hosted Window', value: '2 hours' },
+			{ label: 'Room Rental', value: 'No rental fee' }
 		],
-		detailsNote: 'Tuesday – Sunday'
+		minimums: [
+			{ label: 'Mon – Wed', value: '$500' },
+			{ label: 'Thu & Weekend Brunch', value: '$1,000' },
+			{ label: 'Fri – Sat Evening', value: '$1,500' }
+		],
+		detailsNote: 'Additional hours available upon request.'
 	},
 	{
 		name: 'Full Restaurant Buyout',
-		tagline: 'The Ultimate Experience',
-		description: 'Take over the entire destination. Complete access to the main dining area, the back bar, front patio, and dedicated service staff to create a fully customized, unforgettable event for your large group.',
+		tagline: 'Take over the entire destination.',
+		description: 'Take over the entire restaurant. You and your guests receive exclusive access to the main dining room, the back bar and lounge, front street-facing seating/patio, and a fully dedicated kitchen and service crew for a completely customized event.',
 		image: '/findlay.png',
 		amenities: [
-			'Full Staff Allocation',
-			'Custom Seating Arrangements',
-			'Full A/V Control'
+			'Full Staff & Kitchen Allocation',
+			'Both Bars & Service Wells Open',
+			'Custom Seating & Buffet Arrangements',
+			'Full A/V & Sound Control'
 		],
 		details: [
-			{ label: 'Rental Fee', value: 'Custom Quote' },
-			{ label: 'Minimum', value: 'Custom Quote' },
-			{ label: 'Ocupancy', value: '~100+ people' }
-		]
+			{ label: 'Occupancy', value: 'Up to ~100+ guests' },
+			{ label: 'Rental Fee', value: '$0 — waived with minimum spend' },
+			{ label: 'F&B Minimum', value: 'Custom quote by day & time' },
+			{ label: 'Format', value: 'Passed service, grazing stations, or custom spreads' }
+		],
+		detailsNote: 'Buyouts can be booked using our per-person package tiers ($35–$75) or structured around custom food stations and open consumption bar tabs.'
 	}
 ]
 

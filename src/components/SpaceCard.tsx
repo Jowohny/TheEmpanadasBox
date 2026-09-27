@@ -27,7 +27,16 @@ const SpaceCard = ({ space, reverse }: SpaceCardProps) => {
 					{space.description}
 				</p>
 
-				<div className="mt-8 grid grid-cols-2 gap-8">
+				{space.idealFor && (
+					<p className="mt-5 text-sm font-light leading-relaxed text-white/60">
+						<span className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#fec32f]">
+							Ideal for:{' '}
+						</span>
+						{space.idealFor}
+					</p>
+				)}
+
+				<div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
 					<div>
 						<p className="mb-3 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#fec32f]">
 							Amenities
@@ -56,6 +65,35 @@ const SpaceCard = ({ space, reverse }: SpaceCardProps) => {
 						</ul>
 					</div>
 				</div>
+
+				{space.minimums && (
+					<div className="mt-8 border-t border-white/10 pt-6">
+						<p className="mb-4 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#fec32f]">
+							Food &amp; Beverage Minimums
+						</p>
+						<div className="flex flex-col gap-4 sm:flex-row sm:gap-0">
+							{space.minimums.map((minimum, i) => (
+								<div
+									key={minimum.label}
+									className={`flex-1 ${i > 0 ? 'sm:border-l sm:border-white/10 sm:pl-5' : ''} ${i < space.minimums!.length - 1 ? 'sm:pr-5' : ''}`}
+								>
+									<p className="font-inter text-2xl font-black leading-none text-white md:text-3xl">
+										{minimum.value}
+									</p>
+									<p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white/50">
+										{minimum.label}
+									</p>
+								</div>
+							))}
+						</div>
+					</div>
+				)}
+
+				{space.detailsNote && (
+					<p className="mt-6 text-xs font-light leading-relaxed text-white/45">
+						{space.detailsNote}
+					</p>
+				)}
 			</div>
 		</div>
 	)

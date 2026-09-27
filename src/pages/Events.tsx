@@ -159,6 +159,9 @@ const Events = () => {
 						<p className="text-base font-light tracking-wide text-white/60 md:text-lg lg:text-xl">
 							Exclusive only to our <span className="font-bold">Findlay Location</span> on <span className="font-bold">1819 Elm Street</span>.
 						</p>
+						<p className="mt-1 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#fec32f] md:text-xs">
+							No room rental fees &mdash; every dollar goes toward feeding your guests
+						</p>
 					</div>
 
 					<div className="flex flex-col gap-16 md:gap-24">
