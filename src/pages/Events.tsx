@@ -4,6 +4,7 @@ import PackageRow from "../components/PackageRow";
 import EventTypes from "../data/EventTypes";
 import EventSpaces from "../data/EventSpaces";
 import EventPackages from "../data/EventPackages";
+import BookingTerms from "../data/BookingTerms";
 import InquiryForm from "../components/InquiryForm";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
@@ -199,7 +200,41 @@ const Events = () => {
 				</div>
 			</div>
 
-			<div id="inquiry" className="bg-[#faf7f2] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
+			<div id="terms" className="bg-[#faf7f2] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
+				<div className="mx-auto max-w-[90rem]">
+					<div data-reveal className="mb-8 max-w-3xl md:mb-12">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+							The Fine Print
+						</p>
+						<h2 className="mb-4 font-inter text-4xl font-black leading-[0.95] tracking-tight text-[#1a1209] md:text-5xl lg:text-6xl">
+							Standard booking <span className="italic text-[#D09501]">terms.</span>
+						</h2>
+						<div data-rule className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<p className="text-base font-light tracking-wide text-[#64605b] md:text-lg">
+							To keep pricing transparent and service seamless, all private bookings operate under these standard billing policies.
+						</p>
+					</div>
+
+					<div className="flex flex-col">
+						{BookingTerms.map((term) => (
+							<div
+								data-reveal
+								key={term.label}
+								className="grid grid-cols-1 gap-2 border-t border-[#1a1209]/10 py-5 md:grid-cols-[15rem_1fr] md:gap-10 md:py-6"
+							>
+								<p className="font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000] md:text-xs">
+									{term.label}
+								</p>
+								<p className="max-w-3xl text-sm font-light leading-relaxed text-[#64605b] md:text-base">
+									{term.body}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+
+			<div id="inquiry" className="bg-white px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
 				<div className="mx-auto max-w-[90rem]">
 					<div data-reveal className="mx-auto mb-12 max-w-3xl text-center md:mb-16">
 						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
