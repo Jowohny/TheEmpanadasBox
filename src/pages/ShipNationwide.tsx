@@ -2,6 +2,7 @@ import CartDrawer from "../components/CartDrawer";
 import CartIcon from "../components/CartIcon";
 import MenuItemCard from "../components/MenuItemCard";
 import PackCard from "../components/PackCard";
+import ShippingRate from "../components/ShippingRate";
 import { CustomPacks, PresetBoxes, Sauces } from "../data/ShipProducts";
 
 const SectionLabel = ({ children }: { children: string }) => (
@@ -54,6 +55,11 @@ const ShipNationwide = () => {
 						{Sauces.map((sauce) => (
 							<MenuItemCard key={sauce.id} product={sauce} />
 						))}
+					</div>
+
+					<div></div>
+					<div className="max-w-2xl">
+						<ShippingRate />
 					</div>
 				</div>
 			</div>
