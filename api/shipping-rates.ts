@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { createRateQuote } from './_lib/shippo';
-import type { DestinationAddress } from './_lib/shippo';
+import { createRateQuote } from './_lib/shippo.js';
+import type { DestinationAddress } from './_lib/shippo.js';
 
 const MAX_TRANSIT_DAYS = 2;
 
