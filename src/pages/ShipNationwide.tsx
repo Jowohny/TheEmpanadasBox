@@ -56,11 +56,6 @@ const ShipNationwide = () => {
 							<MenuItemCard key={sauce.id} product={sauce} />
 						))}
 					</div>
-
-					<div></div>
-					<div className="max-w-2xl">
-						<ShippingRate />
-					</div>
 				</div>
 			</div>
 		</div>
