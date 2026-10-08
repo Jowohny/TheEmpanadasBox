@@ -1,8 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Sauce, PresetBox, CustomPack, IndividualEmpanada } from '../data/ShipProducts';
 
-export type CartLocation = 'Covington' | 'Findlay Market'
-
 export interface SauceLine {
 	id: string
 	type: 'sauce'
@@ -33,6 +31,7 @@ export interface EmpanadaLine {
 }
 
 export type CartLine = SauceLine | PresetLine | CustomPackLine | EmpanadaLine
+
 export type CartLineInput =
 	| Omit<SauceLine, 'id'>
 	| Omit<PresetLine, 'id'>
@@ -41,35 +40,32 @@ export type CartLineInput =
 
 interface CartContextValue {
 	lines: CartLine[]
-	location: CartLocation
 	isDrawerOpen: boolean
 	itemCount: number
+	subtotal: number
 	addLine: (line: CartLineInput) => void
 	removeLine: (id: string) => void
 	updateQuantity: (id: string, quantity: number) => void
 	clear: () => void
-	setLocation: (loc: CartLocation) => void
 	openDrawer: () => void
 	closeDrawer: () => void
 }
 
 const STORAGE_KEY = 'theempanadasbox.cart.v1'
-const DEFAULT_LOCATION: CartLocation = 'Covington'
 
 const CartContext = createContext<CartContextValue | null>(null)
 
-function readPersisted(): { lines: CartLine[]; location: CartLocation } {
-	if (typeof localStorage === 'undefined') return { lines: [], location: DEFAULT_LOCATION }
+function readPersisted(): { lines: CartLine[] } {
+	if (typeof localStorage === 'undefined') return { lines: [] }
 	try {
 		const raw = localStorage.getItem(STORAGE_KEY)
-		if (!raw) return { lines: [], location: DEFAULT_LOCATION }
+		if (!raw) return { lines: [] }
 		const parsed = JSON.parse(raw)
 		return {
 			lines: Array.isArray(parsed.lines) ? parsed.lines : [],
-			location: parsed.location === 'Findlay Market' ? 'Findlay Market' : DEFAULT_LOCATION
 		}
 	} catch {
-		return { lines: [], location: DEFAULT_LOCATION }
+		return { lines: [] }
 	}
 }
 
@@ -83,18 +79,18 @@ function newId(): string {
 export const CartProvider = ({ children }: { children: ReactNode }) => {
 	const persisted = readPersisted()
 	const [lines, setLines] = useState<CartLine[]>(persisted.lines)
-	const [location, setLocation] = useState<CartLocation>(persisted.location)
 	const [isDrawerOpen, setDrawerOpen] = useState(false)
 
 	useEffect(() => {
 		try {
-			localStorage.setItem(STORAGE_KEY, JSON.stringify({ lines, location }))
+			localStorage.setItem(STORAGE_KEY, JSON.stringify({ lines }))
 		} catch {
 
 		}
-	}, [lines, location])
+	}, [lines])
 
 	const itemCount = lines.reduce((sum, line) => sum + line.quantity, 0)
+	const subtotal = lines.reduce((sum, line) => sum + (line.product.price ?? 0) * line.quantity, 0)
 
 	const addLine = (input: CartLineInput) => {
 		setLines((prev) => {
@@ -131,14 +127,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 		<CartContext.Provider
 			value={{
 				lines,
-				location,
 				isDrawerOpen,
 				itemCount,
+				subtotal,
 				addLine,
 				removeLine,
 				updateQuantity,
 				clear,
-				setLocation,
 				openDrawer: () => setDrawerOpen(true),
 				closeDrawer: () => setDrawerOpen(false)
 			}}

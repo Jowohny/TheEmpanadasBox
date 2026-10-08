@@ -11,13 +11,20 @@ const PackCard = ({ pack }: PackCardProps) => {
 	return (
 		<div className="flex flex-col overflow-hidden rounded-2xl md:rounded-[1.5rem] border border-[#ede5d8] bg-white shadow-sm">
 			<div className="relative h-56 md:h-64 lg:h-72 w-full overflow-hidden">
-				<div className="absolute bottom-4 left-4 z-10">
-					<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.24em] text-[#fec32f]">
-						{pack.size} Empanadas
-					</p>
-					<h3 className="font-inter text-2xl md:text-3xl font-black leading-tight text-white">
-						{pack.name}
-					</h3>
+				<div className="absolute bottom-4 left-4 right-4 z-10 flex items-end justify-between gap-4">
+					<div>
+						<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.24em] text-[#fec32f]">
+							{pack.size} Empanadas
+						</p>
+						<h3 className="font-inter text-2xl md:text-3xl font-black leading-tight text-white">
+							{pack.name}
+						</h3>
+					</div>
+					{typeof pack.price === 'number' && (
+						<p className="shrink-0 font-inter text-2xl md:text-3xl font-black leading-none tracking-tight text-white">
+							${pack.price.toFixed(2)}
+						</p>
+					)}
 				</div>
 				<img
 					src={pack.image}

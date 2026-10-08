@@ -1,8 +1,8 @@
-import type { Sauce, PresetBox, IndividualEmpanada } from "../data/ShipProducts";
+import type { Sauce, PresetBox } from "../data/ShipProducts";
 import { useCart } from "../contexts/CartContext";
 
 type MenuItemCardProps = {
-	product: Sauce | PresetBox | IndividualEmpanada
+	product: Sauce | PresetBox
 }
 
 const MenuItemCard = ({ product }: MenuItemCardProps) => {
@@ -13,8 +13,6 @@ const MenuItemCard = ({ product }: MenuItemCardProps) => {
 			addLine({ type: 'sauce', product, quantity: 1 })
 		} else if (product.type === 'preset-box') {
 			addLine({ type: 'preset-box', product, quantity: 1 })
-		} else {
-			addLine({ type: 'empanada', product, quantity: 1 })
 		}
 		openDrawer()
 	}
@@ -29,9 +27,16 @@ const MenuItemCard = ({ product }: MenuItemCardProps) => {
 				/>
 			</div>
 			<div className="flex flex-1 flex-col gap-3 p-5 md:p-6">
-				<h3 className="font-inter text-xl md:text-2xl font-black tracking-tight text-[#1a1209]">
-					{product.name}
-				</h3>
+				<div className="flex items-baseline justify-between gap-4">
+					<h3 className="font-inter text-xl md:text-2xl font-black tracking-tight text-[#1a1209]">
+						{product.name}
+					</h3>
+					{typeof product.price === 'number' && (
+						<p className="shrink-0 font-inter text-xl md:text-2xl font-black tracking-tight text-[#bf8000]">
+							${product.price.toFixed(2)}
+						</p>
+					)}
+				</div>
 				<p className="text-sm font-light leading-relaxed text-[#5f5449]">
 					{product.description}
 				</p>

@@ -35,7 +35,8 @@ export const CustomPacks: CustomPack[] = [
 		size: 24,
 		name: 'Build a 24-Pack',
 		description: 'A 24-pack of empanadas, mix and match as you please.',
-		image: '/EmpanadaPics/Items Photos/JAMAICA.jpg'
+		image: '/EmpanadaPics/Items Photos/JAMAICA.jpg',
+		price: 125
 	},
 	{
 		id: 'custom-pack-36',
@@ -43,7 +44,8 @@ export const CustomPacks: CustomPack[] = [
 		size: 36,
 		name: 'Build a 36-Pack',
 		description: 'A 36-pack of empanadas, for those with more mouths to feed.',
-		image: '/EmpanadaPics/Items Photos/SINGAPORE.jpg'
+		image: '/EmpanadaPics/Items Photos/SINGAPORE.jpg',
+		price: 175
 	}
 ]
 
@@ -53,14 +55,16 @@ export const Sauces: Sauce[] = [
 		type: 'sauce',
 		name: 'Chimichurri',
 		description: 'Bright, herby, garlicky. Made in-house — the green sauce that goes on everything.',
-		image: '/EmpanadaPics/EzCaterer Menu/Chimichuri.jpg'
+		image: '/EmpanadaPics/EzCaterer Menu/Chimichuri.jpg',
+		price: 12
 	},
 	{
 		id: 'sauce-salsa-roja',
 		type: 'sauce',
 		name: 'Salsa Roja',
 		description: 'Smoky, tomato-forward, with a slow warm finish. The red counterpart to chimichurri.',
-		image: '/EmpanadaPics/EzCaterer Menu/Salsa Roja.jpg'
+		image: '/EmpanadaPics/EzCaterer Menu/Salsa Roja.jpg',
+		price: 8.25
 	}
 ]
 
@@ -74,7 +78,8 @@ export const PresetBoxes: PresetBox[] = [
 		contents: [
 			'3 each of all 12 flavors - 36 total',
 			'Ships frozen, ready to heat'
-		]
+		],
+		price: 175
 	},
 	{
 		id: 'preset-crowd-pleaser-pack',
@@ -86,7 +91,8 @@ export const PresetBoxes: PresetBox[] = [
 			'Buenos Aires, Bordeaux, Jamaica, Philly',
 			'9 of each — 36 total',
 			'Ships frozen, ready to heat'
-		]
+		],
+		price: 175
 	},
 	{
 		id: 'preset-veggie-tour',
@@ -99,7 +105,8 @@ export const PresetBoxes: PresetBox[] = [
 			'9 of each — 36 total',
 			'Vegetarian and Vegan only',
 			'Ships frozen, ready to heat'
-		]
+		],
+		price: 175
 	}
 ]
 

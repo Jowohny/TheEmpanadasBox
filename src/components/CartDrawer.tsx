@@ -1,8 +1,10 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 
 const CartDrawer = () => {
-	const { lines, location, isDrawerOpen, closeDrawer, removeLine, updateQuantity } = useCart()
+	const { lines, subtotal, isDrawerOpen, closeDrawer, removeLine, updateQuantity } = useCart()
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (!isDrawerOpen) return
@@ -12,9 +14,6 @@ const CartDrawer = () => {
 			document.body.style.overflow = prev
 		}
 	}, [isDrawerOpen])
-
-	const allPriced = lines.length > 0 && lines.every((line) => typeof line.product.price === 'number')
-	const subtotal = lines.reduce((sum, line) => sum + (line.product.price ?? 0) * line.quantity, 0)
 
 	return (
 		<>
@@ -118,16 +117,17 @@ const CartDrawer = () => {
 								Subtotal
 							</span>
 							<span className="font-inter text-base font-black text-white">
-								{allPriced ? `$${subtotal.toFixed(2)}` : 'See price at checkout'}
+								{lines.length > 0 ? `$${subtotal.toFixed(2)}` : 'Currently No Items In Cart!'}
 							</span>
 						</div>
 					)}
 					<p className="mb-4 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-white/50">
-						Shipping from <span className="text-[#fec32f]">{location}</span>
+						Shipping from <span className="text-[#fec32f]">Findlay Market</span>
 					</p>
 					<button
 						type="button"
 						disabled={lines.length === 0}
+						onClick={() => { closeDrawer(); navigate('/Checkout') }}
 						className="w-full rounded-full border-2 border-black/20 bg-[#fec32f] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg disabled:cursor-not-allowed disabled:opacity-40"
 					>
 						Checkout →
