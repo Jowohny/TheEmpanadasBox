@@ -12,6 +12,7 @@ import Events from './pages/Events';
 import FAQs from './pages/FAQs';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import Checkout from './pages/Checkout';
 
 function App() {
 	const location = useLocation()
@@ -35,6 +36,7 @@ function App() {
 					<Route path="/FAQs" element={<FAQs/>} />
 					<Route path="/AboutUs" element={<AboutUs/>} />
 					<Route path="/ContactUs" element={<ContactUs/>} />
+					<Route path="/Checkout" element={<Checkout/>} />
 					<Route path="*" element={<h1>404 <br /> Page Not Found</h1>} />
 				</Routes>
 			</div>
