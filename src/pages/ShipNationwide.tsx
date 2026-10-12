@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import CartDrawer from "../components/CartDrawer";
 import CartIcon from "../components/CartIcon";
 import MenuItemCard from "../components/MenuItemCard";
@@ -13,6 +14,17 @@ const SectionLabel = ({ children }: { children: string }) => (
 	</div>
 )
 
+const Notice = ({ label, children }: { label: string; children: ReactNode }) => (
+	<div className="flex-1 border-l-2 border-[#bf8000]/40 pl-5">
+		<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.22em] text-[#bf8000]">
+			{label}
+		</p>
+		<p className="mt-2 text-sm md:text-base font-light leading-relaxed text-[#64605b]">
+			{children}
+		</p>
+	</div>
+)
+
 const ShipNationwide = () => {
 	return (
 		<div className="min-w-screen min-h-screen bg-[#faf7f2]">
@@ -20,7 +32,7 @@ const ShipNationwide = () => {
 			<CartDrawer />
 
 			<div className="mx-auto max-w-[90rem] px-6 py-12 md:px-12 md:py-16 lg:px-20 lg:py-20">
-				<div className="mb-10 md:mb-14 lg:mb-20 max-w-3xl">
+				<div className="mb-10 md:mb-14 lg:mb-20 max-w-4xl">
 					<p className="mb-3 md:mb-4 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 						Ship Nationwide
 					</p>
@@ -30,8 +42,24 @@ const ShipNationwide = () => {
 					</h1>
 					<div className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
 					<p className="text-base md:text-lg lg:text-xl font-light tracking-wide text-[#64605b]">
-						Pick a pack, build your box, and send our empanadas right to your doorstep!
+						Pick a pack, build your box, and send our empanadas right to your doorstep.
 					</p>
+
+					<div className="mt-8 flex flex-col gap-6 md:mt-10 md:flex-row md:gap-10">
+						<Notice label="Where we ship">
+							For the time being we only ship and deliver to{' '}
+							<span className="font-medium text-[#1a1209]">
+								Ohio, Kentucky, Indiana, West Virginia, Michigan, Illinois, Tennessee
+							</span>{' '}
+							and <span className="font-medium text-[#1a1209]">Pennsylvania</span>.
+						</Notice>
+
+						<Notice label="When we ship">
+							Orders go out on the next{' '}
+							<span className="font-medium text-[#1a1209]">Monday or Tuesday</span> after
+							they&rsquo;re placed, so every box travels frozen and arrives fresh.
+						</Notice>
+					</div>
 				</div>
 
 				<div className="grid grid-cols-1 gap-y-6 md:gap-y-8 lg:grid-cols-[180px_1fr] lg:gap-x-10 lg:gap-y-16">
