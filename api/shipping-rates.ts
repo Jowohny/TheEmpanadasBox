@@ -3,7 +3,6 @@ import { createRateQuote } from './_lib/shippo.js';
 import type { DestinationAddress } from './_lib/shippo.js';
 import { send, readBody, BODY_TOO_LARGE, type Req } from './_lib/http.js';
 
-/** We ship frozen. Anything slower than this arrives thawed, so it is never quoted. */
 const MAX_TRANSIT_DAYS = 2;
 
 const REQUIRED: Array<keyof DestinationAddress> = ['name', 'street1', 'city', 'state', 'zip'];

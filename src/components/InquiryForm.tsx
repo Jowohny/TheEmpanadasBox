@@ -1,7 +1,5 @@
 import { useState, type FormEvent } from 'react';
 
-const INQUIRY_EMAIL = 'general@theempanadasbox.com';
-
 const InquiryForm = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -10,20 +8,38 @@ const InquiryForm = () => {
 	const [headcount, setHeadcount] = useState('');
 	const [eventType, setEventType] = useState('Corporate');
 	const [notes, setNotes] = useState('');
+	const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+	const [error, setError] = useState('');
 
-	const handleInquiry = (e: FormEvent<HTMLFormElement>) => {
+	const handleInquiry = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const subject = encodeURIComponent(`Event Inquiry — ${eventType}`);
-		const body = encodeURIComponent(
-			`Name: ${name}\n` +
-			`Email: ${email}\n` +
-			`Phone: ${phone || '(not provided)'}\n` +
-			`Event Date: ${eventDate}\n` +
-			`Headcount: ${headcount}\n` +
-			`Event Type: ${eventType}\n\n` +
-			`Notes:\n${notes || '(none)'}`
-		);
-		window.location.href = `mailto:${INQUIRY_EMAIL}?subject=${subject}&body=${body}`;
+		setStatus('sending');
+		setError('');
+
+		const message = [
+			`Event Date: ${eventDate || '(not given)'}`,
+			`Headcount: ${headcount || '(not given)'}`,
+			'',
+			'Notes:',
+			notes || '(none)',
+		].join('\n');
+
+		try {
+			const res = await fetch('/api/send-email', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name, email, phone, topic: eventType, message, inbox: 'events' }),
+			});
+			const data = await res.json().catch(() => ({}));
+			if (!res.ok) throw new Error(data.error || `Could not send (${res.status})`);
+
+			setStatus('sent');
+			setName(''); setEmail(''); setPhone('');
+			setEventDate(''); setHeadcount(''); setEventType('Corporate'); setNotes('');
+		} catch (err) {
+			setStatus('idle');
+			setError(err instanceof Error ? err.message : 'Could not send that inquiry.');
+		}
 	};
 
 	return (
@@ -112,10 +128,19 @@ const InquiryForm = () => {
 
 			<button
 				type="submit"
-				className="mt-2 w-full self-start rounded-full bg-[#bf8000] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-lg border-2 border-black/20 md:w-auto"
+				disabled={status === 'sending'}
+				className="mt-2 w-full self-start rounded-full bg-[#bf8000] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-lg border-2 border-black/20 disabled:opacity-60 md:w-auto"
 			>
-				Send Inquiry →
+				{status === 'sending' ? 'Sending...' : 'Send Inquiry →'}
 			</button>
+
+			{status === 'sent' && (
+				<p className="font-mono text-xs font-black uppercase tracking-[0.22em] text-[#bf8000]">
+					Thanks &mdash; we&rsquo;ll be in touch shortly.
+				</p>
+			)}
+
+			{error && <p className="font-mono text-xs leading-relaxed text-[#a33522]">{error}</p>}
 		</form>
 	)
 }

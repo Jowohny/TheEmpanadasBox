@@ -30,6 +30,7 @@ export default async function handler(req: Req, res: ServerResponse) {
 	const phone = str(body.phone);
 	const topic = str(body.topic);
 	const message = str(body.message);
+	const inbox = str(body.inbox);
 
 	const missing = [
 		!name && 'name',
@@ -50,8 +51,7 @@ export default async function handler(req: Req, res: ServerResponse) {
 	if (tooLong) {
 		return send(res, 400, { error: `${tooLong[0]} is too long (max ${tooLong[1]}).` });
 	}
-
-	const inbox = body.inbox === undefined ? 'general' : body.inbox;
+	
 	if (!isInbox(inbox)) {
 		return send(res, 400, { error: `inbox must be one of: ${INBOX_KEYS.join(', ')}.` });
 	}

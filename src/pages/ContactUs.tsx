@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CONTACT_EMAIL = 'general@theempanadasbox.com';
@@ -18,6 +18,30 @@ const ContactUs = () => {
 	const [topic, setTopic] = useState('General');
 	const [message, setMessage] = useState('');
 	const navigate = useNavigate();
+	const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+	const [error, setError] = useState('');
+
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setStatus('sending');
+		setError('');
+
+		try {
+			const res = await fetch('/api/send-email', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name, email, phone, topic, message, inbox: 'general' }),
+			});
+			const data = await res.json().catch(() => ({}));
+			if (!res.ok) throw new Error(data.error || `Could not send (${res.status})`);
+
+			setStatus('sent');
+			setName(''); setEmail(''); setPhone(''); setTopic('General'); setMessage('');
+		} catch (err) {
+			setStatus('idle');
+			setError(err instanceof Error ? err.message : 'Could not send that message.');
+		}
+	};
 
 	return (
 		<div className="min-h-screen bg-[#faf7f2]">
@@ -35,7 +59,7 @@ const ContactUs = () => {
 					</p>
 				</div>
 
-				<form className="mt-16 flex flex-col gap-10">
+				<form onSubmit={handleSubmit} className="mt-16 flex flex-col gap-10">
 					<div className="grid grid-cols-2 gap-x-10 gap-y-10">
 						<label className="flex flex-col">
 							<span className={labelClass}>Name</span>
@@ -78,11 +102,21 @@ const ContactUs = () => {
 					<div className="flex items-center gap-8">
 						<button
 							type="submit"
+							disabled={status === 'sending'}
 							className="self-start rounded-full bg-[#bf8000] px-10 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-lg border-2 border-black/20 disabled:opacity-60"
 						>
-							Send -&gt;
+							{status === 'sending' ? 'Sending...' : 'Send ->'}
 						</button>
 
+						{status === 'sent' && (
+							<p className="font-mono text-xs font-black uppercase tracking-[0.22em] text-[#bf8000]">
+								Thanks &mdash; we&rsquo;ll be in touch.
+							</p>
+						)}
+
+						{error && (
+							<p className="font-mono text-xs leading-relaxed text-[#a33522]">{error}</p>
+						)}
 					</div>
 				</form>
 
