@@ -263,7 +263,7 @@ const Events = () => {
 									href={'mailto:general@theempanadasbox.com'}
 									className="mt-4 inline-block font-inter text-xl font-bold text-[#bf8000] underline underline-offset-4"
 								>
-									general@theempanadasbox.com
+									events@theempanadasbox.com
 								</a>
 							</div>
 						</div>

@@ -22,7 +22,7 @@ export const INBOX_KEYS = Object.keys(INBOXES) as Inbox[];
 export const isInbox = (value: unknown): value is Inbox =>
 	typeof value === 'string' && Object.hasOwn(INBOXES, value);
 
-const FROM = 'The Empanada’s Box <onboarding@resend.dev>';
+const FROM = 'The Empanada’s Box <noreply@empanadasbox.com>';
 
 function escapeHtml(value: string): string {
 	return value
