@@ -47,19 +47,30 @@ const OrderPickup = () => {
 			)
 		})
 
-		const slots = gsap.utils.toArray<HTMLElement>("[data-slot='']")
-		const todaySlots = gsap.utils.toArray<HTMLElement>("[data-slot='today']")
-		gsap.timeline({
-			defaults: { ease: "power3.out" },
-			scrollTrigger: { trigger: "[data-timetable]", start: "top 78%", once: true },
+		const mm = gsap.matchMedia()
+		mm.add("(min-width: 768px)", () => {
+			const slots = gsap.utils.toArray<HTMLElement>("[data-slot='']")
+			const todaySlots = gsap.utils.toArray<HTMLElement>("[data-slot='today']")
+			gsap.timeline({
+				defaults: { ease: "power3.out" },
+				scrollTrigger: { trigger: "[data-timetable]", start: "top 78%", once: true },
+			})
+				.from("[data-day]", { autoAlpha: 0, y: -12, duration: 0.5, stagger: 0.05 })
+				.from("[data-place-name]", { autoAlpha: 0, x: -24, duration: 0.6, stagger: 0.08 }, "<0.1")
+				.from(slots, { autoAlpha: 0, scale: 0.7, duration: 0.5, stagger: { grid: "auto", from: "start", axis: "x", amount: 0.6 } }, "<0.1")
+				.from(todaySlots, { scaleY: 0, transformOrigin: "bottom center", duration: 0.5, stagger: 0.08, ease: "back.out(2.2)" }, "-=0.15")
 		})
-			.from("[data-day]", { autoAlpha: 0, y: -12, duration: 0.5, stagger: 0.05 })
-			.from("[data-place-name]", { autoAlpha: 0, x: -24, duration: 0.6, stagger: 0.08 }, "<0.1")
-			.from(slots, { autoAlpha: 0, scale: 0.7, duration: 0.5, stagger: { grid: "auto", from: "start", axis: "x", amount: 0.6 } }, "<0.1")
-			.from(todaySlots, { scaleY: 0, transformOrigin: "bottom center", duration: 0.5, stagger: 0.08, ease: "back.out(2.2)" }, "-=0.15")
+		mm.add("(max-width: 767px)", () => {
+			gsap.timeline({
+				defaults: { ease: "power3.out" },
+				scrollTrigger: { trigger: "[data-timetable-mobile]", start: "top 80%", once: true },
+			})
+				.from("[data-mobile-place]", { autoAlpha: 0, x: -20, duration: 0.6, stagger: 0.1 })
+				.from("[data-mobile-today]", { autoAlpha: 0, scale: 0.6, duration: 0.45, stagger: 0.1, ease: "back.out(2.2)" }, "-=0.35")
+		})
 
 		gsap.utils.toArray<HTMLElement>("[data-place]").forEach((place, i) => {
-			gsap.timeline({ delay: (i % 2) * 0.12, scrollTrigger: { trigger: place, start: "top 85%", once: true } })
+			gsap.timeline({ delay: window.innerWidth >= 1280 ? (i % 2) * 0.12 : 0, scrollTrigger: { trigger: place, start: "top 85%", once: true } })
 				.from(place.querySelector("[data-place-photo]"), { clipPath: "inset(0 100% 0 0)", duration: 0.9, ease: "power3.inOut" })
 				.from(place.querySelectorAll("[data-place-text]"), { autoAlpha: 0, y: 18, duration: 0.6, stagger: 0.07, ease: "power3.out" }, "-=0.45")
 		})
@@ -115,23 +126,23 @@ const OrderPickup = () => {
 				</div>
 			</div>
 
-			<div className="bg-[#faf7f2] px-20 py-24">
+			<div className="bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-14 md:py-20 lg:py-24">
 				<div className="mx-auto max-w-[90rem]">
-					<div data-reveal className="mb-12">
-						<p className="mb-3 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+					<div data-reveal className="mb-8 md:mb-12">
+						<p className="mb-3 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 							Our Locations
 						</p>
-						<h2 className="mb-3 font-inter text-6xl font-black tracking-tight text-[#242424]">
+						<h2 className="mb-3 font-inter text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#242424]">
 							When can you pick up?
 						</h2>
-						<p className="text-xl font-light tracking-wide text-[#64605b]">
+						<p className="text-base md:text-lg lg:text-xl font-light tracking-wide text-[#64605b]">
 							Two kitchens open six days a week, plus two farmers markets from April to December.
 						</p>
 					</div>
 
 					<PickupTimetable places={timetablePlaces} />
 
-					<div className="mt-20 grid grid-cols-2 gap-x-16 gap-y-14">
+					<div className="mt-12 md:mt-16 lg:mt-20 grid grid-cols-1 xl:grid-cols-2 gap-x-16 gap-y-10 md:gap-y-12 lg:gap-y-14">
 						{Locations.map((location) => (
 							<PlaceRow
 								key={location.name}
@@ -187,21 +198,21 @@ const OrderPickup = () => {
 				)}
 			</div>
 
-			<div className="relative bg-[#0d0c0b] px-20 py-24">
-				<div className="absolute left-0 top-0 h-full w-3 bg-[#fec32f]" />
+			<div className="relative bg-[#0d0c0b] px-6 md:px-12 lg:px-20 py-14 md:py-20 lg:py-24">
+				<div className="absolute left-0 top-0 h-full w-2 md:w-3 bg-[#fec32f]" />
 
-				<div className="mx-auto grid max-w-[90rem] grid-cols-[5fr_7fr] items-center gap-16">
+				<div className="mx-auto grid max-w-[90rem] grid-cols-1 lg:grid-cols-[5fr_7fr] items-center gap-12 lg:gap-16">
 					<div>
-						<p data-reveal className="mb-3 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+						<p data-reveal className="mb-3 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
 							Reheating Guide
 						</p>
-						<h2 data-reveal className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
+						<h2 data-reveal className="mb-4 font-inter text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
 							How to heat your empanadas
 						</h2>
-						<p data-reveal className="text-xl font-light leading-relaxed text-white/60">
+						<p data-reveal className="text-base md:text-lg lg:text-xl font-light leading-relaxed text-white/60">
 							Dry heat keeps the crust crisp. Pick your temperature and you're minutes from dinner.
 						</p>
-						<p data-reveal className="mt-8 text-lg text-white/60">
+						<p data-reveal className="mt-6 md:mt-8 text-base md:text-lg text-white/60">
 							<span className="relative mr-2 font-inter text-xl font-black text-[#e4806d]">
 								Microwave
 								<span data-strike className="absolute left-0 top-1/2 h-[3px] w-full -translate-y-1/2 bg-[#e4806d]" />
@@ -210,7 +221,7 @@ const OrderPickup = () => {
 						</p>
 					</div>
 
-					<div data-heat className="relative mr-6 h-64">
+					<div data-heat className="relative mx-4 md:mx-6 h-64">
 						<div className="absolute inset-x-0 top-[6.5rem] h-3.5 rounded-full bg-white/10" />
 						<div data-heat-fill className="absolute left-0 top-[6.5rem] h-3.5 rounded-full bg-[#fec32f]" style={{ width: `${(HEAT_METHODS[HEAT_METHODS.length - 1].temp - 300)}%` }} />
 						<span className="absolute left-0 top-[8.5rem] -translate-x-1/2 text-sm text-white/40">300°</span>
@@ -220,14 +231,14 @@ const OrderPickup = () => {
 								<div data-heat-pip className="absolute top-[5.75rem] h-9 w-1 -translate-x-1/2 bg-[#faf7f2]" style={{ left: `${method.temp - 300}%` }} />
 								<div
 									data-heat-mark={method.temp}
-									className={`absolute w-60 -translate-x-1/2 text-center ${i % 2 ? 'top-[9rem]' : 'top-0'}`}
+									className={`absolute w-36 sm:w-60 -translate-x-1/2 text-center ${i % 2 ? 'top-[9rem]' : 'top-0'}`}
 									style={{ left: `${method.temp - 300}%` }}
 								>
-									<p className={`font-inter text-5xl font-black tracking-tight ${i % 2 ? 'text-[#faf7f2]' : 'text-[#fec32f]'}`}>
+									<p className={`font-inter text-4xl sm:text-5xl font-black tracking-tight ${i % 2 ? 'text-[#faf7f2]' : 'text-[#fec32f]'}`}>
 										<span data-heat-temp>{method.temp}</span>°F
 									</p>
-									<p className="font-inter text-lg font-extrabold text-[#faf7f2]">{method.name}</p>
-									<p className="text-sm text-white/60">{method.detail}</p>
+									<p className="font-inter text-base sm:text-lg font-extrabold text-[#faf7f2]">{method.name}</p>
+									<p className="text-xs sm:text-sm text-white/60">{method.detail}</p>
 								</div>
 							</div>
 						))}
