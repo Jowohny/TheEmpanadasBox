@@ -13,7 +13,7 @@ const MarketLocations: MarketLocation[] = [
 	{
 		name: 'The Empanadas Box\nFort Thomas Farmers Market',
 		address: '801 Cochran Ave, Fort Thomas, KY 41075',
-		duration: 'OPEN FROM APRIL 9 - DECEMBER 17\nFROZEN EMPANADAS ONLY ❄️🥟❄️',
+		duration: 'Open April 9 – December 17\nFrozen empanadas only',
 		hours: ['Wednesday: 3PM-6PM', 'Hours extend to 7:00PM from June through September'],
 		iFrameLink: 'https://maps.google.com/maps?q=801%20Cochran%20Ave%2C%20Fort%20Thomas%2C%20KY%2041075&z=16&output=embed',
 		mapsLink: 'https://maps.app.goo.gl/PZr5MAtS6nZ73n5n9',
@@ -22,7 +22,7 @@ const MarketLocations: MarketLocation[] = [
 	{
 		name: 'The Empanadas Box\nFindlay\'s Farmers Market',
 		address: '1801 Race Street Cincinnati, OH 45202',
-		duration: 'OPEN FROM APRIL 9 - DECEMBER 17\nFROZEN EMPANADAS ONLY ❄️🥟❄️',
+		duration: 'Open April 9 – December 17\nFrozen empanadas only',
 		hours: ['Saturday: 8AM-2PM', 'Sunday: 10AM-2PM'],
 		iFrameLink: 'https://maps.google.com/maps?q=1801%20Race%20Street%20Cincinnati%2C%20OH%2045202&z=16&output=embed',
 		mapsLink: 'https://maps.app.goo.gl/rQnzzHozjFwdN8jr7',

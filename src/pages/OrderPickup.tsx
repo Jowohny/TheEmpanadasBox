@@ -1,8 +1,7 @@
-import LocationCard from '../components/LocationCard';
-import MarketLocationCard from '../components/MarketLocationCard';
+import PickupTimetable from '../components/PickupTimetable';
+import PlaceRow from '../components/PlaceRow';
 import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
-import RewardsTiers from '../data/RewardsTiers';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
@@ -12,6 +11,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const shortName = (name: string) => name.split('\n')[1] ?? name
+
+const timetablePlaces = [
+	...Locations.map(l => ({ name: shortName(l.name), kind: 'Kitchen', hours: l.hours })),
+	...MarketLocations.map(m => ({ name: shortName(m.name).replace(' Farmers Market', ''), kind: 'Farmers market · frozen only', hours: m.hours, market: true })),
+]
+
+const HEAT_METHODS = [
+	{ name: 'Air Fryer', temp: 350, detail: '3 to 5 mins · the crispiest' },
+	{ name: 'Oven', temp: 375, detail: '5 to 8 mins · best for a crowd' },
+]
 
 const OrderPickup = () => {
 	const navigate = useNavigate()
@@ -35,6 +46,37 @@ const OrderPickup = () => {
 					scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } },
 			)
 		})
+
+		const slots = gsap.utils.toArray<HTMLElement>("[data-slot='']")
+		const todaySlots = gsap.utils.toArray<HTMLElement>("[data-slot='today']")
+		gsap.timeline({
+			defaults: { ease: "power3.out" },
+			scrollTrigger: { trigger: "[data-timetable]", start: "top 78%", once: true },
+		})
+			.from("[data-day]", { autoAlpha: 0, y: -12, duration: 0.5, stagger: 0.05 })
+			.from("[data-place-name]", { autoAlpha: 0, x: -24, duration: 0.6, stagger: 0.08 }, "<0.1")
+			.from(slots, { autoAlpha: 0, scale: 0.7, duration: 0.5, stagger: { grid: "auto", from: "start", axis: "x", amount: 0.6 } }, "<0.1")
+			.from(todaySlots, { scaleY: 0, transformOrigin: "bottom center", duration: 0.5, stagger: 0.08, ease: "back.out(2.2)" }, "-=0.15")
+
+		gsap.utils.toArray<HTMLElement>("[data-place]").forEach((place, i) => {
+			gsap.timeline({ delay: (i % 2) * 0.12, scrollTrigger: { trigger: place, start: "top 85%", once: true } })
+				.from(place.querySelector("[data-place-photo]"), { clipPath: "inset(0 100% 0 0)", duration: 0.9, ease: "power3.inOut" })
+				.from(place.querySelectorAll("[data-place-text]"), { autoAlpha: 0, y: 18, duration: 0.6, stagger: 0.07, ease: "power3.out" }, "-=0.45")
+		})
+
+		const fillTime = 1.8
+		const heat = gsap.timeline({ scrollTrigger: { trigger: "[data-heat]", start: "top 75%", once: true } })
+		heat.from("[data-heat-fill]", { scaleX: 0, transformOrigin: "left center", duration: fillTime, ease: "power2.inOut" })
+		gsap.utils.toArray<HTMLElement>("[data-heat-mark]").forEach((mark, i) => {
+			const temp = Number(mark.dataset.heatMark)
+			const at = ((temp - 300) / (HEAT_METHODS[HEAT_METHODS.length - 1].temp - 300)) * fillTime
+			const readout = mark.querySelector("[data-heat-temp]")!
+			const n = { v: 300 }
+			heat.from(gsap.utils.toArray("[data-heat-pip]")[i] as HTMLElement, { scaleY: 0, duration: 0.3, ease: "back.out(3)" }, at - 0.15)
+				.from(mark, { autoAlpha: 0, y: i % 2 ? -16 : 16, duration: 0.5, ease: "back.out(2)" }, at - 0.15)
+				.to(n, { v: temp, duration: at, ease: "power2.inOut", onUpdate: () => { readout.textContent = Math.round(n.v).toString() } }, 0)
+		})
+		heat.from("[data-strike]", { scaleX: 0, transformOrigin: "left center", duration: 0.4, ease: "power4.in" }, "+=0.1")
 	}, { scope: container })
 
 	return (
@@ -73,46 +115,46 @@ const OrderPickup = () => {
 				</div>
 			</div>
 
-			<div className="bg-[#faf7f2] px-4 md:px-6 py-10 md:py-16">
+			<div className="bg-[#faf7f2] px-20 py-24">
 				<div className="mx-auto max-w-[90rem]">
-					<div data-reveal className="mb-8 md:mb-14 text-center">
-						<p className="mb-3 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+					<div data-reveal className="mb-12">
+						<p className="mb-3 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 							Our Locations
 						</p>
-						<h2 className="mb-3 font-inter text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#242424]">
-							Where are we heading today?
+						<h2 className="mb-3 font-inter text-6xl font-black tracking-tight text-[#242424]">
+							When can you pick up?
 						</h2>
-						<p className="text-[#64605b] text-base md:text-lg lg:text-xl font-light tracking-wide">
-							Find the closest location to you for your next pickup.
+						<p className="text-xl font-light tracking-wide text-[#64605b]">
+							Two kitchens open six days a week, plus two farmers markets from April to December.
 						</p>
 					</div>
 
-					<div data-reveal className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mb-12 md:mb-20">
+					<PickupTimetable places={timetablePlaces} />
+
+					<div className="mt-20 grid grid-cols-2 gap-x-16 gap-y-14">
 						{Locations.map((location) => (
-							<LocationCard key={location.name} location={location} />
+							<PlaceRow
+								key={location.name}
+								name={shortName(location.name)}
+								address={location.address}
+								photo={location.storeFront}
+								mapsLink={location.mapsLink}
+								phoneNumber={location.phoneNumber}
+							/>
 						))}
-					</div>
-
-					<div data-reveal className="mb-8 md:mb-14 text-center">
-						<p className="mb-3 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
-							Farmers Markets
-						</p>
-						<h2 className="mb-3 font-inter text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#242424]">
-							Check out our market locations!
-						</h2>
-						<p className="text-[#64605b] text-base md:text-lg lg:text-xl font-light tracking-wide">
-							Drop by and see us in person — these locations sell frozen empanadas for at-home preparation.
-						</p>
-					</div>
-
-					<div data-reveal className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
-						{MarketLocations.map((marketLocation) => (
-							<MarketLocationCard key={marketLocation.name} marketLocation={marketLocation} />
+						{MarketLocations.map((market) => (
+							<PlaceRow
+								key={market.name}
+								name={shortName(market.name)}
+								address={market.address}
+								photo={market.storeFront}
+								mapsLink={market.mapsLink}
+								notes={[...market.duration.split('\n'), ...market.hours.filter(h => !/^\w+day:/.test(h))]}
+							/>
 						))}
 					</div>
 				</div>
 			</div>
-
 			<div data-reveal className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 bg-[#0d0c0b] px-4 md:px-10 lg:px-20 py-4 md:py-5 border-y border-white/8">
 				<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.25em] text-white/90">
 					Order for Delivery
@@ -145,115 +187,53 @@ const OrderPickup = () => {
 				)}
 			</div>
 
-			<div className="relative flex flex-col lg:flex-row min-h-[38rem] items-center lg:justify-between overflow-hidden border-b border-[#e2d8ca] bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-12 md:py-16 gap-10 lg:gap-0">
-				<div className="absolute left-0 top-0 h-full w-2 md:w-3 bg-[#fec32f]" />
-				
-				<img
-					data-parallax
-					src="/stamps.jpg"
-					className="absolute inset-0 z-0 h-full w-full object-cover opacity-[0.1]"
-				/>
+			<div className="relative bg-[#0d0c0b] px-20 py-24">
+				<div className="absolute left-0 top-0 h-full w-3 bg-[#fec32f]" />
 
-				<div className="relative z-10 ml-4 md:ml-6 max-w-full lg:max-w-[42rem]">
-					<p data-reveal className="mb-3 md:mb-4 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
-						Passport Rewards
-					</p>
-					<h2 data-reveal className="mb-4 md:mb-5 font-inter text-4xl md:text-6xl lg:text-7xl font-black leading-[0.88] tracking-tight text-[#242424]">
-						Don't Leave<br />Without Your<br />Stamps!
-					</h2>
-					<p data-reveal className="mb-6 md:mb-8 max-w-md text-base md:text-lg font-light leading-relaxed text-[#64605b]">
-						Sign in at checkout to earn Passport Stamps on every order.
-					</p>
+				<div className="mx-auto grid max-w-[90rem] grid-cols-[5fr_7fr] items-center gap-16">
+					<div>
+						<p data-reveal className="mb-3 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+							Reheating Guide
+						</p>
+						<h2 data-reveal className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
+							How to heat your empanadas
+						</h2>
+						<p data-reveal className="text-xl font-light leading-relaxed text-white/60">
+							Dry heat keeps the crust crisp. Pick your temperature and you're minutes from dinner.
+						</p>
+						<p data-reveal className="mt-8 text-lg text-white/60">
+							<span className="relative mr-2 font-inter text-xl font-black text-[#e4806d]">
+								Microwave
+								<span data-strike className="absolute left-0 top-1/2 h-[3px] w-full -translate-y-1/2 bg-[#e4806d]" />
+							</span>
+							Never. It turns the crust soggy every time.
+						</p>
+					</div>
 
-					<div className="mb-6 md:mb-9 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-						{RewardsTiers.map(({ stamps, reward }) => (
-							<div data-reveal key={stamps} className="rounded-xl border border-[#e2d8ca] bg-white/60 text-center px-3 md:px-5 py-3 md:py-4">
-								<p className="font-inter text-2xl md:text-3xl font-black leading-none text-[#242424]">{stamps}</p>
-								<p className="mt-1 font-mono text-[10px] font-black uppercase tracking-[0.18em] text-[#fec32f]">Stamps</p>
-								<p className="mt-2 font-inter text-[10px] md:text-xs font-bold text-[#5f5a54]">{reward}</p>
+					<div data-heat className="relative mr-6 h-64">
+						<div className="absolute inset-x-0 top-[6.5rem] h-3.5 rounded-full bg-white/10" />
+						<div data-heat-fill className="absolute left-0 top-[6.5rem] h-3.5 rounded-full bg-[#fec32f]" style={{ width: `${(HEAT_METHODS[HEAT_METHODS.length - 1].temp - 300)}%` }} />
+						<span className="absolute left-0 top-[8.5rem] -translate-x-1/2 text-sm text-white/40">300°</span>
+						<span className="absolute left-full top-[8.5rem] -translate-x-1/2 text-sm text-white/40">400°</span>
+						{HEAT_METHODS.map((method, i) => (
+							<div key={method.name}>
+								<div data-heat-pip className="absolute top-[5.75rem] h-9 w-1 -translate-x-1/2 bg-[#faf7f2]" style={{ left: `${method.temp - 300}%` }} />
+								<div
+									data-heat-mark={method.temp}
+									className={`absolute w-60 -translate-x-1/2 text-center ${i % 2 ? 'top-[9rem]' : 'top-0'}`}
+									style={{ left: `${method.temp - 300}%` }}
+								>
+									<p className={`font-inter text-5xl font-black tracking-tight ${i % 2 ? 'text-[#faf7f2]' : 'text-[#fec32f]'}`}>
+										<span data-heat-temp>{method.temp}</span>°F
+									</p>
+									<p className="font-inter text-lg font-extrabold text-[#faf7f2]">{method.name}</p>
+									<p className="text-sm text-white/60">{method.detail}</p>
+								</div>
 							</div>
 						))}
 					</div>
-
-					<div data-reveal className="flex flex-wrap gap-3 md:gap-4">
-						<button
-							onClick={() => navigate('/Rewards')}
-							className="cursor-pointer rounded-full bg-[#fec32f] px-6 md:px-8 py-3 md:py-4 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.16em] text-[#765600] shadow-md transition-colors duration-200 hover:bg-[#eeb11f]"
-						>
-							Check Stamp Balance
-						</button>
-						<button
-							onClick={() => navigate('/Rewards')}
-							className="cursor-pointer rounded-full border border-[#d4c9b8] px-6 md:px-8 py-3 md:py-4 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.16em] text-[#5f5a54] transition-colors duration-200 hover:border-[#fec32f] hover:text-[#242424]"
-						>
-							Learn More
-						</button>
-					</div>
-				</div>
-
-				<div data-reveal className="relative z-10 mr-0 lg:mr-10 h-[60vw] w-[60vw] md:h-[24rem] md:w-[24rem] lg:h-[33rem] lg:w-[33rem] overflow-hidden rounded-full border-4 md:border-8 border-[#faf7f2] shadow-[0_28px_60px_rgba(26,18,9,0.18)]">
-					<img
-						src="/EmpanadaPics/EzCaterer Menu/Empanadas by the Dozen.jpg"
-						alt="Fresh empanadas"
-						className="h-full w-full object-cover object-center"
-					/>
 				</div>
 			</div>
-
-			<div className="relative border-b border-[#e2d8ca] bg-[#0d0c0b] px-6 md:px-12 lg:px-20 py-12 md:py-16">
-				<div className="absolute left-0 top-0 h-full w-2 md:w-3 bg-[#fec32f]" />
-
-				<div className="ml-4 md:ml-6">
-					<p data-reveal className="mb-3 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
-						Reheating Guide
-					</p>
-					<h2 data-reveal className="mb-8 md:mb-10 font-inter text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-[#faf7f2]">
-						How to Heat Your Empanadas
-					</h2>
-
-					<div className="flex flex-col md:flex-row gap-4 md:gap-6">
-						<div data-reveal className="flex flex-1 flex-col justify-between rounded-2xl border border-white/8 bg-white/4 p-5 md:p-7">
-							<div>
-								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#fec32f]">The Gold Standard</p>
-								<p className="mb-2 font-inter text-xl md:text-2xl font-black text-[#faf7f2]">Air Fryer</p>
-								<p className="text-sm font-light leading-relaxed text-white/40">
-									Keeps the crust crispy and the filling perfectly hot all the way through.
-								</p>
-							</div>
-							<div className="mt-4 md:mt-6 rounded-xl border border-[#fec32f]/20 bg-[#fec32f]/8 px-4 md:px-5 py-3 md:py-4">
-								<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-widest text-[#fec32f]">350°F — 3 to 5 mins</p>
-							</div>
-						</div>
-
-						<div data-reveal className="flex flex-1 flex-col justify-between rounded-2xl border border-white/8 bg-white/4 p-5 md:p-7">
-							<div>
-								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-white/30">For Large Batches</p>
-								<p className="mb-2 font-inter text-xl md:text-2xl font-black text-[#faf7f2]">Oven</p>
-								<p className="text-sm font-light leading-relaxed text-white/40">
-									Best when feeding a crowd. Place on a wire rack for even heat circulation.
-								</p>
-							</div>
-							<div className="mt-4 md:mt-6 rounded-xl border border-white/8 bg-white/4 px-4 md:px-5 py-3 md:py-4">
-								<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-widest text-white/40">375°F — 5 to 8 mins</p>
-							</div>
-						</div>
-
-						<div data-reveal className="flex flex-1 flex-col justify-between rounded-2xl border border-red-900/60 bg-red-950/50 p-5 md:p-7">
-							<div>
-								<p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-red-400/70">Never Do This</p>
-								<p className="mb-2 font-inter text-xl md:text-2xl font-black text-[#faf7f2]">Microwave</p>
-								<p className="text-sm font-light leading-relaxed text-white/40">
-									Turns the crust soggy and ruins the texture. Do yourself a favor and use the air fryer.
-								</p>
-							</div>
-							<div className="mt-4 md:mt-6 rounded-xl border border-red-900/30 bg-red-950/30 px-4 md:px-5 py-3 md:py-4">
-								<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.15em] text-red-400/70">Not recommended — ever</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
 			<div className="border-b border-[#e2d8ca] bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-12 md:py-16 text-center">
 				<p data-reveal className="mb-3 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
 					Order Support
