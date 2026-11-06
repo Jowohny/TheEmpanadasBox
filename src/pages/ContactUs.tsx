@@ -5,7 +5,7 @@ const CONTACT_EMAIL = 'general@theempanadasbox.com';
 
 
 const fieldClass =
-	'border-0 border-b-2 border-[#1a1209]/15 bg-transparent px-0 py-1 font-inter text-lg text-[#1a1209] ' +
+	'border-0 border-b-2 border-[#1a1209]/15 bg-transparent px-0 py-1 font-inter text-base md:text-lg text-[#1a1209] ' +
 	'placeholder:text-[#b3ab9e] focus:border-[#bf8000] focus:outline-none focus:ring-0';
 
 const labelClass =
@@ -45,22 +45,22 @@ const ContactUs = () => {
 
 	return (
 		<div className="min-h-screen bg-[#faf7f2]">
-			<div className="mx-auto max-w-5xl px-16 py-24">
+			<div className="mx-auto max-w-5xl px-6 md:px-12 lg:px-16 py-14 md:py-20 lg:py-24">
 				<div className="max-w-3xl">
-					<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+					<p className="mb-3 md:mb-4 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 						Get in touch
 					</p>
-					<h1 className="mb-4 font-inter text-7xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
+					<h1 className="mb-4 font-inter text-5xl md:text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
 						Contact <span className="italic text-[#D09501]">us.</span>
 					</h1>
 					<div className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
-					<p className="text-xl font-light tracking-wide text-[#64605b]">
+					<p className="text-base md:text-lg lg:text-xl font-light tracking-wide text-[#64605b]">
 						Questions, catering, wholesale, or just saying hello — send us a note and we'll get back to you.
 					</p>
 				</div>
 
-				<form onSubmit={handleSubmit} className="mt-16 flex flex-col gap-10">
-					<div className="grid grid-cols-2 gap-x-10 gap-y-10">
+				<form onSubmit={handleSubmit} className="mt-10 md:mt-16 flex flex-col gap-8 md:gap-10">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8 md:gap-y-10">
 						<label className="flex flex-col">
 							<span className={labelClass}>Name</span>
 							<input type="text" required value={name} onChange={(e) => setName(e.target.value)} className={fieldClass} />
@@ -99,11 +99,11 @@ const ContactUs = () => {
 						/>
 					</label>
 
-					<div className="flex items-center gap-8">
+					<div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-8">
 						<button
 							type="submit"
 							disabled={status === 'sending'}
-							className="self-start rounded-full bg-[#bf8000] px-10 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-lg border-2 border-black/20 disabled:opacity-60"
+							className="w-full sm:w-auto rounded-full bg-[#bf8000] px-10 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-white shadow-lg border-2 border-black/20 disabled:opacity-60"
 						>
 							{status === 'sending' ? 'Sending...' : 'Send ->'}
 						</button>
@@ -120,17 +120,17 @@ const ContactUs = () => {
 					</div>
 				</form>
 
-				<div className="mt-16 grid grid-cols-2 border-t border-[#1a1209]/10 pt-8">
+				<div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6 md:gap-y-8 border-t border-[#1a1209]/10 pt-8">
 					<div>
 						<p className="mb-1 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Prefer email?</p>
-						<a href={`mailto:${CONTACT_EMAIL}`} className="font-inter text-lg font-bold text-[#1a1209] underline underline-offset-4 decoration-[#bf8000]">
+						<a href={`mailto:${CONTACT_EMAIL}`} className="break-words font-inter text-base md:text-lg font-bold text-[#1a1209] underline underline-offset-4 decoration-[#bf8000]">
 							{CONTACT_EMAIL}
 						</a>
 					</div>
 
 					<div>
 						<p className="mb-1 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Events or Quotes?</p>
-						<p className="font-inter text-lg font-light text-[#64605b]">
+						<p className="font-inter text-base md:text-lg font-light text-[#64605b]">
 							For any large parties or events you might want to rent out a space for, refer to this 
 							&nbsp;<span onClick={() => navigate('/events#inquiry')} className='text-[#bf8000] underline cursor-pointer'>form</span> instead.
 						</p>
@@ -138,7 +138,7 @@ const ContactUs = () => {
 
 					<div>
 						<p className="mb-1 font-mono text-[10px] font-black uppercase tracking-[0.22em] text-[#bf8000]">Response time</p>
-						<p className="font-inter text-lg font-light text-[#64605b]">Within one business day.</p>
+						<p className="font-inter text-base md:text-lg font-light text-[#64605b]">Within one business day.</p>
 					</div>
 				</div>
 
