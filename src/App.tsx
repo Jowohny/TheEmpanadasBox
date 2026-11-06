@@ -4,8 +4,8 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import OrderPickup from './pages/OrderPickup';
-import ShipNationwide from './pages/ShipNationwide';
-import BoxBuilder from './pages/BoxBuilder';
+// import ShipNationwide from './pages/ShipNationwide';
+// import BoxBuilder from './pages/BoxBuilder';
 import Catering from './pages/Catering';
 import Rewards from './pages/Rewards';
 import Events from './pages/Events';
@@ -13,6 +13,7 @@ import FAQs from './pages/FAQs';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Checkout from './pages/Checkout';
+import TempRedirect from './pages/tempredirect';
 
 function App() {
 	const location = useLocation()
@@ -28,8 +29,8 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Home/>} />
 					<Route path="/OrderPickup" element={<OrderPickup/>} />
-					<Route path="/ShipNationwide" element={<ShipNationwide/>} />
-					<Route path="/ShipNationwide/build/:size" element={<BoxBuilder/>} />
+					<Route path="/ShipNationwide" element={<TempRedirect/>} />
+					<Route path="/ShipNationwide/build/:size" element={<TempRedirect/>} />
 					<Route path="/Catering" element={<Catering/>} />
 					<Route path="/Rewards" element={<Rewards/>} />
 					<Route path="/Events" element={<Events/>} />
