@@ -29,6 +29,9 @@ const Rewards = () => {
 		if (reducedMotion()) return
 
 		const route = document.querySelector<HTMLElement>("[data-route-section]")!
+		const mm = gsap.matchMedia()
+
+		mm.add("(min-width: 1280px)", () => {
 		const path = document.querySelector<SVGPathElement>("#route-path")!
 		const draw = document.querySelector<SVGPathElement>("[data-route-draw]")!
 		const len = path.getTotalLength()
@@ -65,6 +68,28 @@ const Rewards = () => {
 					Math.max(0, at - 0.03))
 		})
 		showCount()
+		})
+
+		mm.add("(max-width: 1279px)", () => {
+			const counter = { v: 0 }
+			const countEl = document.querySelector("[data-route-count-v]")!
+			const showCount = () => { countEl.textContent = Math.round(counter.v).toString() }
+			const tl = gsap.timeline({ paused: true })
+			ScrollTrigger.create({
+				trigger: "[data-route-v]",
+				start: "top 70%",
+				once: true,
+				onEnter: () => { tl.play() },
+			})
+			gsap.utils.toArray<HTMLElement>("[data-route-v-stop]").forEach((stop, i) => {
+				tl.from(stop.querySelector("img"), { autoAlpha: 0, scale: 0.4, duration: 0.45, ease: "back.out(2.5)" })
+					.from(stop.querySelectorAll("[data-route-v-text]"), { autoAlpha: 0, x: 16, duration: 0.4, stagger: 0.06, ease: "power3.out" }, "<0.1")
+					.to(counter, { v: RewardsTiers[i].stamps, duration: 0.5, ease: "power1.out", onUpdate: showCount }, "<")
+				const leg = stop.querySelector("[data-route-v-leg]")
+				if (leg) tl.from(leg, { scaleY: 0, transformOrigin: "top center", duration: 0.45, ease: "power1.inOut" }, "-=0.1")
+			})
+			showCount()
+		})
 
 		gsap.set("[data-reveal]", { autoAlpha: 0, y: 40 })
 		ScrollTrigger.batch("[data-reveal]", {
@@ -94,9 +119,9 @@ const Rewards = () => {
 				.fromTo(stamp,
 					{ autoAlpha: 0, scale: 2.6, rotation: tilt - 18 },
 					{ autoAlpha: 0.9, scale: 1, rotation: tilt, duration: 0.22, ease: "power4.in" },
-					i ? "+=0.14" : "-=0.1")
+					i ? "-=0.14" : "-=0.25")
 				.to("[data-passport-body]", { keyframes: { y: [0, 5, -2, 0], scale: [1, 0.99, 1.003, 1] }, duration: 0.24, ease: "none" })
-				.to(rows[i], { autoAlpha: 1, duration: 0.3 }, "<")
+				.to(rows[i], { autoAlpha: 1, duration: 0 }, "<")
 		})
 
 		const tiers = gsap.timeline({
@@ -133,27 +158,27 @@ const Rewards = () => {
 					className="z-0 object-cover"
 					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
 				/>
-				<div className="absolute inset-y-0 left-0 bg-white lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[70%] z-10" />
+				<div className="absolute inset-y-0 left-0 w-full bg-white/85 lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[70%] z-10" />
 
-				<div className="absolute z-20 ml-16 max-w-3xl text-left">
-					<p data-reveal className="mb-6 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+				<div className="absolute z-20 mx-6 md:ml-12 lg:ml-16 max-w-3xl text-left">
+					<p data-reveal className="mb-4 md:mb-6 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 						Loyalty Program
 					</p>
-					<h1 data-reveal className="font-inter font-black uppercase text-8xl scale-y-[1.05] leading-[0.85] tracking-wide text-[#1a1209] mb-6">
+					<h1 data-reveal className="font-inter font-black uppercase text-5xl sm:text-6xl md:text-7xl lg:text-8xl scale-y-[1.05] leading-[0.85] tracking-wide text-[#1a1209] mb-6">
 						Rewards <br />
 						every time <br />
 						<span className="italic text-[#D09501]">you eat!</span>
 					</h1>
 					<div data-reveal className="h-[2px] w-12 bg-[#bf8000] mb-6" />
-					<p data-reveal className="font-mono text-base font-semibold tracking-wide text-slate-800 mb-8">
-						Join for free and earn Passport Stamps every time you <br />
+					<p data-reveal className="font-mono text-sm md:text-base font-semibold tracking-wide text-slate-800 mb-6 md:mb-8">
+						Join for free and earn Passport Stamps every time you <br className="hidden md:inline" />
 						shop because tasting the world should pay off.
 					</p>
 					<div data-reveal className="flex flex-row items-center gap-3">
 						<a href="https://profile.squareup.com/merchantportal/ZYF2F37ACHYN0/loyalty" target="_blank" rel="noopener noreferrer">
 							<button
 								type="button"
-								className="bg-[#bf8000] rounded-full px-8 py-4 font-mono font-semibold text-white tracking-wide text-sm uppercase shadow-lg border-2 border-black/20"
+								className="bg-[#bf8000] rounded-full px-6 py-3 md:px-8 md:py-4 font-mono font-semibold text-white tracking-wide text-xs md:text-sm uppercase shadow-lg border-2 border-black/20"
 							>
 								Check Stamp Balance
 							</button>
@@ -162,35 +187,33 @@ const Rewards = () => {
 				</div>
 			</div>
 
-			<div className="bg-[#faf7f2] px-20 py-24">
-				<div className="mx-auto grid max-w-[90rem] grid-cols-[5fr_7fr] items-center gap-16">
-					<div>
-						<div data-reveal>
-							<h2 className="mb-4 font-inter text-6xl font-black tracking-tight text-[#1a1209]">
+			<div className="bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-14 md:py-20 lg:py-24">
+				<div className="mx-auto grid max-w-[90rem] grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-[5fr_7fr] lg:content-center">
+						<div data-reveal className="lg:col-start-1 lg:row-start-1 lg:self-end">
+							<h2 className="mb-4 font-inter text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#1a1209]">
 								Earn Your <span className="italic text-[#D09501]">Stamps</span>
 							</h2>
 							<div data-rule className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
-							<p className="text-xl font-light tracking-wide text-[#64605b]">
+							<p className="text-base md:text-lg lg:text-xl font-light tracking-wide text-[#64605b]">
 								Every order, every birthday, every friend you bring along gets inked into your passport.
 							</p>
 						</div>
-						<ul className="mt-8">
+						<ul className="order-3 lg:order-none lg:col-start-1 lg:row-start-2 lg:self-start">
 							{StampWays.map((stampWay) => (
 								<li
 									data-stamp-row
 									key={stampWay.label}
 									className="flex items-baseline gap-5 border-t border-[#1a1209]/10 py-3 first:border-t-0"
 								>
-									<span className="min-w-[3.5ch] font-inter text-3xl font-black tracking-tight text-[#1a1209]">
+									<span className="min-w-[3.5ch] font-inter text-2xl md:text-3xl font-black tracking-tight text-[#1a1209]">
 										+{stampWay.stamps}
 									</span>
-									<span className="text-lg text-[#5f5449]">{stampWay.description}</span>
+									<span className="text-base md:text-lg text-[#5f5449]">{stampWay.description}</span>
 								</li>
 							))}
 						</ul>
-					</div>
 
-					<div data-passport aria-hidden="true" className="[perspective:2200px]">
+					<div data-passport aria-hidden="true" className="order-2 [perspective:2200px] lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
 						<svg className="absolute h-0 w-0">
 							<filter id="stamp-ink">
 								<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="4" result="noise" />
@@ -199,14 +222,14 @@ const Rewards = () => {
 								<feComposite in="rough" in2="speckle" operator="in" />
 							</filter>
 						</svg>
-						<div data-passport-body className="rounded-xl bg-[#6e2316] p-2.5">
-							<div className="relative aspect-[1.42]">
+						<div data-passport-body className="rounded-lg md:rounded-xl bg-[#6e2316] p-1.5 md:p-2.5">
+							<div className="@container relative aspect-[1.42]">
 								<div className="absolute inset-y-0 left-0 w-1/2 rounded-l-md" style={pageTexture}>
-									<span className="absolute bottom-4 left-6 font-inter text-xs font-bold text-[#765600]/40">12</span>
+									<span className="absolute bottom-2 left-3 md:bottom-4 md:left-6 font-inter text-[10px] md:text-xs font-bold text-[#765600]/40">12</span>
 								</div>
 								<div data-passport-page className="absolute inset-y-0 right-0 w-1/2 rounded-r-md [backface-visibility:hidden]" style={pageTexture}>
-									<span className="absolute right-6 top-5 font-inter text-xs font-black uppercase tracking-[0.3em] text-[#765600]/40">Stamps</span>
-									<span className="absolute bottom-4 right-6 font-inter text-xs font-bold text-[#765600]/40">13</span>
+									<span className="absolute right-3 top-2.5 md:right-6 md:top-5 font-inter text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#765600]/40">Stamps</span>
+									<span className="absolute bottom-2 right-3 md:bottom-4 md:right-6 font-inter text-[10px] md:text-xs font-bold text-[#765600]/40">13</span>
 								</div>
 								<div className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-[#1a1209]/10" />
 								{StampWays.map((stampWay) => (
@@ -218,22 +241,51 @@ const Rewards = () => {
 				</div>
 			</div>
 
-			<div data-route-section className="bg-[#0d0c0b] px-20 py-20">
+			<div data-route-section className="bg-[#0d0c0b] px-6 md:px-12 lg:px-20 py-14 md:py-20">
 				<div className="mx-auto max-w-[90rem]">
 					<div data-reveal className="mx-auto mb-6 max-w-3xl text-center">
-						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
+						<p className="mb-4 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
 							Redemption
 						</p>
-						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
+						<h2 className="mb-4 font-inter text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight text-[#faf7f2]">
 							Cash in your <span className="italic text-[#fec32f]">stamps.</span>
 						</h2>
 						<div data-rule className="mx-auto mb-5 h-[2px] w-12 bg-[#fec32f]" />
-						<p className="text-xl font-light tracking-wide text-white/60">
+						<p className="text-base md:text-lg lg:text-xl font-light tracking-wide text-white/60">
 							Stamps stack up automatically. Every stop on the route is a reward you can claim.
 						</p>
 					</div>
 
-					<div className="relative mx-auto aspect-[1000/420] max-w-[75rem]">
+					{/* Phones and tablets: the route runs top to bottom, one leg per stop */}
+					<ol data-route-v className="mx-auto mt-10 max-w-xl xl:hidden">
+						{RewardsTiers.map((tier, i) => (
+							<li data-route-v-stop key={tier.stamps} className="relative flex items-start gap-5 pb-8 last:pb-0">
+								{i < RewardsTiers.length - 1 && (
+									<span data-route-v-leg className="absolute left-[2.6rem] top-[5.25rem] bottom-0 border-l-[3px] border-dotted border-[#fec32f] md:left-[3.35rem] md:top-[6.75rem]" />
+								)}
+								<img
+									src={tier.image}
+									alt={tier.reward}
+									className="relative h-[5.25rem] w-[5.25rem] shrink-0 rounded-full border-4 border-[#fec32f] object-cover md:h-[6.75rem] md:w-[6.75rem]"
+								/>
+								<div className="pt-2">
+									<p data-route-v-text className="font-inter text-3xl md:text-4xl font-black leading-none tracking-tight text-[#fec32f]">{tier.stamps}</p>
+									<h3 data-route-v-text className="mt-1.5 font-inter text-lg md:text-xl font-black tracking-tight text-[#faf7f2]">{tier.reward}</h3>
+									<p data-route-v-text className="mt-0.5 text-sm font-light leading-snug text-white/60">{tier.description}</p>
+								</div>
+							</li>
+						))}
+					</ol>
+					<div className="mx-auto mt-10 max-w-xl text-right xl:hidden">
+						<p data-route-count-v className="font-inter text-6xl font-black leading-none tracking-tight text-[#fec32f] tabular-nums">
+							550
+						</p>
+						<p className="mt-2 font-mono text-[10px] font-black uppercase tracking-[0.3em] text-white/50">
+							Stamps collected
+						</p>
+					</div>
+
+					<div className="relative mx-auto hidden aspect-[1000/420] max-w-[75rem] xl:block">
 						<svg viewBox="0 0 1000 420" className="absolute inset-0 h-full w-full overflow-visible" aria-hidden="true">
 							<defs>
 								<mask id="route-mask" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1100" height="520">
@@ -267,22 +319,23 @@ const Rewards = () => {
 				</div>
 			</div>
 
-			<div className="bg-[#faf7f2] px-20 py-24">
-				<div className="mx-auto flex max-w-[90rem] items-end justify-between gap-16">
-					<div data-reveal className="max-w-lg self-start">
-						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+			<div className="bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-14 md:py-20 lg:py-24">
+				<div className="mx-auto flex max-w-[90rem] flex-col gap-12 min-[1400px]:flex-row min-[1400px]:items-end min-[1400px]:justify-between min-[1400px]:gap-16">
+					<div data-reveal className="max-w-lg min-[1400px]:self-start">
+						<p className="mb-4 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 							Membership
 						</p>
-						<h2 className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
+						<h2 className="mb-4 font-inter text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
 							Level up your <span className="italic text-[#D09501]">passport.</span>
 						</h2>
 						<div data-rule className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
-						<p className="text-xl font-light tracking-wide text-[#64605b]">
+						<p className="text-base md:text-lg lg:text-xl font-light tracking-wide text-[#64605b]">
 							Stack more stamps on every order — the more you visit, the faster they pile up.
 						</p>
 					</div>
 
-					<div data-multipliers className="flex items-center gap-14">
+					{/* --multiplier-unit is the size of 1×; each tier is drawn at value × unit */}
+					<div data-multipliers className="flex flex-col items-start gap-8 [--multiplier-unit:3.5rem] md:flex-row md:items-end md:gap-10 lg:self-end md:[--multiplier-unit:4.5rem] min-[1400px]:gap-14 min-[1400px]:[--multiplier-unit:6rem]">
 						{MembershipTiers.map((tier, i) => (
 							<TierMultiplier key={tier.name} tier={tier} highlight={i === MembershipTiers.length - 1} />
 						))}
@@ -290,13 +343,13 @@ const Rewards = () => {
 				</div>
 			</div>
 
-			<div className="bg-[#faf7f2] px-20 py-24">
+			<div className="bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-14 md:py-20 lg:py-24">
 				<div className="mx-auto max-w-3xl text-center">
-					<h2 data-reveal className="mb-4 font-inter text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
+					<h2 data-reveal className="mb-4 font-inter text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight text-[#1a1209]">
 						Ready to start your <span className="italic text-[#D09501]">passport?</span>
 					</h2>
 					<div data-rule className="mx-auto mb-5 h-[2px] w-12 bg-[#bf8000]" />
-					<p data-reveal className="mb-10 text-xl font-light tracking-wide text-[#64605b]">
+					<p data-reveal className="mb-8 md:mb-10 text-base md:text-lg lg:text-xl font-light tracking-wide text-[#64605b]">
 						Sign up today and the next bite already counts.
 					</p>
 
@@ -304,7 +357,7 @@ const Rewards = () => {
 						<a href="https://profile.squareup.com/merchantportal/ZYF2F37ACHYN0/loyalty" target="_blank" rel="noopener noreferrer">
 							<button
 								type="button"
-								className="rounded-full border-2 border-black/20 bg-[#fec32f] px-8 py-4 font-mono text-sm font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
+								className="rounded-full border-2 border-black/20 bg-[#fec32f] px-6 py-3 md:px-8 md:py-4 font-mono text-xs md:text-sm font-semibold uppercase tracking-wide text-[#1a1209] shadow-lg"
 							>
 								Join Now
 							</button>
