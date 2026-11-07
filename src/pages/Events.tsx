@@ -85,7 +85,7 @@ const Events = () => {
 			<div className="relative flex items-center justify-end overflow-hidden">
 				<img
 					data-parallax
-					src="/EmpanadaPics/EzCaterer Menu/Empanada Party Pack - 50 Ppl.jpg"
+					src="/Events/7.png"
 					className="z-0 object-cover"
 					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
 				/>

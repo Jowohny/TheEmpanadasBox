@@ -20,7 +20,7 @@ const EventSpaces: EventSpace[] = [
 		name: 'The Back Bar & Lounge',
 		tagline: 'Intimate & Exclusive',
 		description: 'A private event space tucked behind our main counter, complete with a dedicated 3-tap draft system, custom cocktail bar, and private seating.',
-		image: '/covington.jpg',
+		image: '/Events/2.png',
 		idealFor: 'Birthday celebrations, happy hours, rehearsal dinners, and showers.',
 		amenities: [
 			'Dedicated 3-Tap Draft System',
@@ -45,7 +45,7 @@ const EventSpaces: EventSpace[] = [
 		name: 'Full Restaurant Buyout',
 		tagline: 'Take over the entire destination.',
 		description: 'Take over the entire restaurant. You and your guests receive exclusive access to the main dining room, the back bar and lounge, front street-facing seating/patio, and a fully dedicated kitchen and service crew for a completely customized event.',
-		image: '/findlay.png',
+		image: '/Events/IMG_8941.jpg',
 		amenities: [
 			'Full Staff & Kitchen Allocation',
 			'Both Bars & Service Wells Open',
