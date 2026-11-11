@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ReviewCard from "../components/ReviewCard";
+import CornerHero from "../components/CornerHero";
 import EmpandaCarousel from "../components/EmpanadaCarousel";
 import Reviews from "../data/Reviews";
 
@@ -72,41 +73,27 @@ const Home = () => {
 
 	return (
 		<div ref={container} className="min-w-screen min-h-screen -mt-[8.25rem]">
-			<div className="relative flex items-center justify-start overflow-hidden">
-				<img
-					data-parallax
-					src='/EmpanadaPics/EzCaterer Menu/Full Menu.jpg'
-					className='z-0 w-full h-full object-cover'
-					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
-				/>
-				<div className="absolute inset-0 bg-white lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[70%] z-10" />
-				<div className="absolute text-left ml-6 md:ml-12 lg:ml-16 z-20 max-w-md md:max-w-xl lg:max-w-2xl">
-					<h1 data-reveal className="text-4xl md:text-6xl lg:text-8xl uppercase font-inter font-black mb-6 scale-y-[1.1] tracking-wide leading-[0.9] text-[#1a1209]">
-						your freezer's <br />
-						<span className="italic text-[#D09501]">new best friend</span>
-					</h1>
-					<div data-reveal className="w-12 h-[2px] bg-[#bf8000] mb-6" />
-					<p data-reveal className="font-mono text-sm md:text-base font-medium text-slate-600 tracking-wide mb-6">
-						The Only Box That Takes You Around the World in 5 Bites.
-					</p>
-					<div data-reveal className="flex flex-col md:flex-row gap-3 items-start md:items-center">
-						<button
-							type="button"
-							onClick={() => navigate('OrderPickup')}
-							className="bg-[#bf8000] rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-white tracking-wide text-xs md:text-sm uppercase shadow-lg border-2 border-black/20"
-						>
-							Order Pickup
-						</button>
-						<button
-							type="button"
-							onClick={() => navigate('ShipNationwide')}
-							className="bg-white rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-gray-800 tracking-wide text-xs md:text-sm uppercase shadow-md border-2 border-gray-800/50"
-						>
-							Ship Nationwide
-						</button>
-					</div>
-				</div>
-			</div>
+			<CornerHero
+				title={<>Your freezer's <em>new best friend.</em></>}
+				subtext="The only box that takes you around the world in five bites."
+				image="/EmpanadaPics/EzCaterer Menu/Full Menu.jpg"
+				buttons={<>
+					<button
+						type="button"
+						onClick={() => navigate('OrderPickup')}
+						className="bg-[#bf8000] rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-white tracking-wide text-xs md:text-sm uppercase shadow-lg border-2 border-black/20"
+					>
+						Order Pickup
+					</button>
+					<button
+						type="button"
+						onClick={() => navigate('ShipNationwide')}
+						className="bg-white rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-gray-800 tracking-wide text-xs md:text-sm uppercase shadow-md border-2 border-gray-800/50"
+					>
+						Ship Nationwide
+					</button>
+				</>}
+			/>
 
 			<div className="relative flex items-center justify-end min-h-[70vh] md:min-h-[80vh] lg:min-h-screen overflow-hidden">
 				<video
