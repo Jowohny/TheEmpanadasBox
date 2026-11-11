@@ -99,13 +99,17 @@ const OrderPickup = () => {
 				image="/EmpanadaPics/EzCaterer Menu/Empanada Party Pack - 50 Ppl.jpg"
 				buttons={<>
 					<a
-						href='https://empanadasboxfindlay.square.site/ '
+						href='https://empanadasboxfindlay.square.site/'
+						target="_blank" 
+						rel="noopener noreferrer"
 						className="bg-[#bf8000] rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-white tracking-wide text-xs md:text-sm uppercase shadow-lg border-2 border-black/20"
 					>
 						Findlay Pickup
 					</a>
 					<a
-					href='https://empanadasboxcov.square.site/'
+						href='https://empanadasboxcov.square.site/'
+						target="_blank" 
+						rel="noopener noreferrer"
 						className="bg-white rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-gray-800 tracking-wide text-xs md:text-sm uppercase shadow-md border-2 border-gray-800/50"
 					>
 						Covington Pickup

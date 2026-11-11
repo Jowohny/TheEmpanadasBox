@@ -8,6 +8,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CornerHero from "../components/CornerHero";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
@@ -151,41 +152,21 @@ const Rewards = () => {
 
 	return (
 		<div ref={container} className="min-w-screen min-h-screen -mt-[8.25rem]">
-			<div className="relative flex items-center justify-start overflow-hidden">
-				<img
-					data-parallax
-					src="/EmpanadaPics/EzCaterer Menu/Empanadas by the Dozen.jpg"
-					className="z-0 object-cover"
-					style={{ width: '100vw', height: 'calc(100vh + 2.25rem)' }}
-				/>
-				<div className="absolute inset-y-0 left-0 w-full bg-white/85 lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[70%] z-10" />
-
-				<div className="absolute z-20 mx-6 md:ml-12 lg:ml-16 max-w-3xl text-left">
-					<p data-reveal className="mb-4 md:mb-6 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
-						Loyalty Program
-					</p>
-					<h1 data-reveal className="font-inter font-black uppercase text-5xl sm:text-6xl md:text-7xl lg:text-8xl scale-y-[1.05] leading-[0.85] tracking-wide text-[#1a1209] mb-6">
-						Rewards <br />
-						every time <br />
-						<span className="italic text-[#D09501]">you eat!</span>
-					</h1>
-					<div data-reveal className="h-[2px] w-12 bg-[#bf8000] mb-6" />
-					<p data-reveal className="font-mono text-sm md:text-base font-semibold tracking-wide text-slate-800 mb-6 md:mb-8">
-						Join for free and earn Passport Stamps every time you <br className="hidden md:inline" />
-						shop because tasting the world should pay off.
-					</p>
-					<div data-reveal className="flex flex-row items-center gap-3">
-						<a href="https://profile.squareup.com/merchantportal/ZYF2F37ACHYN0/loyalty" target="_blank" rel="noopener noreferrer">
-							<button
-								type="button"
-								className="bg-[#bf8000] rounded-full px-6 py-3 md:px-8 md:py-4 font-mono font-semibold text-white tracking-wide text-xs md:text-sm uppercase shadow-lg border-2 border-black/20"
-							>
-								Check Stamp Balance
-							</button>
-						</a>
-					</div>
-				</div>
-			</div>
+			<CornerHero
+				title={<>Rewards every time <em>you eat!</em></>}
+				subtext="Join for free and earn Passport Stamps every time you shop, because tasting the world should pay off."
+				image="/EmpanadaPics/EzCaterer Menu/Empanadas by the Dozen.jpg"
+				buttons={
+					<a
+						href="https://profile.squareup.com/merchantportal/ZYF2F37ACHYN0/loyalty"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="inline-block bg-[#bf8000] rounded-full px-6 py-3 md:px-8 md:py-4 font-mono font-semibold text-white tracking-wide text-xs md:text-sm uppercase shadow-lg border-2 border-black/20"
+					>
+						Check Stamp Balance
+					</a>
+				}
+			/>
 
 			<div className="bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-14 md:py-20 lg:py-24">
 				<div className="mx-auto grid max-w-[90rem] grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-[5fr_7fr] lg:content-center">
