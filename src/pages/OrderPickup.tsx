@@ -1,5 +1,6 @@
 import PickupTimetable from '../components/PickupTimetable';
 import PlaceRow from '../components/PlaceRow';
+import CornerHero from '../components/CornerHero';
 import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
 import { useNavigate } from 'react-router-dom';
@@ -91,40 +92,26 @@ const OrderPickup = () => {
 	}, { scope: container })
 
 	return (
-		<div ref={container} className="min-w-screen min-h-screen">
-			<div	className="min-h-screen w-full relative flex flex-col items-center justify-end -mt-[8.25rem] pb-8 md:pb-12 overflow-hidden bg-cover bg-center">
-				<div className="absolute inset-0 bg-white lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[60%] z-10" />
-				<div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/10 to-transparent z-10" />
-
-				<img
-					data-parallax
-					src="/EmpanadaPics/EzCaterer Menu/Empanada Party Pack - 50 Ppl.jpg"
-					className="z-0 object-cover"
-					style={{ width: '100vw', height: 'calc(100vh - 2.25rem)' }}
-				/>
-
-				<div className="absolute top-1/2 left-0 -translate-y-1/2 ml-6 md:ml-8 lg:ml-12 max-w-[92vw] z-20">
-					<div data-reveal className="inline-block font-mono font-bold uppercase text-[10px] md:text-xs tracking-widest bg-red-400/40 text-red-900 rounded-full py-1 px-3 md:px-4 mb-4 md:mb-8">
-						The World Tour Experience
-					</div>
-					<div className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.9]">
-						<h2 data-reveal className="text-[#765600]">Pick Up.</h2>
-						<h2 data-reveal className="text-[#a33522]">Heat Up.</h2>
-						<h2 data-reveal className="text-[#765600] mb-4 md:mb-6 lg:mb-8">Eat Up.</h2>
-					</div>
-					<p data-reveal className="ont-mono text-sm font-semibold tracking-wide text-slate-800 mb-6 md:mb-8 md:text-base">
-						Our handcrafted crusts are designed to travel. Journey from our <br />
-						kitchen to your table without losing a single note of flavor.
-					</p>
-				</div>
-
-				<div data-reveal className="relative flex flex-col items-center gap-3 z-20">
-					<div className="w-16 md:w-24 h-[2px] bg-[#bf8000] mb-2" />
-					<p className="font-mono text-xs md:text-base font-bold tracking-[0.2em] uppercase text-black text-center px-4">
-						Fresh. Frozen. Ready when you are.
-					</p>
-				</div>
-			</div>
+		<div ref={container} className="min-w-screen min-h-screen -mt-[8.25rem]">
+			<CornerHero
+				title={<><em>Pick up.</em> <br/> Heat up. <br/> <em>Eat up.</em></>}
+				subtext="Our handcrafted crusts are designed to travel. Journey from our kitchen to your table without losing a single note of flavor."
+				image="/EmpanadaPics/EzCaterer Menu/Empanada Party Pack - 50 Ppl.jpg"
+				buttons={<>
+					<a
+						href='https://empanadasboxfindlay.square.site/ '
+						className="bg-[#bf8000] rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-white tracking-wide text-xs md:text-sm uppercase shadow-lg border-2 border-black/20"
+					>
+						Findlay Pickup
+					</a>
+					<a
+					href='https://empanadasboxcov.square.site/'
+						className="bg-white rounded-full px-6 md:px-8 py-3 md:py-4 font-mono font-semibold text-gray-800 tracking-wide text-xs md:text-sm uppercase shadow-md border-2 border-gray-800/50"
+					>
+						Covington Pickup
+					</a>
+				</>}
+			/>
 
 			<div className="bg-[#faf7f2] px-6 md:px-12 lg:px-20 py-14 md:py-20 lg:py-24">
 				<div className="mx-auto max-w-[90rem]">
