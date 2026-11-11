@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { scroller } from 'react-scroll';
+import SimpleTixButton from "@/components/SimpleTixButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -171,6 +172,38 @@ const Events = () => {
 						{EventSpaces.map((space, idx) => (
 							<SpaceCard key={space.name} space={space} reverse={idx % 2 === 1} />
 						))}
+					</div>
+				</div>
+			</div>
+
+			<div id="classes" className="bg-[#faf7f2] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-24">
+				<div className="mx-auto max-w-4xl">
+					<div data-reveal className="mb-10 md:mb-12">
+						<p className="mb-4 font-mono text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
+							Classes
+						</p>
+						<h2 className="mb-4 font-inter text-4xl font-black leading-[0.95] tracking-tight text-[#1a1209] md:text-5xl lg:text-6xl">
+							Fold your own <span className="italic text-[#D09501]">empanadas.</span>
+						</h2>
+						<div data-rule className="mb-5 h-[2px] w-12 bg-[#bf8000]" />
+						<p className="text-base font-light tracking-wide text-[#64605b] md:text-lg lg:text-xl">
+							Hands-on nights at our Findlay location. Grab a seat at the next one.
+						</p>
+					</div>
+
+					<div data-reveal className="overflow-hidden rounded-xl border-2 border-[#1a1209]/10 bg-[#fcede2]">
+						<iframe
+							src="https://luma.com/embed/event/evt-vjoRFExlrD9GxWN/simple"
+							title="Sip & Fold: Empanada Making Night"
+							className="block h-[820px] w-full sm:h-[730px] md:h-[560px] lg:h-[500px]"
+							allow="fullscreen; payment"
+						/>
+						<div className="flex flex-col items-start gap-4 border-t-2 border-[#1a1209]/10 px-6 py-5 sm:px-8 sm:flex-row sm:items-center sm:justify-between">
+							<p className="text-sm text-[#5f5449] md:text-base">
+								Tickets are sold through SimpleTix.
+							</p>
+							<SimpleTixButton />
+						</div>
 					</div>
 				</div>
 			</div>
