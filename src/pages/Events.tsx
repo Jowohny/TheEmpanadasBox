@@ -86,7 +86,7 @@ const Events = () => {
 			<CornerHero
 				title={<>Bring the <em>world tour</em> to your event</>}
 				subtext="Weddings, corporate gatherings, parties — we cater the spread that travels around the world in five bites."
-				image="/Events/7.png"
+				image={["/Events/7.png", "/Events/2.png", "/Events/IMG_8941.jpg", "/Events/IMG_9282.jpg", "/Events/IMG_9294.jpg"]}
 				buttons={<>
 					<button
 						type="button"
@@ -97,10 +97,10 @@ const Events = () => {
 					</button>
 					<button
 						type="button"
-						onClick={() => scrollToId('destinations')}
+						onClick={() => scrollToId('packages')}
 						className="bg-white rounded-full px-6 py-3 font-mono font-semibold text-[#bf8000] tracking-wide text-sm uppercase shadow-md border-2 border-[#bf8000]/30 md:px-8 md:py-4"
 					>
-						See Destinations
+						See Our Packages
 					</button>
 				</>}
 			/>

@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,7 +12,6 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 const scrollToEvents = () => document.getElementById('upcoming')?.scrollIntoView({ behavior: 'smooth' })
 
 const LiveEvents = () => {
-	const navigate = useNavigate()
 	const container = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
