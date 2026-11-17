@@ -6,6 +6,7 @@ const FooterLinks: Link[] = [
 	{ label: 'Order Pickup', path: '/OrderPickup' },
 	{ label: 'Catering', path: '/Catering' },
 	{ label: 'Events', path: '/Events' },
+	{ label: 'Live Events', path: '/LiveEvents' },
 	{ label: 'Rewards', path: '/Rewards' },
 	{ label: 'Shipped Boxes', path: '/ShipNationwide' },
 	{ label: 'Contact Us', path: '/ContactUs' },

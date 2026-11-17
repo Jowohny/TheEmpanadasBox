@@ -2,7 +2,28 @@ import React, { useState } from 'react';
 
 type SimpleTixWindow = Window & { createSimpleTixEmbed?: (...args: unknown[]) => void };
 
+const APPLICATION_ID = 'ed4ae783-756e-4db7-b8b5-6a444deb7ed1';
+
+const addSimpleTixInputs = () => {
+	const inputs = {
+		smt_hdnApplicationId: APPLICATION_ID,
+		smt_hdnStoreName: 'Empanadas Box',
+		smt_hdnDataUrl: 'https://embed.prod.simpletix.com/',
+		smt_hdnEnableDigitalWallets: 'true',
+	};
+	for (const [id, value] of Object.entries(inputs)) {
+		if (document.getElementById(id)) continue;
+		const input = document.createElement('input');
+		input.type = 'hidden';
+		input.id = id;
+		input.value = value;
+		document.body.appendChild(input);
+	}
+};
+
 const loadSimpleTix = () => new Promise<void>((resolve, reject) => {
+	addSimpleTixInputs();
+
 	if (!document.getElementById('simpletix-widget-css')) {
 		const link = document.createElement('link');
 		link.id = 'simpletix-widget-css';
@@ -25,12 +46,18 @@ const loadSimpleTix = () => new Promise<void>((resolve, reject) => {
 	script.addEventListener('error', () => reject(new Error('SimpleTix failed to load')), { once: true });
 });
 
-const SimpleTixButton = () => {
+type SimpleTixButtonProps = {
+	eventId: string
+	eventSlug: string
+}
+
+const SimpleTixButton = ({ eventId, eventSlug }: SimpleTixButtonProps) => {
 	const [loading, setLoading] = useState(false);
 
 	const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
 		if (loading) return;
+		// React clears currentTarget once the handler yields, so hold on to it.
 		const button = e.currentTarget;
 
 		setLoading(true);
@@ -38,9 +65,9 @@ const SimpleTixButton = () => {
 			await loadSimpleTix();
 			(window as SimpleTixWindow).createSimpleTixEmbed?.(
 				button,
-				'ed4ae783-756e-4db7-b8b5-6a444deb7ed1',
-				'300756',
-				'#sip-&-fold:-empanada',
+				APPLICATION_ID,
+				eventId,
+				eventSlug,
 				'Empanadas Box',
 				'',
 				'0'
@@ -54,11 +81,6 @@ const SimpleTixButton = () => {
 
   return (
     <div>
-      <input type="hidden" id="smt_hdnApplicationId" value="ed4ae783-756e-4db7-b8b5-6a444deb7ed1" />
-      <input type="hidden" id="smt_hdnStoreName" value="Empanadas Box" />
-      <input type="hidden" id="smt_hdnDataUrl" value="https://embed.prod.simpletix.com/" />
-      <input type="hidden" id="smt_hdnEnableDigitalWallets" value="true" />
-
       <a
         href="#"
         role="button"

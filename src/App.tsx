@@ -9,6 +9,7 @@ import OrderPickup from './pages/OrderPickup';
 import Catering from './pages/Catering';
 import Rewards from './pages/Rewards';
 import Events from './pages/Events';
+import LiveEvents from './pages/LiveEvents';
 import FAQs from './pages/FAQs';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
@@ -34,6 +35,7 @@ function App() {
 					<Route path="/Catering" element={<Catering/>} />
 					<Route path="/Rewards" element={<Rewards/>} />
 					<Route path="/Events" element={<Events/>} />
+					<Route path="/LiveEvents" element={<LiveEvents/>} />
 					<Route path="/FAQs" element={<FAQs/>} />
 					<Route path="/AboutUs" element={<AboutUs/>} />
 					<Route path="/ContactUs" element={<ContactUs/>} />
