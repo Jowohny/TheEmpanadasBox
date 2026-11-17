@@ -1,5 +1,4 @@
 import PickupTimetable from '../components/PickupTimetable';
-import PlaceRow from '../components/PlaceRow';
 import CornerHero from '../components/CornerHero';
 import Locations from '../data/LocationInfo';
 import MarketLocations from '../data/MarketLocationInfo';
@@ -16,8 +15,9 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 const shortName = (name: string) => name.split('\n')[1] ?? name
 
 const timetablePlaces = [
-	...Locations.map(l => ({ name: shortName(l.name), kind: 'Kitchen', hours: l.hours })),
-	...MarketLocations.map(m => ({ name: shortName(m.name).replace(' Farmers Market', ''), kind: 'Farmers market · frozen only', hours: m.hours, market: true })),
+	...Locations.map(l => ({ name: shortName(l.name), kind: 'Kitchen', address: l.address, mapsLink: l.mapsLink, photo: l.storeFront, phoneNumber: l.phoneNumber, hours: l.hours })),
+	...MarketLocations.map(m => ({ name: shortName(m.name).replace(' Farmers Market', ''), kind: 'Farmers market · frozen only', address: m.address, mapsLink: m.mapsLink, photo: m.storeFront, hours: m.hours,
+		notes: [...m.duration.split('\n').filter(line => !/frozen/i.test(line)), ...m.hours.filter(h => !/^\w+day:/.test(h))], market: true })),
 ]
 
 const HEAT_METHODS = [
@@ -68,12 +68,6 @@ const OrderPickup = () => {
 			})
 				.from("[data-mobile-place]", { autoAlpha: 0, x: -20, duration: 0.6, stagger: 0.1 })
 				.from("[data-mobile-today]", { autoAlpha: 0, scale: 0.6, duration: 0.45, stagger: 0.1, ease: "back.out(2.2)" }, "-=0.35")
-		})
-
-		gsap.utils.toArray<HTMLElement>("[data-place]").forEach((place, i) => {
-			gsap.timeline({ delay: window.innerWidth >= 1280 ? (i % 2) * 0.12 : 0, scrollTrigger: { trigger: place, start: "top 85%", once: true } })
-				.from(place.querySelector("[data-place-photo]"), { clipPath: "inset(0 100% 0 0)", duration: 0.9, ease: "power3.inOut" })
-				.from(place.querySelectorAll("[data-place-text]"), { autoAlpha: 0, y: 18, duration: 0.6, stagger: 0.07, ease: "power3.out" }, "-=0.45")
 		})
 
 		const fillTime = 1.8
@@ -132,29 +126,6 @@ const OrderPickup = () => {
 					</div>
 
 					<PickupTimetable places={timetablePlaces} />
-
-					<div className="mt-12 md:mt-16 lg:mt-20 grid grid-cols-1 xl:grid-cols-2 gap-x-16 gap-y-10 md:gap-y-12 lg:gap-y-14">
-						{Locations.map((location) => (
-							<PlaceRow
-								key={location.name}
-								name={shortName(location.name)}
-								address={location.address}
-								photo={location.storeFront}
-								mapsLink={location.mapsLink}
-								phoneNumber={location.phoneNumber}
-							/>
-						))}
-						{MarketLocations.map((market) => (
-							<PlaceRow
-								key={market.name}
-								name={shortName(market.name)}
-								address={market.address}
-								photo={market.storeFront}
-								mapsLink={market.mapsLink}
-								notes={[...market.duration.split('\n'), ...market.hours.filter(h => !/^\w+day:/.test(h))]}
-							/>
-						))}
-					</div>
 				</div>
 			</div>
 			<div data-reveal className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 bg-[#0d0c0b] px-4 md:px-10 lg:px-20 py-4 md:py-5 border-y border-white/8">
