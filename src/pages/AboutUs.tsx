@@ -8,15 +8,29 @@ import { Family } from '../data/Family';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const WHO_IMAGE = ''
-const CATERING_IMAGE = ''
-const FROZEN_IMAGE = ''
+const WHO_IMAGE = '/AboutUs/images-1.jpg'
+const CATERING_IMAGE = '/EmpanadaPics/EzCaterer Menu/Team Meeting Pack - 10 Ppl.jpg'
+const FROZEN_IMAGE = '/EmpanadaPics/BYC.jpg'
+
+const ORIGIN_IMAGES = [
+	{ src: '/AboutUs/images-3.jpg', alt: "The team with a signed Empanada's Box sign at the pop-up tent", position: '50% 30%' },
+	{ src: '/AboutUs/images-4.jpg', alt: 'Diego, Lucas and Fabiana holding their accelerator certificate', position: '50% 50%' },
+	{ src: '/AboutUs/opening.jpg', alt: 'Ribbon cutting outside the Elm St storefront', position: '60% 60%' },
+	{ src: '/AboutUs/images-2.jpg', alt: 'Serving a platter of empanadas in the new dining room', position: '50% 30%' },
+]
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const Photo = ({ src, className = '', ...rest }: { src: string, className?: string } & React.HTMLAttributes<HTMLDivElement>) => (
+type PhotoProps = {
+	src: string
+	alt?: string
+	className?: string
+	position?: string
+} & React.HTMLAttributes<HTMLDivElement>
+
+const Photo = ({ src, alt = '', className = '', position, ...rest }: PhotoProps) => (
 	<div {...rest} className={`overflow-hidden bg-[#ede5d8] ${className}`}>
-		{src && <img data-parallax src={src} alt="" className="h-full w-full object-cover" />}
+		{src && <img data-parallax={position ? undefined : ''} src={src} alt={alt} style={position ? { objectPosition: position } : undefined} className="h-full w-full object-cover" />}
 	</div>
 )
 
@@ -104,7 +118,7 @@ const AboutUs = () => {
 
 			<div className="relative overflow-hidden bg-[#faf7f2] px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-28">
 				<div className="relative mx-auto max-w-[90rem] lg:flex lg:justify-end">
-					<Photo data-reveal src={WHO_IMAGE} className="h-60 sm:h-80 w-full rounded-xl lg:h-[42rem] lg:w-[60%]" />
+					<Photo data-reveal src={WHO_IMAGE} alt="Diego and Lucas inside The Empanada's Box" position="18% 40%" className="h-60 sm:h-80 w-full rounded-xl lg:h-auto lg:aspect-[8/7] lg:w-[60%]" />
 					<div className="relative -mt-10 mx-auto w-[92%] bg-white p-7 sm:p-10 shadow-[0_30px_70px_rgba(26,18,9,0.16)] lg:absolute lg:left-0 lg:top-1/2 lg:mx-0 lg:mt-0 lg:w-[46%] lg:-translate-y-1/2 lg:p-12">
 						<div data-rule className="mb-6 h-[3px] w-14 bg-[#bf8000]" />
 						<p data-reveal className="mb-3 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
@@ -136,27 +150,42 @@ const AboutUs = () => {
 						passion for sharing authentic South American street food.
 					</p>
 
-					<div className="relative mt-12 md:mt-16">
-						<div data-line className="absolute left-[11px] top-4 bottom-4 border-l-[3px] border-dotted border-[#bf8000]/40 md:left-[13px]" />
+					<div className="mt-12 md:mt-16 lg:grid lg:grid-cols-[3fr_2fr] lg:gap-16 xl:gap-24">
+						<div className="relative">
+							<div data-line className="absolute left-[11px] top-4 bottom-4 border-l-[3px] border-dotted border-[#bf8000]/40 md:left-[13px]" />
 
-						<ol className="flex flex-col gap-12 md:gap-16">
-							{Milestones.map((m) => (
-								<li key={m.marker} data-reveal className="relative pl-12 md:pl-16">
-									<span data-pin className="absolute left-0 top-0 bg-white pb-1">
-										<img src="/icons/pin.svg" alt="" className="h-6 w-6 md:h-7 md:w-7" />
-									</span>
-									<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.22em] text-[#bf8000]">
-										{m.marker}
-									</p>
-									<h3 className="mt-2 font-inter text-2xl md:text-3xl font-black leading-tight tracking-tight text-[#1a1209]">
-										{m.title}
-									</h3>
-									<p className="mt-3 max-w-2xl text-base md:text-lg font-light leading-relaxed text-[#64605b]">
-										{m.body}
-									</p>
-								</li>
+							<ol className="flex flex-col gap-12 md:gap-16">
+								{Milestones.map((m) => (
+									<li key={m.marker} data-reveal className="relative pl-12 md:pl-16">
+										<span data-pin className="absolute left-0 top-0 bg-white pb-1">
+											<img src="/icons/pin.svg" alt="" className="h-6 w-6 md:h-7 md:w-7" />
+										</span>
+										<p className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.22em] text-[#bf8000]">
+											{m.marker}
+										</p>
+										<h3 className="mt-2 font-inter text-2xl md:text-3xl font-black leading-tight tracking-tight text-[#1a1209]">
+											{m.title}
+										</h3>
+										<p className="mt-3 max-w-2xl text-base md:text-lg font-light leading-relaxed text-[#64605b]">
+											{m.body}
+										</p>
+									</li>
+								))}
+							</ol>
+						</div>
+
+						<div className="hidden lg:flex lg:flex-col lg:justify-between">
+							{ORIGIN_IMAGES.map((img, i) => (
+								<Photo
+									key={img.src}
+									data-reveal
+									src={img.src}
+									alt={img.alt}
+									position={img.position}
+									className={`aspect-[4/3] w-[76%] rounded-xl shadow-[0_24px_50px_rgba(26,18,9,0.18)] ${i % 2 === 1 ? 'self-end' : 'self-start'} ${i > 0 ? '-mt-8' : ''}`}
+								/>
 							))}
-						</ol>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -174,7 +203,7 @@ const AboutUs = () => {
 					<div className="flex flex-col md:flex-row md:justify-center gap-12 md:gap-6 lg:gap-10">
 						{Family.map((member, i) => (
 							<div key={member.name} data-reveal className={`w-full md:w-1/3 ${i%2===1 ? 'md:mt-28' : 'md:mt-14'}`}>
-								<Photo src={member.picture} className="h-64 sm:h-88 md:h-[17rem] lg:h-[23rem] w-full rounded-xl" />
+								<Photo src={member.picture} alt={member.name} position={member.picturePosition} className="h-80 sm:h-88 md:h-[17rem] lg:h-[23rem] w-full rounded-xl" />
 								<h3 className="mt-6 font-inter text-xl md:text-2xl font-black tracking-tight text-black">{member.name}</h3>
 								<p className="mt-1 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-[#bf8000]">{member.title}</p>
 								<p className="mt-4 text-sm md:text-base font-light leading-relaxed text-black/70">{member.description}</p>
@@ -184,12 +213,10 @@ const AboutUs = () => {
 				</div>
 			</div>
 
-			<div className="relative overflow-hidden bg-white">
-				{CATERING_IMAGE && (
-					<img data-parallax src={CATERING_IMAGE} alt="" className="absolute inset-0 h-full w-full object-cover" />
-				)}
-				<div className="relative mx-auto max-w-[90rem] px-6 py-20 md:px-12 md:py-28 lg:px-20 lg:py-36">
-					<div className="lg:w-[56%]">
+			<div className="bg-white px-6 py-16 md:px-12 md:py-20 lg:px-20 lg:py-28">
+				<div className="mx-auto grid max-w-[90rem] items-center gap-10 lg:grid-cols-[6fr_5fr] lg:gap-20">
+					<Photo src={CATERING_IMAGE} alt="A catering tray of empanadas beside a fresh salad" className="aspect-[4/3] rounded-xl" />
+					<div>
 						<p data-reveal className="mb-3 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#bf8000]">
 							For your crew
 						</p>
@@ -197,7 +224,7 @@ const AboutUs = () => {
 							Catering
 						</h2>
 						<div data-rule className="my-6 h-[2px] w-12 bg-[#fec32f]" />
-						<p data-reveal className="mb-8 max-w-2xl text-base md:text-lg font-light leading-relaxed text-black/70">
+						<p data-reveal className="mb-8 text-base md:text-lg font-light leading-relaxed text-black/70">
 							Bring the flavor of our kitchen to your next gathering. From office lunches and corporate mixers
 							to milestone celebrations, our easy drop-off catering delivers hot, fresh empanadas and sides
 							with zero hassle and no utensils required.
@@ -219,12 +246,12 @@ const AboutUs = () => {
 				<span data-word className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 select-none font-inter text-[6rem] sm:text-[9rem] md:text-[13rem] lg:text-[17rem] font-black uppercase leading-none tracking-tighter text-white/[0.08]">
 					Mission
 				</span>
-				<div className="relative mx-auto max-w-[90rem]">
-					<div className="max-w-3xl lg:ml-auto">
-						<p data-reveal className="mb-6 font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f]">
-							Our Mission
-						</p>
-						<p data-reveal className="font-inter text-2xl md:text-3xl lg:text-4xl font-bold leading-snug tracking-tight text-white/90">
+				<div className="relative mx-auto grid max-w-[90rem] gap-6 lg:grid-cols-[12rem_1fr] lg:gap-12">
+					<p data-reveal className="font-mono text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#fec32f] lg:pt-4">
+						Our Mission
+					</p>
+					<div>
+						<p data-reveal className="font-inter text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight text-white/90">
 							To bring a different culture to Cincinnati and the rest of the country, fusing our roots with
 							the flavors of others. Empanadas are the perfect finger food!
 						</p>
@@ -255,7 +282,7 @@ const AboutUs = () => {
 							Shop Frozen Boxes →
 						</button>
 					</div>
-					<Photo src={FROZEN_IMAGE} className="aspect-[4/3] rounded-xl" />
+					<Photo src={FROZEN_IMAGE} alt="Rows of empanadas stamped with their flavor names" className="aspect-[4/3] rounded-xl" />
 				</div>
 			</div>
 		</div>
