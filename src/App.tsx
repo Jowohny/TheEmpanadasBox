@@ -15,7 +15,7 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Checkout from './pages/Checkout';
 import TempRedirect from './pages/tempredirect';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
 	const location = useLocation()
