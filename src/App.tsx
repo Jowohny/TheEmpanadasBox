@@ -15,12 +15,14 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Checkout from './pages/Checkout';
 import TempRedirect from './pages/tempredirect';
+import { Analytics } from "@vercel/analytics/next"
 
 function App() {
 	const location = useLocation()
 
   return (
 		<>
+			<Analytics/>
 			<Banner />
 			<div className="sticky top-0 z-40 w-screen motion-safe:animate-[drop-in_0.5s_ease-out_0.12s_both]">
 				<Navbar />

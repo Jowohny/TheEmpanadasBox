@@ -9,7 +9,7 @@ const NavLinks: Link[] = [
 	{ label: 'Shipped Boxes', path: '/ShipNationwide' },
 	{ label: 'Catering', path: '/Catering' },
 	{ label: 'Events', path: '/Events' },
-	{ label: 'Rewards', path: '/Rewards' },
+	{ label: 'Classes & Experiences', path: '/LiveEvents' },
 ];
 
 export default NavLinks
