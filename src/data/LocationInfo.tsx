@@ -27,7 +27,7 @@ const Locations: Location[] = [
 	{
 		name: 'Empanada Box\nKitchen & Bar',
 		address: '1819 Elm St, Cincinnati, OH 45202',
-		hours: ['Monday: CLOSED', 'Tuesday: 9AM-9PM', 'Wednesday: 9AM-9PM', 'Thursday: 9AM-9PM', 'Friday: 9AM-9PM', 'Saturday: 9AM-9PM', 'Sunday: 9AM-5PM'],
+		hours: ['Monday: CLOSED', 'Tuesday: 9AM-8PM', 'Wednesday: 9AM-8PM', 'Thursday: 9AM-8PM', 'Friday: 9AM-8PM', 'Saturday: 9AM-8PM', 'Sunday: 9AM-5PM'],
 		doordashLink: 'https://www.doordash.com/store/the-empanadas-box-cincinnati-33894621/?utm_campaign=gpa&pickup=true&rwg_token=AFd1xnGhSQ8sIzws6EWbRLuSJ5Qc0AiasX9wzL2fl-jPLOEoFZE98NRvFrYor98p2vPHtXz4uqeNL_ja9HzdDK0E6vVsVRywNA%3D%3D',
 		postmatesLink: 'https://postmates.com/store/the-empanadas-box-findlay-market-1807-elm-st/C_GHKjfXWcuXk-PRAQS6mg?diningMode=PICKUP&utm_campaign=CM2508147-search-free-nonbrand-google-pas_e_all_acq_Global&utm_medium=search-free-nonbrand&utm_source=google-pas',
 		uberEatsLinks: 'https://www.ubereats.com/store/the-empanadas-box-findlay-market-1807-elm-st/C_GHKjfXWcuXk-PRAQS6mg?diningMode=PICKUP&utm_campaign=CM2508147-search-free-nonbrand-google-pas_e_all_acq_Global&utm_medium=search-free-nonbrand&utm_source=google-pas&rwg_token=AFd1xnEf8_Om-3_IfGZ4XV-ZsWgK3OT1SJgUbkNqvHfnyczx-kDPzORWlJfzg1kpHYBh77pfdt6fiUBXuHJH4pM9bBcUS1F0uA%3D%3D',

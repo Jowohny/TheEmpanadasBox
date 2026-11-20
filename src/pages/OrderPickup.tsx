@@ -15,7 +15,7 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 const shortName = (name: string) => name.split('\n')[1] ?? name
 
 const timetablePlaces = [
-	...Locations.map(l => ({ name: shortName(l.name), kind: 'Kitchen', address: l.address, mapsLink: l.mapsLink, photo: l.storeFront, phoneNumber: l.phoneNumber, hours: l.hours })),
+	...Locations.map(l => ({ name: shortName(l.name), kind: 'Restaurant & Takeout', address: l.address, mapsLink: l.mapsLink, photo: l.storeFront, phoneNumber: l.phoneNumber, hours: l.hours })),
 	...MarketLocations.map(m => ({ name: shortName(m.name).replace(' Farmers Market', ''), kind: 'Farmers market · frozen only', address: m.address, mapsLink: m.mapsLink, photo: m.storeFront, hours: m.hours,
 		notes: [...m.duration.split('\n').filter(line => !/frozen/i.test(line)), ...m.hours.filter(h => !/^\w+day:/.test(h))], market: true })),
 ]
